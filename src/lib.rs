@@ -50,4 +50,7 @@ where
         }
     }
     (max_score, max_seq)
-}
+#[macro_use]
+extern crate derive_new;
+
+
