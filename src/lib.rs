@@ -54,3 +54,5 @@ where
 extern crate derive_new;
 
 
+pub mod cigar;
+
