@@ -1,23 +1,27 @@
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
+/// Contains read's CIGAR information
 #[derive(Debug, new)]
 pub struct CIGAR {
 
-
+   /// Left clip
   #[new(default)]
   pub lclip: i32,
 
+  /// Alignment
   #[new(default)]
   pub align: Vec<i32>,
 
+  /// Right clip
   #[new(default)]
   pub rclip: i32,
 
+  /// Insertion
   #[new(default)]
   pub ins: Vec<i32>,
 
+  /// Deletion
   #[new(default)]
   pub del: Vec<i32>,
 
@@ -28,6 +32,20 @@ pub struct CIGAR {
 
 impl CIGAR {
 
+  /// Load string into CIGAR struct
+  ///
+  /// # Examples
+  ///
+  /// ```
+  /// use genomic_strcutures::CIGAR;
+  ///
+  /// let cigar = CIGAR::loader("10H1I2M2D80M5H");
+  /// assert_eq!(cigar.align, vec![2, 80]);
+  /// assert_eq!(cigar.del, vec![2]);
+  /// assert_eq!(cigar.ins, vec![1]);
+  /// assert_eq!(cigar.lclip, 10);
+  /// assert_eq!(cigar.rclip, 5);
+  /// ```
   pub fn loader(to_interpret: &str) -> Self {
 
     // create new CIGAR with empty values
@@ -78,21 +96,40 @@ impl CIGAR {
     this_cigar
   }
 
-  // tupple: first => adjusted position; second => total aligned length
-  pub fn adjuster(&self, position: i32) -> (i32, i32) {
+  /// Adjust alignment coordinates according to CIGAR interpretation
+  /// returning a tupple ( adjusted position, total aligned length )
+  fn adjuster(&self, position: i32) -> (i32, i32) {
     let align_sum: i32 = self.align.iter().sum();
     let ins_sum: i32 = self.ins.iter().sum();
     let del_sum: i32 = self.del.iter().sum();
     (self.lclip + position, align_sum + ins_sum + del_sum)
   }
 
-  pub fn left_boundry(&self, position: i32) -> i32 {
+  /// Define left boundry
+  fn left_boundry(&self, position: i32) -> i32 {
     position - self.lclip
   }
 
-  pub fn right_boundry(&self, position: i32) -> i32 {
+  /// Define right boundry
+  fn right_boundry(&self, position: i32) -> i32 {
     let lpos = self.left_boundry(position);
     lpos + ( self.lclip + self.adjuster(position).1 + self.rclip )
+  }
+
+  // TODO: verify boundries
+
+  /// Define left and right boundries
+  ///
+  /// # Examples
+  ///
+  /// ```
+  /// use genomic_strcutures::CIGAR;
+  ///
+  /// let mut cigar = CIGAR::loader("10H84M6H");
+  /// assert_eq!((90, 190), cigar.boundries(100))
+  /// ```
+  pub fn boundries(&self, position: i32) -> (i32, i32) {
+    (self.left_boundry(position), self.right_boundry(position))
   }
 }
 
