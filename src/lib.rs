@@ -53,6 +53,7 @@ where
 #[macro_use]
 extern crate derive_new;
 
+mod cigar;
 
-pub mod cigar;
+pub use crate::cigar::CIGAR;
 
