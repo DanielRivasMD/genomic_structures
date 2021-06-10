@@ -16,6 +16,10 @@ extern crate derive_new;
 
 
 
+// functions
+mod functions;
+pub use crate::functions::flag_interpretor::interpretor;
+
 // structures
 mod structures;
 
