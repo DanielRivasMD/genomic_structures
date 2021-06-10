@@ -14,3 +14,5 @@ path = "src/lib.rs"
 [dependencies]
 derive-new = "0.5"
 data-test = "0.1.0"
+
+libc = "0.2.70"
