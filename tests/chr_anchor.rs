@@ -34,6 +34,23 @@ data_test! {
       tlen: 100,
     }
   )
+
+  fn test_chr_anchor_binner(chr_anchor, expected) => {
+    assert_eq!(chr_anchor.binner(), expected)
+  }
+
+  - _00 (
+    super::ChrAnchor{
+      chr: "chr7".to_string(),
+      flag: 56,
+      pos: 2099,
+      cigar: "100M".to_string(),
+      mapq: 100,
+      tlen: 100,
+    },
+    2000
+)
+
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
