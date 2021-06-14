@@ -1,35 +1,36 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // standard library
-use std::collections::{HashMap};
+use std::collections::HashMap;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // crate utilities
-use crate::{BIN_SIZE, BIN_OVERLAP};
+use crate::{
+  BIN_OVERLAP,
+  BIN_SIZE,
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // C bindings
 use libc::{
-  c_int,
   c_double,
+  c_int,
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
-#[link(name="Rmath")]
-extern {
 // R function signature declaration
+#[link(name = "Rmath")]
+extern "C" {
   fn ppois(
     x: c_double,
     lambda: c_double,
     lower_tail: c_int,
-    log_p: c_int
+    log_p: c_int,
   ) -> c_double;
 }
-
 
 fn effective_genome_length_calculator(
   genome_length: f64,
@@ -75,9 +76,7 @@ fn tabler(
   out_vec
 }
 
-fn cumsum(
-  mut cum_vec: Vec<f64>,
-) -> Vec<f64> {
+fn cumsum(mut cum_vec: Vec<f64>) -> Vec<f64> {
   let mut cumulus = 0.;
   for cix in &mut cum_vec {
     cumulus += *cix;
@@ -161,7 +160,7 @@ pub fn thresholder(
   for (ix, fd_val) in false_disc_values.iter().enumerate() {
     if *fd_val < false_discovery_tolerance {
       threshold = ix + 1;
-      break
+      break;
     }
   }
   threshold
@@ -172,16 +171,19 @@ pub fn thresholder(
 // test private functions
 #[cfg(test)]
 mod priv_tests {
-  use data_test::data_test;
-  use crate::{BIN_SIZE, BIN_OVERLAP};
   use super::{
-    ppois,
+    cumsum,
     effective_genome_length_calculator,
     lambda_calculator,
+    ppois,
     r_ppoisson,
     tabler,
-    cumsum,
   };
+  use crate::{
+    BIN_OVERLAP,
+    BIN_SIZE,
+  };
+  use data_test::data_test;
 
   data_test! {
     // precission point => 20
@@ -278,7 +280,6 @@ mod priv_tests {
     - _02 (vec![10., 9., 8., 7., 6., 5., 4., 3., 2., 1., 0., ], vec![10., 19., 27., 34., 40., 45., 49., 52., 54., 55., 55., ])
 
   }
-
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////

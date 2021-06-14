@@ -15,11 +15,11 @@
 /// 10) read fails platform/vendor quality checks
 /// 11) read is PCR or optical duplicate
 /// 12) supplementary alignment
-pub fn interpretor(n: i32, p: usize) -> bool {
-  let bin_n: String = format!("{:b}", n)
-    .chars()
-    .rev()
-    .collect();
+pub fn interpretor(
+  n: i32,
+  p: usize,
+) -> bool {
+  let bin_n: String = format!("{:b}", n).chars().rev().collect();
   let mut stat_array = ['0'; 12];
   for i in bin_n.char_indices() {
     stat_array[i.0] = i.1;
@@ -31,7 +31,10 @@ pub fn interpretor(n: i32, p: usize) -> bool {
 
 /// Binary interpretation on a SAM flag struct
 pub trait SamFlag {
-  fn interpretor(&self, p: usize) -> bool;
+  fn interpretor(
+    &self,
+    p: usize,
+  ) -> bool;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
