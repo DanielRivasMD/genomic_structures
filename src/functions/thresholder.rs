@@ -19,9 +19,9 @@ use libc::{
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-/// R function signature declaration
 #[link(name="Rmath")]
 extern {
+// R function signature declaration
   fn ppois(
     x: c_double,
     lambda: c_double,
@@ -88,6 +88,48 @@ fn cumsum(
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
+/// Obtain a threshold according to parameters.
+///
+/// Parameters:
+/// 1) Number of reads
+/// 2) Scaffold / chromosome size
+/// 3) False discovery tolerance
+/// 4) Read positioning, i.e., pill up
+///
+/// # Examples
+///
+/// ```
+/// use genomic_strcutures::thresholder;
+/// let ks = vec![
+///   "100".to_string(),
+///   "200".to_string(),
+///   "300".to_string(),
+///   "400".to_string(),
+///   "500".to_string(),
+///   "600".to_string(),
+/// ];
+/// let vs = vec![
+///   vec!["100.1".to_string(), "100.2".to_string()],
+///   vec![
+///     "200.1".to_string(),
+///     "200.2".to_string(),
+///     "200.3".to_string(),
+///   ],
+///   vec!["300.1".to_string(), "300.".to_string()],
+///   vec!["400.1".to_string(), "400.2".to_string()],
+///   vec![
+///     "500.1".to_string(),
+///     "500.2".to_string(),
+///     "500.3".to_string(),
+///   ],
+///   vec!["600.1".to_string(), "600.2".to_string()],
+/// ];
+/// let mut hm = std::collections::HashMap::new();
+/// for ix in 0..ks.len() {
+///   hm.insert(ks[ix].clone(), vs[ix].clone());
+/// }
+/// assert_eq!(thresholder(6., 1000., 0.001, &hm, 25), 5)
+/// ```
 pub fn thresholder(
   pop_reads: f64,
   chromosome_size: f64,

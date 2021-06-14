@@ -3,8 +3,6 @@
 //! Collection of structures & functions for mobile elment &
 //! structural variant identification from genomic data
 //! # Basic usage
-//! ```
-//! ```
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 

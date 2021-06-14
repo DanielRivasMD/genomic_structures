@@ -1,5 +1,8 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
+/// Binary interpretor for SAM flags.
+///
+/// Interpretation is carried out as follows:
 /// 1) read paired
 /// 2) read mapped in proper pair
 /// 3) read unmapped
@@ -26,6 +29,7 @@ pub fn interpretor(n: i32, p: usize) -> bool {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
+/// Binary interpretation on a SAM flag struct
 pub trait SamFlag {
   fn interpretor(&self, p: usize) -> bool;
 }
