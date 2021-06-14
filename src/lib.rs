@@ -28,6 +28,7 @@ pub use crate::functions::thresholder::thresholder;
 mod structures;
 
 pub use crate::structures::chr_anchor::ChrAnchor;
+pub use crate::structures::chr_anchor_enum::ChrAnchorEnum;
 pub use crate::structures::cigar::CIGAR;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
