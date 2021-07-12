@@ -28,5 +28,6 @@ mod structures;
 pub use crate::structures::chr_anchor::ChrAnchor;
 pub use crate::structures::chr_anchor_enum::ChrAnchorEnum;
 pub use crate::structures::cigar::CIGAR;
+pub use crate::structures::erv_annotations::ERVAnnotations;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////

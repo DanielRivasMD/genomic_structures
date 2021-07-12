@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-// use to indicate which LTR sequence to use
+/// ERV annotation to indicate which LTR sequence is present
 #[derive(Debug, Default)]
 pub struct ERVAnnotations {
   pub ltr5: bool,
