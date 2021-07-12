@@ -30,5 +30,6 @@ pub use crate::structures::chr_anchor_enum::ChrAnchorEnum;
 pub use crate::structures::cigar::CIGAR;
 pub use crate::structures::erv_annotations::ERVAnnotations;
 pub use crate::structures::me_anchor::MEAnchor;
+pub use crate::structures::sv_type::SVType;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
