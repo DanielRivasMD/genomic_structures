@@ -1,25 +1,25 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-/// Contains read's CIGAR information
+/// Contain read's CIGAR information.
 #[derive(Debug, new)]
 pub struct CIGAR {
-  /// Left clip
+  /// Left clip.
   #[new(default)]
   pub lclip: i32,
 
-  /// Alignment
+  /// Alignment.
   #[new(default)]
   pub align: Vec<i32>,
 
-  /// Right clip
+  /// Right clip.
   #[new(default)]
   pub rclip: i32,
 
-  /// Insertion
+  /// Insertion.
   #[new(default)]
   pub ins: Vec<i32>,
 
-  /// Deletion
+  /// Deletion.
   #[new(default)]
   pub del: Vec<i32>,
 }
@@ -94,7 +94,7 @@ impl CIGAR {
   }
 
   /// Adjust alignment coordinates according to CIGAR interpretation
-  /// returning a tupple ( adjusted position, total aligned length )
+  /// returning a tupple ( adjusted position, total aligned length ).
   fn adjuster(
     &self,
     position: i32,
@@ -105,7 +105,7 @@ impl CIGAR {
     (self.lclip + position, align_sum + ins_sum + del_sum)
   }
 
-  /// Define left boundry
+  /// Define left boundry.
   fn left_boundry(
     &self,
     position: i32,
@@ -113,7 +113,7 @@ impl CIGAR {
     position - self.lclip
   }
 
-  /// Define right boundry
+  /// Define right boundry.
   fn right_boundry(
     &self,
     position: i32,
@@ -124,7 +124,7 @@ impl CIGAR {
 
   // TODO: verify boundries
 
-  /// Define left and right boundries
+  /// Define left and right boundries.
   ///
   /// # Examples
   ///

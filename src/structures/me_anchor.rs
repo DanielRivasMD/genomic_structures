@@ -8,30 +8,30 @@ use crate::functions::flag_interpretor::{
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-/// Mobile element anchor structure
+/// Mobile element anchor structure.
 #[derive(Debug, new, Default)]
 pub struct MEAnchor {
-  /// Mobile element
+  /// Mobile element.
   #[new(default)]
   pub mobel: String,
 
-  /// Size
+  /// Size.
   #[new(default)]
   pub size: f64,
 
-  /// Flag
+  /// Flag.
   #[new(default)]
   pub flag: i32,
 
-  /// Position
+  /// Position.
   #[new(default)]
   pub pos: i32,
 
-  /// CIGAR
+  /// CIGAR.
   #[new(default)]
   pub cigar: String,
 
-  /// Orientation
+  /// Orientation.
   #[new(default)]
   pub orientation: String,
 }
@@ -51,12 +51,12 @@ impl MEAnchor {
   ///   1000.,
   ///   &"FS5",
   /// );
-  /// let manual = MEAnchor{
-  ///   mobel: "me11".to_string(),
-  ///   size: 1000.,
-  ///   flag: 75,
-  ///   pos: 650,
-  ///   cigar: "100M".to_string(),
+  /// let manual = MEAnchor {
+  ///   mobel:       "me11".to_string(),
+  ///   size:        1000.,
+  ///   flag:        75,
+  ///   pos:         650,
+  ///   cigar:       "100M".to_string(),
   ///   orientation: "FS5".to_string(),
   /// };
   ///

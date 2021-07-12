@@ -1,67 +1,62 @@
-
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // crate utilities
-use crate::BIN_SIZE;
-use crate::functions::{
-    flag_interpretor::{
-      SamFlag,
-      interpretor,
-    },
+use crate::functions::flag_interpretor::{
+  interpretor,
+  SamFlag,
 };
+use crate::BIN_SIZE;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-/// Chromosomal anchor structure
+/// Chromosomal anchor structure.
 #[derive(Debug, new, Default)]
 pub struct ChrAnchor {
-
-  /// Chromosome
+  /// Chromosome.
   #[new(default)]
   pub chr: String,
 
-  /// Flag
+  /// Flag.
   #[new(default)]
   pub flag: i32,
 
-  /// Position
+  /// Position.
   #[new(default)]
   pub pos: i32,
 
-  /// CIGAR
+  /// CIGAR.
   #[new(default)]
   pub cigar: String,
 
-  /// Mapping quality (MAPQ)
+  /// Mapping quality (MAPQ).
   #[new(default)]
   pub mapq: i32,
 
-  /// Template length (TLEN)
+  /// Template length (TLEN).
   #[new(default)]
   pub tlen: i32,
-
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 impl ChrAnchor {
-  /// Load vector of strings (line from a file) int ChrAnchor struct.
+  /// Load vector of strings (line from a file) onto ChrAnchor struct.
   ///
   /// # Examples
   ///
   /// ```
   /// use genomic_strcutures::ChrAnchor;
   ///
-  /// let loaded = ChrAnchor::loader(
-  ///   &vec!["", "56", "chr7", "2099", "100", "100M", "", "", "100"]
-  /// );
-  /// let manual = ChrAnchor{
-  ///   chr: "chr7".to_string(),
-  ///   flag: 56,
-  ///   pos: 2099,
+  /// let loaded = ChrAnchor::loader(&vec![
+  ///   "", "56", "chr7", "2099", "100", "100M", "", "", "100",
+  /// ]);
+  /// let manual = ChrAnchor {
+  ///   chr:   "chr7".to_string(),
+  ///   flag:  56,
+  ///   pos:   2099,
   ///   cigar: "100M".to_string(),
-  ///   mapq: 100,
-  ///   tlen: 100,
+  ///   mapq:  100,
+  ///   tlen:  100,
   /// };
   ///
   /// assert_eq!(loaded.chr, manual.chr);
@@ -73,12 +68,12 @@ impl ChrAnchor {
   /// ```
   pub fn loader(file_line: &[&str]) -> Self {
     Self {
-      chr: file_line[2].to_string(),
-      flag: file_line[1].parse::<i32>().unwrap(),
-      pos: file_line[3].parse::<i32>().unwrap(),
+      chr:   file_line[2].to_string(),
+      flag:  file_line[1].parse::<i32>().unwrap(),
+      pos:   file_line[3].parse::<i32>().unwrap(),
       cigar: file_line[5].to_string(),
-      mapq: file_line[4].parse::<i32>().unwrap(),
-      tlen: file_line[8].parse::<i32>().unwrap(),
+      mapq:  file_line[4].parse::<i32>().unwrap(),
+      tlen:  file_line[8].parse::<i32>().unwrap(),
     }
   }
 
@@ -90,14 +85,15 @@ impl ChrAnchor {
   /// use genomic_strcutures::ChrAnchor;
   ///
   /// assert_eq!(
-  ///   ChrAnchor{
-  ///     chr: "chr7".to_string(),
-  ///     flag: 56,
-  ///     pos: 2099,
+  ///   ChrAnchor {
+  ///     chr:   "chr7".to_string(),
+  ///     flag:  56,
+  ///     pos:   2099,
   ///     cigar: "100M".to_string(),
-  ///     mapq: 100,
-  ///     tlen: 100,
-  ///   }.binner(),
+  ///     mapq:  100,
+  ///     tlen:  100,
+  ///   }
+  ///   .binner(),
   ///   2000
   /// );
   /// ```
@@ -105,13 +101,15 @@ impl ChrAnchor {
     let binned = self.pos % BIN_SIZE;
     self.pos - binned
   }
-
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 impl SamFlag for ChrAnchor {
-  fn interpretor(&self, p: usize) -> bool {
+  fn interpretor(
+    &self,
+    p: usize,
+  ) -> bool {
     interpretor(self.flag, p)
   }
 }

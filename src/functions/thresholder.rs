@@ -90,10 +90,10 @@ fn cumsum(mut cum_vec: Vec<f64>) -> Vec<f64> {
 /// Obtain a threshold according to parameters.
 ///
 /// Parameters:
-/// 1) Number of reads
-/// 2) Scaffold / chromosome size
-/// 3) False discovery tolerance
-/// 4) Read positioning, i.e., pill up
+/// 1) Number of reads.
+/// 2) Scaffold / chromosome size.
+/// 3) False discovery tolerance.
+/// 4) Read positioning, i.e., pill up.
 ///
 /// # Examples
 ///
