@@ -98,7 +98,7 @@ fn cumsum(mut cum_vec: Vec<f64>) -> Vec<f64> {
 /// # Examples
 ///
 /// ```
-/// use genomic_strcutures::thresholder;
+/// use genomic_structures::thresholder;
 /// let ks = vec![
 ///   "100".to_string(),
 ///   "200".to_string(),

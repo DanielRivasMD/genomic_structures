@@ -32,7 +32,7 @@ impl CIGAR {
   /// # Examples
   ///
   /// ```
-  /// use genomic_strcutures::CIGAR;
+  /// use genomic_structures::CIGAR;
   ///
   /// let cigar = CIGAR::loader("10H1I2M2D80M5H");
   /// assert_eq!(cigar.align, vec![2, 80]);
@@ -129,7 +129,7 @@ impl CIGAR {
   /// # Examples
   ///
   /// ```
-  /// use genomic_strcutures::CIGAR;
+  /// use genomic_structures::CIGAR;
   ///
   /// let mut cigar = CIGAR::loader("10H84M6H");
   /// assert_eq!((90, 190), cigar.boundries(100))

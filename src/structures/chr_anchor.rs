@@ -45,7 +45,7 @@ impl ChrAnchor {
   /// # Examples
   ///
   /// ```
-  /// use genomic_strcutures::ChrAnchor;
+  /// use genomic_structures::ChrAnchor;
   ///
   /// let loaded = ChrAnchor::loader(&vec![
   ///   "", "56", "chr7", "2099", "100", "100M", "", "", "100",
@@ -82,7 +82,7 @@ impl ChrAnchor {
   /// # Examples
   ///
   /// ```
-  /// use genomic_strcutures::ChrAnchor;
+  /// use genomic_structures::ChrAnchor;
   ///
   /// assert_eq!(
   ///   ChrAnchor {

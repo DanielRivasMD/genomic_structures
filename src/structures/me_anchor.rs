@@ -44,7 +44,7 @@ impl MEAnchor {
   /// # Examples
   ///
   /// ```
-  /// use genomic_strcutures::MEAnchor;
+  /// use genomic_structures::MEAnchor;
   ///
   /// let loaded = MEAnchor::loader(
   ///   &vec!["", "75", "me11", "650", "100", "100M", "", "", "100"],
