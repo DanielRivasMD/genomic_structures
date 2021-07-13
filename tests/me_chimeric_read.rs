@@ -10,13 +10,12 @@ use genomic_structures::MEChimericRead;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
 data_test! {
 
   fn test_me_chimeric_read(sequence, expected) => {
-   let mut toreverse = super::MEChimericRead::new();
-   toreverse.sequence = sequence;
-   assert_eq!(toreverse.sequence_reverser(), expected);
+    let mut toreverse = super::MEChimericRead::new();
+    toreverse.sequence = sequence;
+    assert_eq!(toreverse.sequence_reverser(), expected);
   }
 
   - _00 ("GATTACA".to_string(), "TGTAATC".to_string())

@@ -4,7 +4,7 @@
 #[derive(Debug, new, Default)]
 pub struct BreakPoint {
   /// Sequence.
-  pub sequence:   String,
+  pub sequence: String,
 
   /// Coordinates.
   pub coordinate: i32,

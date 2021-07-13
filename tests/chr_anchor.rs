@@ -10,7 +10,6 @@ use genomic_structures::ChrAnchor;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
 data_test! {
 
   fn test_chr_anchor_loader(chr, flag, pos, cigar, mapq, tlen, expected) => {

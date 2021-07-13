@@ -10,7 +10,6 @@ use genomic_structures::thresholder;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
 data_test! {
 
   fn test_thresholder(read_count, chr_size, fdr, hm_keys, hm_vals, expected) => {

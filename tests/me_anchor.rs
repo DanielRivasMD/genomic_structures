@@ -10,7 +10,6 @@ use genomic_structures::MEAnchor;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
 data_test! {
 
   fn test_me_anchor_loader(mobel, flag, pos, cigar, size, orient, expected) => {
