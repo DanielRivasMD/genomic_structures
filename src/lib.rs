@@ -1,7 +1,7 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//! Collection of structures & functions for mobile elment &
-//! structural variant identification from genomic data
+//! Collection of structures, types and functions for mobile elment
+//! and structural variant identification from genomic data.
 //! # Basic usage
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -16,12 +16,17 @@ extern crate derive_new;
 #[macro_use]
 mod macros;
 
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
 // functions
 mod functions;
 
 pub use crate::functions::flag_interpretor::interpretor;
 pub use crate::functions::thresholder::thresholder;
+pub use crate::functions::identificator::identificator;
 pub use crate::functions::counter::strand_counter;
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // structures
 mod structures;
@@ -38,5 +43,12 @@ pub use crate::structures::me_library::MELibrary;
 pub use crate::structures::sv_chimeric_pair::SVChimericPair;
 pub use crate::structures::sv_chimeric_read::SVChimericRead;
 pub use crate::structures::sv_type::SVType;
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// TODO: handle constants
+pub const BIN_OVERLAP: i32 = 50;
+pub const BIN_SIZE: i32 = 100;
+pub const TRANSLOCATION_DISTANCE: i32 = 1000;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
