@@ -34,6 +34,7 @@ pub use crate::structures::erv_annotations::ERVAnnotations;
 pub use crate::structures::me_anchor::MEAnchor;
 pub use crate::structures::me_chimeric_pair::MEChimericPair;
 pub use crate::structures::me_chimeric_read::MEChimericRead;
+pub use crate::structures::me_library::MELibrary;
 pub use crate::structures::sv_chimeric_pair::SVChimericPair;
 pub use crate::structures::sv_chimeric_read::SVChimericRead;
 pub use crate::structures::sv_type::SVType;
