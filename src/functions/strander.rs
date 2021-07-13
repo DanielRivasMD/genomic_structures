@@ -8,8 +8,6 @@ use std::collections::HashMap;
 // crate utilities
 use crate::{
   utils::functions::{
-    chr_counter::chr_counter,
-    element_counter::ElementCounter,
   },
   utils::structures::{
     chr_anchor::ChrAnchor,
@@ -57,6 +55,49 @@ pub fn strander(
     _ => {}
   }
   read_count
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// count reads at bin
+fn chr_counter(
+  read_id: String,
+  position_hm: &mut HashMap<String, Vec<String>>,
+  binned_position: String,
+) {
+  position_hm
+    .entry(binned_position.clone())
+    .or_insert_with(Vec::new);
+  if let Some(id_vector) = position_hm.get_mut(&binned_position) {
+    id_vector.push(read_id);
+  }
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// hold count upstream & downstream
+#[derive(Debug, new)]
+struct ElementCounter {
+  #[new(default)]
+  pub upstream:   i32,
+  #[new(default)]
+  pub downstream: i32,
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// count on element
+impl ElementCounter {
+  fn counter(
+    &mut self,
+    orientation: &str,
+  ) {
+    if orientation == "upstream" {
+      self.upstream += 1;
+    } else if orientation == "downstream" {
+      self.downstream += 1;
+    }
+  }
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
