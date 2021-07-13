@@ -40,9 +40,9 @@ impl MEChimericPair {
   /// # Examples
   ///
   /// ```
+  /// use genomic_structures::ChrAnchorEnum;
   /// use genomic_structures::MEChimericPair;
   /// use genomic_structures::MEChimericRead;
-  /// use genomic_structures::ChrAnchorEnum;
   ///
   /// let mut toretrieve = MEChimericPair::new(ChrAnchorEnum::None);
   /// toretrieve.read1 = MEChimericRead::new();
@@ -52,10 +52,7 @@ impl MEChimericPair {
   /// let mut predefined = MEChimericRead::new();
   /// predefined.sequence = "GATTACA".to_string();
   ///
-  /// assert_eq!(
-  ///   retrieved.sequence,
-  ///   predefined.sequence,
-  /// )
+  /// assert_eq!(retrieved.sequence, predefined.sequence,)
   /// ```
   pub fn chr_anchor_retriever(&self) -> &MEChimericRead {
     match self.chranch {
@@ -70,8 +67,7 @@ impl MEChimericPair {
     .borrow()
   }
 
-// TODO: add trait implementation for mobile element retrieval
-
+  // TODO: add trait implementation for mobile element retrieval
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
