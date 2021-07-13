@@ -1,24 +1,27 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // crate utilities
-use crate::utils::structures::{
+use crate::structures::{
   break_point::BreakPoint,
   chr_anchor::ChrAnchor,
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-// annotate primary (index 0) & secondary aligned reads
+/// Contain primary (index 0) and secondary aligned read annotations.
 #[derive(Debug, new, Default)]
 pub struct SVChimericRead {
+  /// Sequence.
   #[new(default)]
   pub sequence: String,
 
+  // TODO: perhaps read 1 & read 2?
+  /// Chromosomal read.
   #[new(default)]
-  pub chr_read: ChrAnchor,
+  pub chr_read: Vec<ChrAnchor>,
 
+  /// Breakpoint.
   #[new(default)]
-  // #[new(value = BreakPoint {sequence: "".to_string(), coordinate: 0})]
   pub breakpoint: BreakPoint,
 }
 
