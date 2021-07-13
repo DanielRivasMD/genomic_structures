@@ -6,18 +6,21 @@ use std::collections::HashMap;
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // crate utilities
-use crate::{
-  utils::functions::{
-  },
-  utils::structures::{
-    chr_anchor::ChrAnchor,
-    me_anchor::MEAnchor,
-  },
+use crate::structures::{
+  chr_anchor::ChrAnchor,
+  me_anchor::MEAnchor,
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-pub fn strander(
+/// Count reads per strand and orientation.
+///
+/// # Examples
+///
+/// ```
+/// TODO: add example
+/// ```
+pub fn strand_counter(
   read_id: String,
   str: &str,
   mut read_count: i32,
@@ -52,6 +55,7 @@ pub fn strander(
         chr_counter!(read_id, read_count, chr_pair, position_hm);
       }
     }
+    // TODO: add non-compatible count?
     _ => {}
   }
   read_count
