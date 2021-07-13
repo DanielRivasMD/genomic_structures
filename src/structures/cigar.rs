@@ -132,7 +132,7 @@ impl CIGAR {
   /// use genomic_structures::CIGAR;
   ///
   /// let mut cigar = CIGAR::loader("10H84M6H");
-  /// assert_eq!((90, 190), cigar.boundries(100))
+  /// assert_eq!((90, 190), cigar.boundries(100));
   /// ```
   pub fn boundries(
     &self,

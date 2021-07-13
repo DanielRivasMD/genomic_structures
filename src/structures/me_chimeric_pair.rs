@@ -52,7 +52,7 @@ impl MEChimericPair {
   /// let mut predefined = MEChimericRead::new();
   /// predefined.sequence = "GATTACA".to_string();
   ///
-  /// assert_eq!(retrieved.sequence, predefined.sequence,)
+  /// assert_eq!(retrieved.sequence, predefined.sequence);
   /// ```
   pub fn chr_anchor_retriever(&self) -> &MEChimericRead {
     match self.chranch {

@@ -17,7 +17,7 @@ data_test! {
     for ix in 0..hm_keys.len() {
       bined_hm.insert(hm_keys[ix].clone(), hm_vals[ix].clone());
     }
-    assert_eq!(super::thresholder(read_count, chr_size, fdr, &bined_hm, 25), expected)
+    assert_eq!(super::thresholder(read_count, chr_size, fdr, &bined_hm, 25), expected);
   }
 
   - _00 (6., 1000., 0.001,

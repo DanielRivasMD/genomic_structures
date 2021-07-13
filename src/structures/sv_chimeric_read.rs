@@ -15,7 +15,6 @@ pub struct SVChimericRead {
   #[new(default)]
   pub sequence: String,
 
-  // TODO: perhaps read 1 & read 2?
   /// Chromosomal read.
   #[new(default)]
   pub chr_read: Vec<ChrAnchor>,

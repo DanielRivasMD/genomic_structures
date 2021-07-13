@@ -35,7 +35,7 @@ data_test! {
   )
 
   fn test_chr_anchor_binner(chr_anchor, expected) => {
-    assert_eq!(chr_anchor.binner(), expected)
+    assert_eq!(chr_anchor.binner(), expected);
   }
 
   - _00 (

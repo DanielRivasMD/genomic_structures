@@ -127,7 +127,7 @@ fn cumsum(mut cum_vec: Vec<f64>) -> Vec<f64> {
 /// for ix in 0..ks.len() {
 ///   hm.insert(ks[ix].clone(), vs[ix].clone());
 /// }
-/// assert_eq!(thresholder(6., 1000., 0.001, &hm, 25), 5)
+/// assert_eq!(thresholder(6., 1000., 0.001, &hm, 25), 5);
 /// ```
 pub fn thresholder(
   pop_reads: f64,
@@ -196,7 +196,7 @@ mod priv_tests {
             super::ppois(*ix, lambda, 1, 0)
           } )
         .collect();
-      assert_eq!(pois_vec, expected)
+      assert_eq!(pois_vec, expected);
     }
 
     - _00 (vec![0., 1., 2., 3., 4., 5., 6., 7., 8., 9., 10., ], 0., vec![1.0000000000000000000, 1.0000000000000000000, 1.0000000000000000000, 1.0000000000000000000, 1.0000000000000000000, 1.0000000000000000000, 1.0000000000000000000, 1.0000000000000000000, 1.0000000000000000000, 1.0000000000000000000, 1.0000000000000000000, ])
@@ -212,14 +212,14 @@ mod priv_tests {
     - _10 (vec![0., 1., 2., 3., 4., 5., 6., 7., 8., 9., 10., ], 10., vec![4.539_992_976_248_485_4e-5, 0.000_499_399_227_387_333_3, 0.002_769_395_715_511_576, 0.010_336_050_675_925_728, 0.029_252_688_076_961_082, 0.067_085_962_879_031_8, 0.130_141_420_882_483_07, 0.220_220_646_601_699_07, 0.332_819_678_750_718_8, 0.457_929_714_471_852_27, 0.583_039_750_192_985_4, ])
 
     fn test_effective_genome_length_calculator(glen, expected) => {
-      assert_eq!(super::effective_genome_length_calculator(glen, super::BIN_SIZE as f64, super::BIN_OVERLAP as f64), expected)
+      assert_eq!(super::effective_genome_length_calculator(glen, super::BIN_SIZE as f64, super::BIN_OVERLAP as f64), expected);
     }
 
     - _00 (2000., 4000., )
     - _01 (3243556456., 6487112912., )
 
     fn test_lambda_calculator(preads, eflen, expected) => {
-      assert_eq!(super::lambda_calculator(preads, eflen, super::BIN_SIZE as f64), expected)
+      assert_eq!(super::lambda_calculator(preads, eflen, super::BIN_SIZE as f64), expected);
     }
 
     - _00 (100., 400., 25., )
@@ -227,7 +227,7 @@ mod priv_tests {
 
     // test inverted probability poisson function
     fn test_r_poisson(lambda, psize, expected) => {
-      assert_eq!(super::r_ppoisson(lambda, psize), expected)
+      assert_eq!(super::r_ppoisson(lambda, psize), expected);
     }
 
     - _00 (0., 20, vec![0.0000000000000000000, 0.0000000000000000000, 0.0000000000000000000, 0.0000000000000000000, 0.0000000000000000000, 0.0000000000000000000, 0.0000000000000000000, 0.0000000000000000000, 0.0000000000000000000, 0.0000000000000000000, 0.0000000000000000000, 0.0000000000000000000, 0.0000000000000000000, 0.0000000000000000000, 0.0000000000000000000, 0.0000000000000000000, 0.0000000000000000000, 0.0000000000000000000, 0.0000000000000000000, 0.0000000000000000000, ])
@@ -247,7 +247,7 @@ mod priv_tests {
       for ix in 0..hm_keys.len() {
         bined_hm.insert(hm_keys[ix].clone(), hm_vals[ix].clone());
       }
-      assert_eq!(super::tabler(&bined_hm, psize), expected)
+      assert_eq!(super::tabler(&bined_hm, psize), expected);
     }
 
     - _00 (
@@ -272,7 +272,7 @@ mod priv_tests {
     )
 
     fn test_cumsum(cum_vec, expected) => {
-      assert_eq!(super::cumsum(cum_vec), expected)
+      assert_eq!(super::cumsum(cum_vec), expected);
     }
 
     - _00 (vec![0., 1., 2., 3., 4., ], vec![0., 1., 3., 6., 10., ])
