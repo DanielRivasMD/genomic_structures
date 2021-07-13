@@ -21,10 +21,10 @@ mod macros;
 // functions
 mod functions;
 
-pub use crate::functions::flag_interpretor::interpretor;
-pub use crate::functions::thresholder::thresholder;
-pub use crate::functions::identificator::identificator;
 pub use crate::functions::counter::strand_counter;
+pub use crate::functions::flag_interpretor::interpretor;
+pub use crate::functions::identificator::identificator;
+pub use crate::functions::thresholder::thresholder;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
