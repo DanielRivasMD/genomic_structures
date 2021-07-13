@@ -1,76 +1,24 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // crate utilities
+use crate::TRANSLOCATION_DISTANCE;
 use crate::{
-  settings::constants::TRANSLOCATION_DISTANCE,
-  utils::{
-    functions::flag_interpretor::interpretor,
-    structures::{
-      sv_chimeric_pair::SVChimericPair,
-      sv_type::SVType,
-    },
+  functions::flag_interpretor::interpretor,
+  structures::{
+    sv_chimeric_pair::SVChimericPair,
+    sv_type::SVType,
   },
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-fn sv_deletion(
-  pair: &mut SVChimericPair,
-  expected_tlen: i32,
-) -> bool {
-  let tlen = pair.read1.chr_read.pos - pair.read2.chr_read.pos;
-  if tlen.abs() >= expected_tlen {
-    pair.svtag = SVType::Deletion;
-    true
-  } else {
-    false
-  }
-}
-
-fn sv_duplication(pair: &mut SVChimericPair) -> bool {
-  if pair.read1.chr_read.tlen > 0
-    && !interpretor(pair.read1.chr_read.flag, 5)
-    && !interpretor(pair.read2.chr_read.flag, 5)
-  {
-    pair.svtag = SVType::Duplication;
-    true
-  } else {
-    false
-  }
-}
-
-fn sv_inversion(pair: &mut SVChimericPair) -> bool {
-  if interpretor(pair.read1.chr_read.flag, 5) == interpretor(pair.read2.chr_read.flag, 5)
-    && (pair.read1.chr_read.chr == pair.read2.chr_read.chr)
-  {
-    pair.svtag = SVType::Inversion;
-    true
-  } else {
-    false
-  }
-}
-
-fn sv_insertion(pair: &mut SVChimericPair) -> bool {
-  if interpretor(pair.read1.chr_read.flag, 3) || interpretor(pair.read2.chr_read.flag, 3) {
-    pair.svtag = SVType::Insertion;
-    true
-  } else {
-    false
-  }
-}
-
-fn sv_translocation(pair: &mut SVChimericPair) -> bool {
-  let tlen = pair.read1.chr_read.pos - pair.read2.chr_read.pos;
-  if tlen.abs() > TRANSLOCATION_DISTANCE || pair.read1.chr_read.chr != pair.read2.chr_read.chr {
-    pair.svtag = SVType::Translocation;
-    true
-  } else {
-    false
-  }
-}
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-
+/// Identify structural variant type.
+///
+/// # Examples
+///
+/// ```
+/// TODO: add example
+/// ```
 pub fn identificator(
   pair: &mut SVChimericPair,
   expected_tlen: i32,
@@ -100,6 +48,69 @@ pub trait SVIdentificator {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
+// deletion
+fn sv_deletion(
+  pair: &mut SVChimericPair,
+  expected_tlen: i32,
+) -> bool {
+  let tlen = pair.read1.chr_read[0].pos - pair.read2.chr_read[0].pos;
+  if tlen.abs() >= expected_tlen {
+    pair.svtag = SVType::Deletion;
+    true
+  } else {
+    false
+  }
+}
+
+// duplication
+fn sv_duplication(pair: &mut SVChimericPair) -> bool {
+  if pair.read1.chr_read[0].tlen > 0
+    && !interpretor(pair.read1.chr_read[0].flag, 5)
+    && !interpretor(pair.read2.chr_read[0].flag, 5)
+  {
+    pair.svtag = SVType::Duplication;
+    true
+  } else {
+    false
+  }
+}
+
+// inversion
+fn sv_inversion(pair: &mut SVChimericPair) -> bool {
+  if interpretor(pair.read1.chr_read[0].flag, 5) == interpretor(pair.read2.chr_read[0].flag, 5)
+    && (pair.read1.chr_read[0].chr == pair.read2.chr_read[0].chr)
+  {
+    pair.svtag = SVType::Inversion;
+    true
+  } else {
+    false
+  }
+}
+
+// insertion
+fn sv_insertion(pair: &mut SVChimericPair) -> bool {
+  if interpretor(pair.read1.chr_read[0].flag, 3) || interpretor(pair.read2.chr_read[0].flag, 3) {
+    pair.svtag = SVType::Insertion;
+    true
+  } else {
+    false
+  }
+}
+
+// translocation
+fn sv_translocation(pair: &mut SVChimericPair) -> bool {
+  let tlen = pair.read1.chr_read[0].pos - pair.read2.chr_read[0].pos;
+  if tlen.abs() > TRANSLOCATION_DISTANCE || pair.read1.chr_read[0].chr != pair.read2.chr_read[0].chr
+  {
+    pair.svtag = SVType::Translocation;
+    true
+  } else {
+    false
+  }
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
 // TODO: finish tests
 // test private functions
 #[cfg(test)]
@@ -111,8 +122,8 @@ mod priv_tests {
     sv_inversion,
     sv_translocation,
   };
-  use crate::utils::structures::sv_chimeric_pair::SVChimericPair;
-  use crate::utils::structures::sv_type::SVType;
+  use crate::structures::sv_chimeric_pair::SVChimericPair;
+  use crate::structures::sv_type::SVType;
   use data_test::data_test;
 
   data_test! {
@@ -121,7 +132,7 @@ mod priv_tests {
 
       // load values
       let mut svchim = super::SVChimericPair::new(super::SVType::None);
-      svchim.read1.chr_read.pos = pos1;
+      svchim.read1.chr_read[0].pos = pos1;
       svchim.read2.chr_read.pos = pos2;
 
       assert!(super::sv_deletion(&mut svchim, exlen), expected);

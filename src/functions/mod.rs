@@ -2,6 +2,7 @@
 
 // modules
 pub mod flag_interpretor;
+pub mod identificator;
 pub mod counter;
 pub mod thresholder;
 
