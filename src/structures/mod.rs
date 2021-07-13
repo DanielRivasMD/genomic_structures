@@ -9,6 +9,7 @@ pub mod erv_annotations;
 pub mod me_anchor;
 pub mod me_chimeric_pair;
 pub mod me_chimeric_read;
+pub mod sv_chimeric_pair;
 pub mod sv_chimeric_read;
 pub mod sv_type;
 
