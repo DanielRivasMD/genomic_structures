@@ -2,11 +2,12 @@
 
 // standard libraries
 use std::borrow::Borrow;
+use std::fmt;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // crate utilities
-use crate::utils::structures::{
+use crate::structures::{
   chr_anchor_enum::ChrAnchorEnum,
   me_chimeric_read::MEChimericRead,
 };
@@ -14,21 +15,48 @@ use crate::utils::structures::{
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // to load onto => hashmap for reads aligned to mobile elements
+/// Contain information about a chimeric pair.
 #[derive(Debug, new)]
 pub struct MEChimericPair {
+  /// Read 1.
   #[new(default)]
   pub read1: MEChimericRead,
 
+  /// Read 2.
   #[new(default)]
   pub read2: MEChimericRead,
 
+  /// Chromosomal anchor.
   pub chranch: ChrAnchorEnum,
 }
+
 // TODO: add non-cigar anchor identification
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 impl MEChimericPair {
+  /// Retrieve chromosomal anchor.
+  ///
+  /// # Examples
+  ///
+  /// ```
+  /// use genomic_structures::MEChimericPair;
+  /// use genomic_structures::MEChimericRead;
+  /// use genomic_structures::ChrAnchorEnum;
+  ///
+  /// let mut toretrieve = MEChimericPair::new(ChrAnchorEnum::None);
+  /// toretrieve.read1 = MEChimericRead::new();
+  /// toretrieve.read1.sequence = "GATTACA".to_string();
+  /// let retrieved = toretrieve.chr_anchor_retriever();
+  ///
+  /// let mut predefined = MEChimericRead::new();
+  /// predefined.sequence = "GATTACA".to_string();
+  ///
+  /// assert_eq!(
+  ///   retrieved.sequence,
+  ///   predefined.sequence,
+  /// )
+  /// ```
   pub fn chr_anchor_retriever(&self) -> &MEChimericRead {
     match self.chranch {
       ChrAnchorEnum::None => {
@@ -41,10 +69,14 @@ impl MEChimericPair {
     }
     .borrow()
   }
+
+// TODO: add trait implementation for mobile element retrieval
+
 }
 
-use std::fmt;
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
+// display trait implementation
 impl fmt::Display for MEChimericPair {
   fn fmt(
     &self,
