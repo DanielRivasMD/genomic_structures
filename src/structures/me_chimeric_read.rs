@@ -14,7 +14,7 @@ use crate::structures::{
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-/// Contain primary (index 0) and secondary aligned reads annotation.
+/// Contain primary (index 0) and secondary aligned read annotation.
 #[derive(Debug, new, Default)]
 pub struct MEChimericRead {
   /// Sequence.
