@@ -93,35 +93,6 @@ impl CIGAR {
     this_cigar
   }
 
-  /// Adjust alignment coordinates according to CIGAR interpretation
-  /// returning a tupple ( adjusted position, total aligned length ).
-  fn adjuster(
-    &self,
-    position: i32,
-  ) -> (i32, i32) {
-    let align_sum: i32 = self.align.iter().sum();
-    let ins_sum: i32 = self.ins.iter().sum();
-    let del_sum: i32 = self.del.iter().sum();
-    (self.lclip + position, align_sum + ins_sum + del_sum)
-  }
-
-  /// Define left boundry.
-  fn left_boundry(
-    &self,
-    position: i32,
-  ) -> i32 {
-    position - self.lclip
-  }
-
-  /// Define right boundry.
-  fn right_boundry(
-    &self,
-    position: i32,
-  ) -> i32 {
-    let lpos = self.left_boundry(position);
-    lpos + (self.lclip + self.adjuster(position).1 + self.rclip)
-  }
-
   // TODO: verify boundries
 
   /// Define left and right boundries.
@@ -139,6 +110,35 @@ impl CIGAR {
     position: i32,
   ) -> (i32, i32) {
     (self.left_boundry(position), self.right_boundry(position))
+  }
+
+  // adjust alignment coordinates according to CIGAR interpretation
+  // return tupple ( adjusted position, total aligned length )
+  fn adjuster(
+    &self,
+    position: i32,
+  ) -> (i32, i32) {
+    let align_sum: i32 = self.align.iter().sum();
+    let ins_sum: i32 = self.ins.iter().sum();
+    let del_sum: i32 = self.del.iter().sum();
+    (self.lclip + position, align_sum + ins_sum + del_sum)
+  }
+
+  // left boundry
+  fn left_boundry(
+    &self,
+    position: i32,
+  ) -> i32 {
+    position - self.lclip
+  }
+
+  // right boundry
+  fn right_boundry(
+    &self,
+    position: i32,
+  ) -> i32 {
+    let lpos = self.left_boundry(position);
+    lpos + (self.lclip + self.adjuster(position).1 + self.rclip)
   }
 }
 

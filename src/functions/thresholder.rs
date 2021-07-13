@@ -21,72 +21,6 @@ use libc::{
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-// R function signature declaration
-#[link(name = "Rmath")]
-extern "C" {
-  fn ppois(
-    x: c_double,
-    lambda: c_double,
-    lower_tail: c_int,
-    log_p: c_int,
-  ) -> c_double;
-}
-
-fn effective_genome_length_calculator(
-  genome_length: f64,
-  bin_size: f64,
-  bin_overlap: f64,
-) -> f64 {
-  genome_length * bin_size / bin_overlap
-}
-
-fn lambda_calculator(
-  pop_reads: f64,
-  eff_genome_length: f64,
-  bin_size: f64,
-) -> f64 {
-  pop_reads * bin_size / eff_genome_length
-}
-
-fn r_ppoisson(
-  lambda: f64,
-  psize: usize,
-) -> Vec<f64> {
-  let mut ppois_vec = vec![0.; psize];
-  for ppois_index in 1..=psize {
-    // fix lower_tail = TRUE & log_p = FALSE
-    unsafe {
-      ppois_vec[ppois_index - 1] = 1. - ppois(ppois_index as f64, lambda, 1, 0);
-    }
-  }
-  ppois_vec
-}
-
-fn tabler(
-  bined_hm: &HashMap<String, Vec<String>>,
-  psize: usize,
-) -> Vec<f64> {
-  let mut out_vec = vec![0.; psize];
-  for (_, i) in bined_hm.iter() {
-    let length_count = i.len();
-    if length_count < psize {
-      out_vec[length_count - 1] += 1.;
-    }
-  }
-  out_vec
-}
-
-fn cumsum(mut cum_vec: Vec<f64>) -> Vec<f64> {
-  let mut cumulus = 0.;
-  for cix in &mut cum_vec {
-    cumulus += *cix;
-    *cix = cumulus;
-  }
-  cum_vec
-}
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-
 /// Obtain a threshold according to parameters.
 ///
 /// Parameters:
@@ -164,6 +98,77 @@ pub fn thresholder(
     }
   }
   threshold
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// R function signature declaration
+#[link(name = "Rmath")]
+extern "C" {
+  fn ppois(
+    x: c_double,
+    lambda: c_double,
+    lower_tail: c_int,
+    log_p: c_int,
+  ) -> c_double;
+}
+
+// effective genome / chromosome / scaffold length
+fn effective_genome_length_calculator(
+  genome_length: f64,
+  bin_size: f64,
+  bin_overlap: f64,
+) -> f64 {
+  genome_length * bin_size / bin_overlap
+}
+
+// Poisson lambda λ
+fn lambda_calculator(
+  pop_reads: f64,
+  eff_genome_length: f64,
+  bin_size: f64,
+) -> f64 {
+  pop_reads * bin_size / eff_genome_length
+}
+
+// Poisson distribution
+fn r_ppoisson(
+  lambda: f64,
+  psize: usize,
+) -> Vec<f64> {
+  let mut ppois_vec = vec![0.; psize];
+  for ppois_index in 1..=psize {
+    // fix lower_tail = TRUE & log_p = FALSE
+    unsafe {
+      ppois_vec[ppois_index - 1] = 1. - ppois(ppois_index as f64, lambda, 1, 0);
+    }
+  }
+  ppois_vec
+}
+
+// table convertor
+fn tabler(
+  bined_hm: &HashMap<String, Vec<String>>,
+  psize: usize,
+) -> Vec<f64> {
+  let mut out_vec = vec![0.; psize];
+  for (_, i) in bined_hm.iter() {
+    let length_count = i.len();
+    if length_count < psize {
+      out_vec[length_count - 1] += 1.;
+    }
+  }
+  out_vec
+}
+
+// cumulative sum
+fn cumsum(mut cum_vec: Vec<f64>) -> Vec<f64> {
+  let mut cumulus = 0.;
+  for cix in &mut cum_vec {
+    cumulus += *cix;
+    *cix = cumulus;
+  }
+  cum_vec
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
