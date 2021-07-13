@@ -15,6 +15,18 @@
 /// 10) read fails platform/vendor quality checks.
 /// 11) read is PCR or optical duplicate.
 /// 12) supplementary alignment.
+///
+/// # Examples
+///
+/// ```
+/// use genomic_structures::interpretor;
+///
+/// assert_eq!(interpretor(177, 1), true);
+/// assert_eq!(interpretor(177, 2), false);
+/// assert_eq!(interpretor(2165, 3), true);
+/// assert_eq!(interpretor(133, 7), false);
+/// assert_eq!(interpretor(157, 5), true);
+/// ```
 pub fn interpretor(
   n: i32,
   p: usize,
