@@ -5,7 +5,8 @@ use std::collections::HashMap;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-pub fn chr_counter(
+// count reads at bin
+fn chr_counter(
   read_id: String,
   position_hm: &mut HashMap<String, Vec<String>>,
   binned_position: String,

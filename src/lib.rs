@@ -19,6 +19,7 @@ mod macros;
 // functions
 mod functions;
 
+pub use crate::functions::chr_counter::chr_counter;
 pub use crate::functions::flag_interpretor::interpretor;
 pub use crate::functions::thresholder::thresholder;
 
