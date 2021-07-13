@@ -2,6 +2,7 @@
 
 // modules
 pub mod chr_counter;
+pub mod element_counter;
 pub mod flag_interpretor;
 pub mod thresholder;
 

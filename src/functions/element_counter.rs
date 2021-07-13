@@ -1,7 +1,8 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
+// hold count upstream & downstream
 #[derive(Debug, new)]
-pub struct ElementCounter {
+struct ElementCounter {
   #[new(default)]
   pub upstream:   i32,
   #[new(default)]
@@ -10,8 +11,9 @@ pub struct ElementCounter {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
+// count on element
 impl ElementCounter {
-  pub fn counter(
+  fn counter(
     &mut self,
     orientation: &str,
   ) {
