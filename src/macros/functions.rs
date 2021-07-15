@@ -2,6 +2,7 @@
 
 /// Calculate effective genome / chromosome / scaffold length
 /// with default parameters: `BIN_SIZE` and `BIN_OVERLAP`.
+#[macro_export]
 macro_rules! effective_genome_length_calculator {
   // explicit values
   ( $gl: expr, $bs: expr, $bo: expr ) => {
@@ -16,6 +17,7 @@ macro_rules! effective_genome_length_calculator {
 
 /// Calculate Poisson's lambda (λ)
 /// with default parameters: `BIN_SIZE`.
+#[macro_export]
 macro_rules! lambda_calculator {
   // explicit values
   ( $pr: expr, $egl: expr, $bs: expr ) => {
@@ -31,6 +33,7 @@ macro_rules! lambda_calculator {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /// Count reads that align at a certain bin along chromosome.
+#[macro_export]
 macro_rules! chr_counter {
   // mobile element chromosomal counter
   ( $read_id: expr, $read_count: expr, $chr_pair: expr, $position_hm: expr ) => {
@@ -42,8 +45,8 @@ macro_rules! chr_counter {
   // structural variant chromosomal counter
   ( $read_id: expr, $sv_pair: expr, $position_hm: expr ) => {
     let binned_pos = (
-      $sv_pair.read1.chr_read.binner(),
-      $sv_pair.read2.chr_read.binner(),
+      $sv_pair.read1.chr_read[0].binner(),
+      $sv_pair.read2.chr_read[0].binner(),
     );
     let binned_position = format!(
       "{}-{}",
