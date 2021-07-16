@@ -17,8 +17,8 @@ use crate::structures::{
 ///
 /// # Examples
 ///
-/// ```
 /// TODO: add example
+/// ```
 /// ```
 pub fn strand_counter(
   read_id: String,

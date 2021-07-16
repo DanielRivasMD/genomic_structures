@@ -16,8 +16,8 @@ use crate::{
 ///
 /// # Examples
 ///
-/// ```
 /// TODO: add example
+/// ```
 /// ```
 pub fn identificator(
   pair: &mut SVChimericPair,
