@@ -4,12 +4,20 @@ name = "genomic_structures"
 version = "0.1.0"
 authors = ["DanielRivasMD <danielrivasmd@gmail.com>"]
 edition = "2018"
+description = "Library for interacting with genomic structures, namely mobile elements and structural variants."
+documentation = "https://docs.rs/genomic_structures"
+readme = "README.md"
+homepage = "https://github.com/DanielRivasMD"
+repository = "https://github.com/DanielRivasMD/genomic_structures"
+license = "GNU General Public License v3.0"
+keywords = ["research-tool", "genetics", "genomics", "bioinformatics", "computational-biology"]
+categories = ["library", "command-line-utilities", "development-tools", "research-tool"]
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [lib]
 name = "genomic_structures"
 path = "src/lib.rs"
+
 
 [dependencies]
 derive-new = "0.5"
