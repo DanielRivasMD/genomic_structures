@@ -4,10 +4,10 @@
 #[macro_export]
 macro_rules! load {
   // mobile element
-  ( $record: expr, $read_no: tt, $flines: expr, $ms: expr, $mo: expr ) => {
+  ( $record: expr, $read_no: tt, $flines: expr, $ms: expr, $mo: expr, $err: expr ) => {
     if $flines[1]
       .parse::<i32>()
-      .context(ChapulinCommonError::Parsing)?
+      .context($err)?
       <= 255
     {
       $record.$read_no.sequence = $flines[9].to_string();
