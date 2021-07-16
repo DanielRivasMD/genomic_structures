@@ -1,5 +1,7 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
+/// Load record onto hashmap.
+#[macro_export]
 macro_rules! load {
   // mobile element
   ( $record: expr, $read_no: tt, $flines: expr, $ms: expr, $mo: expr ) => {
@@ -23,6 +25,10 @@ macro_rules! load {
   };
 }
 
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+/// Load record onto hashmap.
+#[macro_export]
 macro_rules! reload {
   // chromosomal loci
   ( $record: expr, $read_no: tt, $flines: expr ) => {
@@ -34,6 +40,10 @@ macro_rules! reload {
   };
 }
 
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+/// Evaluate mapping quality (MAPQ).
+#[macro_export]
 macro_rules! mapq {
   // mapq
   ( $record: expr, $read_no: tt ) => {
