@@ -14,12 +14,6 @@ use crate::structures::{
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /// Count reads per strand and orientation.
-///
-/// # Examples
-///
-/// TODO: add example
-/// ```
-/// ```
 pub fn strand_counter(
   read_id: String,
   str: &str,

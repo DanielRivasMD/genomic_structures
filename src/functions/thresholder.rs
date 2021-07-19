@@ -138,7 +138,7 @@ fn r_ppoisson(
 ) -> Vec<f64> {
   let mut ppois_vec = vec![0.; psize];
   for ppois_index in 1..=psize {
-    // fix lower_tail = TRUE & log_p = FALSE
+    // fixed lower_tail = TRUE & log_p = FALSE
     unsafe {
       ppois_vec[ppois_index - 1] = 1. - ppois(ppois_index as f64, lambda, 1, 0);
     }

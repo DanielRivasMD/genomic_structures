@@ -106,6 +106,7 @@ impl ChrAnchor {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 impl SamFlag for ChrAnchor {
+  /// Binary interpretation on a SAM flag for ChrAnchor struct.
   fn interpretor(
     &self,
     p: usize,

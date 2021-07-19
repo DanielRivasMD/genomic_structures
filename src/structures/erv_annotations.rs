@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-/// ERV annotation to indicate which LTR sequence is present
+/// ERV annotation to indicate which LTR sequence is present.
 #[derive(Debug, Default)]
 pub struct ERVAnnotations {
   pub ltr5: bool,

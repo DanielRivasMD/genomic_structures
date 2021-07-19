@@ -16,7 +16,6 @@ use crate::{
 ///
 /// # Examples
 ///
-/// TODO: add example
 /// ```
 /// ```
 pub fn identificator(
@@ -32,7 +31,6 @@ pub fn identificator(
   psw.push(sv_insertion(pair));
   psw.push(sv_translocation(pair));
   // TODO: correct BUG. variant are called simultaneous
-  // ic!(psw);
 
   psw.contains(&true)
 }
@@ -111,7 +109,6 @@ fn sv_translocation(pair: &mut SVChimericPair) -> bool {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-// TODO: finish tests
 // test private functions
 #[cfg(test)]
 mod priv_tests {

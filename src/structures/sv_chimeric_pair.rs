@@ -31,12 +31,6 @@ pub struct SVChimericPair {
 
 impl SVChimericPair {
   /// Identify type of structural variant.
-  ///
-  /// # Examples
-  ///
-  /// TODO: add example
-  /// ```
-  /// ```
   pub fn identificator(
     &mut self,
     expected_tlen: i32,
