@@ -67,9 +67,9 @@ pub fn strand_counter(
 #[derive(Debug, new)]
 struct ElementCounter {
   #[new(default)]
-  pub upstream:   i32,
+  upstream:   i32,
   #[new(default)]
-  pub downstream: i32,
+  downstream: i32,
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
