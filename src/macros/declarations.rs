@@ -26,18 +26,14 @@ macro_rules! load {
   };
 
   // mobile element
-  ( $record: expr, $read_no: tt, $flines: expr, $ms: expr, $mo: expr, $err: expr ) => {
-    if $flines[1]
-      .parse::<i32>()
-      .context($err)?
-      <= 255
-    {
-      $record.$read_no.sequence = $flines[9].to_string();
+  ( $record: expr, $read_no: tt, $values: expr, $err: expr ) => {
+    if $values.pv_flag <= 255 {
+      $record.$read_no.sequence = $values.sequence;
     }
     $record
       .$read_no
       .me_read
-      .push(MEAnchor::loader(&$flines, $ms, &$mo));
+      .push(MEAnchor::loader($values.mobel, $values.pv_flag, $values.pv_position, $values.cigar.clone(), $values.mobel_size, $values.mobel_orientation));
   };
 
   // structural variant
