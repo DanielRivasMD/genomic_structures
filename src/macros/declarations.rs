@@ -39,10 +39,10 @@ macro_rules! load {
       $record.$read_no.sequence = $values.sequence.clone();
     }
     $record.$read_no.me_read.push(MEAnchor::loader(
-      $values.cigar,
+      $values.cigar.clone(),
       $values.pv_flag,
-      $values.mobel,
-      $values.mobel_orientation,
+      $values.mobel.clone(),
+      $values.mobel_orientation.clone(),
       $values.pv_position,
       $values.mobel_size,
     ));
