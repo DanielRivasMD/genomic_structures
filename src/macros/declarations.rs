@@ -30,10 +30,14 @@ macro_rules! load {
     if $values.pv_flag <= 255 {
       $record.$read_no.sequence = $values.sequence;
     }
-    $record
-      .$read_no
-      .me_read
-      .push(MEAnchor::loader($values.mobel, $values.pv_flag, $values.pv_position, $values.cigar.clone(), $values.mobel_size, $values.mobel_orientation));
+    $record.$read_no.me_read.push(MEAnchor::loader(
+      $values.mobel,
+      $values.pv_flag,
+      $values.pv_position,
+      $values.cigar.clone(),
+      $values.mobel_size,
+      $values.mobel_orientation,
+    ));
   };
 
   // structural variant
@@ -65,7 +69,8 @@ macro_rules! reload {
 macro_rules! mapq {
   // mapq
   ( $record: expr, $read_no: tt ) => {
-    $record.$read_no.chr_read.is_empty() || $record.$read_no.chr_read[0].mapq < MAPQ
+    $record.$read_no.chr_read.is_empty()
+      || $record.$read_no.chr_read[0].mapq < MAPQ
   };
 }
 

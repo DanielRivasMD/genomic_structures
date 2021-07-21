@@ -30,22 +30,30 @@ pub fn strand_counter(
 
   match str {
     "F5" => {
-      if chr_pair.flag == 0 && mobel_counter.upstream >= mobel_counter.downstream {
+      if chr_pair.flag == 0
+        && mobel_counter.upstream >= mobel_counter.downstream
+      {
         chr_counter!(read_id, read_count, chr_pair, position_hm);
       }
     }
     "F3" => {
-      if chr_pair.flag == 16 && mobel_counter.upstream <= mobel_counter.downstream {
+      if chr_pair.flag == 16
+        && mobel_counter.upstream <= mobel_counter.downstream
+      {
         chr_counter!(read_id, read_count, chr_pair, position_hm);
       }
     }
     "R5" => {
-      if chr_pair.flag == 16 && mobel_counter.upstream >= mobel_counter.downstream {
+      if chr_pair.flag == 16
+        && mobel_counter.upstream >= mobel_counter.downstream
+      {
         chr_counter!(read_id, read_count, chr_pair, position_hm);
       }
     }
     "R3" => {
-      if chr_pair.flag == 0 && mobel_counter.upstream <= mobel_counter.downstream {
+      if chr_pair.flag == 0
+        && mobel_counter.upstream <= mobel_counter.downstream
+      {
         chr_counter!(read_id, read_count, chr_pair, position_hm);
       }
     }

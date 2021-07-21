@@ -75,7 +75,8 @@ fn sv_duplication(pair: &mut SVChimericPair) -> bool {
 
 // inversion
 fn sv_inversion(pair: &mut SVChimericPair) -> bool {
-  if interpretor(pair.read1.chr_read[0].flag, 5) == interpretor(pair.read2.chr_read[0].flag, 5)
+  if interpretor(pair.read1.chr_read[0].flag, 5)
+    == interpretor(pair.read2.chr_read[0].flag, 5)
     && (pair.read1.chr_read[0].chr == pair.read2.chr_read[0].chr)
   {
     pair.svtag = SVType::Inversion;
@@ -87,7 +88,9 @@ fn sv_inversion(pair: &mut SVChimericPair) -> bool {
 
 // insertion
 fn sv_insertion(pair: &mut SVChimericPair) -> bool {
-  if interpretor(pair.read1.chr_read[0].flag, 3) || interpretor(pair.read2.chr_read[0].flag, 3) {
+  if interpretor(pair.read1.chr_read[0].flag, 3)
+    || interpretor(pair.read2.chr_read[0].flag, 3)
+  {
     pair.svtag = SVType::Insertion;
     true
   } else {
@@ -98,7 +101,8 @@ fn sv_insertion(pair: &mut SVChimericPair) -> bool {
 // translocation
 fn sv_translocation(pair: &mut SVChimericPair) -> bool {
   let tlen = pair.read1.chr_read[0].pos - pair.read2.chr_read[0].pos;
-  if tlen.abs() > TRANSLOCATION_DISTANCE || pair.read1.chr_read[0].chr != pair.read2.chr_read[0].chr
+  if tlen.abs() > TRANSLOCATION_DISTANCE
+    || pair.read1.chr_read[0].chr != pair.read2.chr_read[0].chr
   {
     pair.svtag = SVType::Translocation;
     true

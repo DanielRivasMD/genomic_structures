@@ -50,7 +50,11 @@ impl CIGAR {
   /// assert_eq!(cigar.lclip, 10);
   /// assert_eq!(cigar.rclip, 5);
   /// ```
-  pub fn loader(&mut self, to_interpret: &str, position: i32) {
+  pub fn loader(
+    &mut self,
+    to_interpret: &str,
+    position: i32,
+  ) {
     if to_interpret == "*" {
       self.align.push(0);
     } else {
@@ -99,7 +103,6 @@ impl CIGAR {
 
     // calculate boundries
     self.boundries(position);
-
   }
 
   // TODO: verify & rewrite boundries
