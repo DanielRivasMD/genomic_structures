@@ -22,11 +22,20 @@ pub struct CIGAR {
   /// Deletion.
   #[new(default)]
   pub del: Vec<i32>,
+
+  /// Left boundry.
+  #[new(default)]
+  pub left_boundry: i32,
+
+  /// Right boundry.
+  #[new(default)]
+  pub right_boundry: i32,
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 impl CIGAR {
+  // TODO: update documentation
   /// Load string into CIGAR struct.
   ///
   /// # Examples
@@ -41,7 +50,7 @@ impl CIGAR {
   /// assert_eq!(cigar.lclip, 10);
   /// assert_eq!(cigar.rclip, 5);
   /// ```
-  pub fn loader(to_interpret: &str) -> Self {
+  pub fn loader(to_interpret: &str, position: i32) -> Self {
     // create new CIGAR with empty values
     let mut this_cigar = CIGAR::new();
 
@@ -90,10 +99,14 @@ impl CIGAR {
         j = i + 1;
       }
     }
+
+    // calculate boundries
+    this_cigar.boundries(position);
+
     this_cigar
   }
 
-  // TODO: verify boundries
+  // TODO: verify & rewrite boundries
 
   /// Define left and right boundries.
   ///
@@ -105,11 +118,12 @@ impl CIGAR {
   /// let mut cigar = CIGAR::loader("10H84M6H");
   /// assert_eq!((90, 190), cigar.boundries(100));
   /// ```
-  pub fn boundries(
-    &self,
+  fn boundries(
+    &mut self,
     position: i32,
-  ) -> (i32, i32) {
-    (self.left_boundry(position), self.right_boundry(position))
+  ) {
+    self.left_boundry = self.left_boundry_calculator(position);
+    self.right_boundry = self.right_boundry_calculator(position);
   }
 
   // adjust alignment coordinates according to CIGAR interpretation
@@ -125,7 +139,7 @@ impl CIGAR {
   }
 
   // left boundry
-  fn left_boundry(
+  fn left_boundry_calculator(
     &self,
     position: i32,
   ) -> i32 {
@@ -133,11 +147,11 @@ impl CIGAR {
   }
 
   // right boundry
-  fn right_boundry(
+  fn right_boundry_calculator(
     &self,
     position: i32,
   ) -> i32 {
-    let lpos = self.left_boundry(position);
+    let lpos = self.left_boundry_calculator(position);
     lpos + (self.lclip + self.adjuster(position).1 + self.rclip)
   }
 }
