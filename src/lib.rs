@@ -1,6 +1,7 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//! Collection of structures, types and functions for mobile elment
+//! This crate provides a
+//! collection of structures, types and functions for mobile elment
 //! and structural variant identification from genomic data.
 //! # Basic usage
 

@@ -1,25 +1,25 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /// Contain read's CIGAR information.
-#[derive(Debug, new)]
+#[derive(Debug, new, Clone)]
 pub struct CIGAR {
-  /// Left clip.
+  /// Left clip position coordinate.
   #[new(default)]
   pub lclip: i32,
 
-  /// Alignment.
+  /// Alignment as a vector of coordinates.
   #[new(default)]
   pub align: Vec<i32>,
 
-  /// Right clip.
+  /// Right clip position coordinate.
   #[new(default)]
   pub rclip: i32,
 
-  /// Insertion.
+  /// Insertion as a vector of coordinates.
   #[new(default)]
   pub ins: Vec<i32>,
 
-  /// Deletion.
+  /// Deletion as a vector of coordinates.
   #[new(default)]
   pub del: Vec<i32>,
 

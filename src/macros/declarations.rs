@@ -1,9 +1,17 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-/// Load record onto hashmap.
+/// Load records:
+///   - Load records contained in SAM file for processing on mobile element
+///     alignment:
+///     - Read ID.
+///     - Alignment flag and interprets orientation.
+///     - Mobile element aligned.
+///     - CIGAR calculating alignment coordinates and boundries.
+///   - Load mobile element features.
+///   - Load structural variant features.
 #[macro_export]
 macro_rules! load {
-  // alignment
+  // raw SAM alignment
   ( $values: expr, $flines: expr, $err: expr ) => {
     // read id
     $values.read_id = $flines[0].to_string();
@@ -11,7 +19,7 @@ macro_rules! load {
     // flag & read orientation
     $values.pv_flag = $flines[1].parse::<i32>().context($err)?;
 
-    // mobile element / scaffold / chromosome
+    // mobile element
     $values.mobel = $flines[2].to_string();
 
     // alignment interpretation
