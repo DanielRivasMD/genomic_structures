@@ -14,34 +14,35 @@ use crate::{
 /// Mobile element anchor structure.
 #[derive(Debug, new)]
 pub struct MEAnchor {
-  /// Mobile element.
-  #[new(default)]
-  pub mobel: String,
-
-  /// Size.
-  #[new(default)]
-  pub size: f64,
+  /// CIGAR.
+  #[new(value = "CIGAR::new()")]
+  pub cigar: CIGAR,
 
   /// Flag.
   #[new(default)]
   pub flag: i32,
 
-  /// Position.
+  /// Mobile element.
   #[new(default)]
-  pub position: i32,
-
-  /// CIGAR.
-  #[new(value = "CIGAR::new()")]
-  pub cigar: CIGAR,
+  pub mobel: String,
 
   /// Orientation.
   #[new(default)]
   pub orientation: String,
+
+  /// Position.
+  #[new(default)]
+  pub position: i32,
+
+  /// Size.
+  #[new(default)]
+  pub size: f64,
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 impl MEAnchor {
+  // TODO: update tests
   /// Load vector of strings (line from a file) onto MEAnchor struct.
   ///
   /// # Examples
@@ -71,20 +72,20 @@ impl MEAnchor {
   /// assert_eq!(loaded.orientation, manual.orientation);
   /// ```
   pub fn loader(
-    mobel: String,
-    flag: i32,
-    position: i32,
     cigar: CIGAR,
-    mobile_size: f64,
-    mobile_orientation: String,
+    flag: i32,
+    mobel: String,
+    orientation: String,
+    position: i32,
+    size: f64,
   ) -> Self {
     Self {
-      mobel,
-      size: mobile_size,
-      flag,
-      position,
       cigar,
-      orientation: (&mobile_orientation).to_string(),
+      flag,
+      mobel,
+      orientation,
+      position,
+      size,
     }
   }
 }

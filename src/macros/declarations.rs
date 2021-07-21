@@ -39,12 +39,12 @@ macro_rules! load {
       $record.$read_no.sequence = $values.sequence;
     }
     $record.$read_no.me_read.push(MEAnchor::loader(
-      $values.mobel,
+      $values.cigar,
       $values.pv_flag,
-      $values.pv_position,
-      $values.cigar.clone(),
-      $values.mobel_size,
+      $values.mobel,
       $values.mobel_orientation,
+      $values.pv_position,
+      $values.mobel_size,
     ));
   };
 
