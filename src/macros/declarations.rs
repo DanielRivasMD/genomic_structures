@@ -3,6 +3,22 @@
 /// Load record onto hashmap.
 #[macro_export]
 macro_rules! load {
+  // alignment
+  ( $values: expr, $flines: expr, $err: expr ) => {
+    // read id
+    $values.read_id = $flines[0].to_string();
+
+    // flag & read orientation
+    $values.pv_flag = $flines[1].parse::<i32>().context($err)?;
+
+    // mobile element / scaffold / chromosome
+    $values.mobel = $flines[2].to_string();
+
+    // alignment interpretation
+    $values.pv_position = $flines[3].parse::<i32>().context($err)?;
+    $values.pv_cigar = $flines[5].to_string();
+  };
+
   // mobile element
   ( $record: expr, $read_no: tt, $flines: expr, $ms: expr, $mo: expr, $err: expr ) => {
     if $flines[1]
