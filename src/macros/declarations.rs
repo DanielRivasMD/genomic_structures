@@ -17,6 +17,9 @@ macro_rules! load {
     // alignment interpretation
     $values.pv_position = $flines[3].parse::<i32>().context($err)?;
     $values.pv_cigar = $flines[5].to_string();
+
+    // cigar
+    $values.cigar.loader(&$values.pv_cigar, $values.pv_position);
   };
 
   // mobile element
