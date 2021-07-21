@@ -20,6 +20,9 @@ macro_rules! load {
 
     // cigar
     $values.cigar.loader(&$values.pv_cigar, $values.pv_position);
+
+    // sequence
+    $values.sequence = $flines[9].to_string();
   };
 
   // mobile element
