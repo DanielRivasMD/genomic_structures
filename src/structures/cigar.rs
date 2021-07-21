@@ -50,12 +50,9 @@ impl CIGAR {
   /// assert_eq!(cigar.lclip, 10);
   /// assert_eq!(cigar.rclip, 5);
   /// ```
-  pub fn loader(to_interpret: &str, position: i32) -> Self {
-    // create new CIGAR with empty values
-    let mut this_cigar = CIGAR::new();
-
+  pub fn loader(&mut self, to_interpret: &str, position: i32) {
     if to_interpret == "*" {
-      this_cigar.align.push(0);
+      self.align.push(0);
     } else {
       // iterate to find annotations
       let mut char_vec = vec![];
@@ -73,24 +70,24 @@ impl CIGAR {
       for i in char_vec.iter() {
         match &to_interpret[*i..*i + 1] {
           "H" | "S" => {
-            if this_cigar.align.iter().sum::<i32>() == 0 {
-              this_cigar.lclip = (&to_interpret[j..*i]).parse::<i32>().unwrap();
+            if self.align.iter().sum::<i32>() == 0 {
+              self.lclip = (&to_interpret[j..*i]).parse::<i32>().unwrap();
             } else {
-              this_cigar.rclip = (&to_interpret[j..*i]).parse::<i32>().unwrap();
+              self.rclip = (&to_interpret[j..*i]).parse::<i32>().unwrap();
             }
           }
           "M" => {
-            this_cigar
+            self
               .align
               .push((&to_interpret[j..*i]).parse::<i32>().unwrap());
           }
           "I" => {
-            this_cigar
+            self
               .ins
               .push((&to_interpret[j..*i]).parse::<i32>().unwrap());
           }
           "D" => {
-            this_cigar
+            self
               .del
               .push((&to_interpret[j..*i]).parse::<i32>().unwrap());
           }
@@ -101,9 +98,8 @@ impl CIGAR {
     }
 
     // calculate boundries
-    this_cigar.boundries(position);
+    self.boundries(position);
 
-    this_cigar
   }
 
   // TODO: verify & rewrite boundries
