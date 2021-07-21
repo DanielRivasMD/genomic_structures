@@ -36,7 +36,7 @@ macro_rules! load {
   // mobile element
   ( $record: expr, $read_no: tt, $values: expr, $err: expr ) => {
     if $values.pv_flag <= 255 {
-      $record.$read_no.sequence = $values.sequence;
+      $record.$read_no.sequence = $values.sequence.clone();
     }
     $record.$read_no.me_read.push(MEAnchor::loader(
       $values.cigar,
