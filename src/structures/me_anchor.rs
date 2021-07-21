@@ -1,15 +1,18 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // crate utilities
-use crate::functions::flag_interpretor::{
-  interpretor,
-  SamFlag,
+use crate::{
+  functions::flag_interpretor::{
+    interpretor,
+    SamFlag,
+  },
+  structures::cigar::CIGAR,
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /// Mobile element anchor structure.
-#[derive(Debug, new, Default)]
+#[derive(Debug, new)]
 pub struct MEAnchor {
   /// Mobile element.
   #[new(default)]
@@ -25,11 +28,11 @@ pub struct MEAnchor {
 
   /// Position.
   #[new(default)]
-  pub pos: i32,
+  pub position: i32,
 
   /// CIGAR.
-  #[new(default)]
-  pub cigar: String,
+  #[new(value = "CIGAR::new()")]
+  pub cigar: CIGAR,
 
   /// Orientation.
   #[new(default)]
@@ -68,16 +71,19 @@ impl MEAnchor {
   /// assert_eq!(loaded.orientation, manual.orientation);
   /// ```
   pub fn loader(
-    file_line: &[&str],
+    mobel: String,
+    flag: i32,
+    position: i32,
+    cigar: CIGAR,
     mobile_size: f64,
-    mobile_orientation: &str,
+    mobile_orientation: String,
   ) -> Self {
     Self {
-      mobel:       file_line[2].to_string(),
-      size:        mobile_size,
-      flag:        file_line[1].parse::<i32>().unwrap(),
-      pos:         file_line[3].parse::<i32>().unwrap(),
-      cigar:       file_line[5].to_string(),
+      mobel,
+      size: mobile_size,
+      flag,
+      position,
+      cigar,
       orientation: (&mobile_orientation).to_string(),
     }
   }
