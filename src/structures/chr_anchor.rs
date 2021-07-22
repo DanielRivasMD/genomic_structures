@@ -1,36 +1,39 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // crate utilities
-use crate::functions::flag_interpretor::{
-  interpretor,
-  SamFlag,
-};
 use crate::BIN_SIZE;
+use crate::{
+  functions::flag_interpretor::{
+    interpretor,
+    SamFlag,
+  },
+  structures::cigar::CIGAR,
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /// Chromosomal anchor structure.
 #[derive(Debug, new, Default)]
 pub struct ChrAnchor {
-  /// Chromosome.
-  #[new(default)]
-  pub chr: String,
+  /// CIGAR.
+  #[new(value = "CIGAR::new()")]
+  pub cigar: CIGAR,
 
   /// Flag.
   #[new(default)]
   pub flag: i32,
 
-  /// Position.
+  /// Chromosome.
   #[new(default)]
-  pub pos: i32,
-
-  /// CIGAR.
-  #[new(default)]
-  pub cigar: String,
+  pub chr: String,
 
   /// Mapping quality (MAPQ).
   #[new(default)]
   pub mapq: i32,
+
+  /// Position.
+  #[new(default)]
+  pub position: i32,
 
   /// Template length (TLEN).
   #[new(default)]
