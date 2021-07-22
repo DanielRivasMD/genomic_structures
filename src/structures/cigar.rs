@@ -3,33 +3,37 @@
 /// Contain read's CIGAR information.
 #[derive(Debug, new, Clone, Default)]
 pub struct CIGAR {
-  /// Left clip position coordinate.
-  #[new(default)]
-  pub lclip: i32,
-
   /// Alignment as a vector of coordinates.
   #[new(default)]
   pub align: Vec<i32>,
-
-  /// Right clip position coordinate.
-  #[new(default)]
-  pub rclip: i32,
-
-  /// Insertion as a vector of coordinates.
-  #[new(default)]
-  pub ins: Vec<i32>,
 
   /// Deletion as a vector of coordinates.
   #[new(default)]
   pub del: Vec<i32>,
 
+  /// Insertion as a vector of coordinates.
+  #[new(default)]
+  pub ins: Vec<i32>,
+
+  /// Left clip position coordinate.
+  #[new(default)]
+  pub lclip: i32,
+
   /// Left boundry.
   #[new(default)]
   pub left_boundry: i32,
 
+  /// Right clip position coordinate.
+  #[new(default)]
+  pub rclip: i32,
+
   /// Right boundry.
   #[new(default)]
   pub right_boundry: i32,
+
+  /// String.
+  #[new(default)]
+  pub stg: String,
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -55,6 +59,7 @@ impl CIGAR {
     to_interpret: &str,
     position: i32,
   ) {
+    self.stg = to_interpret.to_string().clone();
     if to_interpret == "*" {
       self.align.push(0);
     } else {
