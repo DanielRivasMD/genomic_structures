@@ -40,18 +40,18 @@ macro_rules! load {
     $values.sequence = $flines[9].to_string();
   };
 
-  // mobile element
-  ( $record: expr, $read_no: tt, $values: expr, $err: expr ) => {
+  // mobile element on hash map
+  ( $record: expr, $read_no: tt, $values: expr, $switches: expr, $err: expr ) => {
     if $values.flag <= 255 {
       $record.$read_no.sequence = $values.sequence.clone();
     }
     $record.$read_no.me_read.push(MEAnchor::loader(
       $values.cigar.clone(),
       $values.flag,
-      $values.mobel.clone(),
-      $values.mobel_orientation.clone(),
+      $values.scaffold.clone(),
+      $switches.mobel_anchor.orientation.clone(),
       $values.position,
-      $values.mobel_size,
+      $switches.mobel_anchor.size,
     ));
   };
 
