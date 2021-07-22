@@ -17,17 +17,18 @@ macro_rules! load {
     $values.read_id = $flines[0].to_string();
 
     // flag & read orientation
-    $values.pv_flag = $flines[1].parse::<i32>().context($err)?;
+    $values.flag = $flines[1].parse::<i32>().context($err)?;
 
     // mobile element
     $values.mobel = $flines[2].to_string();
 
     // alignment interpretation
-    $values.pv_position = $flines[3].parse::<i32>().context($err)?;
-    $values.pv_cigar = $flines[5].to_string();
+    $values.position = $flines[3].parse::<i32>().context($err)?;
 
     // cigar
-    $values.cigar.loader(&$values.pv_cigar, $values.pv_position);
+    $values
+      .cigar
+      .loader(&$flines[5].to_string(), $values.position);
 
     // sequence
     $values.sequence = $flines[9].to_string();
