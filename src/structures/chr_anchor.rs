@@ -69,14 +69,21 @@ impl ChrAnchor {
   /// assert_eq!(loaded.mapq, manual.mapq);
   /// assert_eq!(loaded.tlen, manual.tlen);
   /// ```
-  pub fn loader(file_line: &[&str]) -> Self {
+  pub fn loader(
+    cigar: CIGAR,
+    flag: i32,
+    chr: String,
+    mapq: i32,
+    position: i32,
+    tlen: i32,
+  ) -> Self {
     Self {
-      chr:   file_line[2].to_string(),
-      flag:  file_line[1].parse::<i32>().unwrap(),
-      pos:   file_line[3].parse::<i32>().unwrap(),
-      cigar: file_line[5].to_string(),
-      mapq:  file_line[4].parse::<i32>().unwrap(),
-      tlen:  file_line[8].parse::<i32>().unwrap(),
+      cigar,
+      flag,
+      chr,
+      mapq,
+      position,
+      tlen,
     }
   }
 
@@ -101,8 +108,8 @@ impl ChrAnchor {
   /// );
   /// ```
   pub fn binner(&self) -> i32 {
-    let binned = self.pos % BIN_SIZE;
-    self.pos - binned
+    let binned = self.position % BIN_SIZE;
+    self.position - binned
   }
 }
 
