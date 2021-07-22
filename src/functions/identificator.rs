@@ -51,7 +51,7 @@ fn sv_deletion(
   pair: &mut SVChimericPair,
   expected_tlen: i32,
 ) -> bool {
-  let tlen = pair.read1.chr_read[0].pos - pair.read2.chr_read[0].pos;
+  let tlen = pair.read1.chr_read[0].position - pair.read2.chr_read[0].position;
   if tlen.abs() >= expected_tlen {
     pair.svtag = SVType::Deletion;
     true
@@ -100,7 +100,7 @@ fn sv_insertion(pair: &mut SVChimericPair) -> bool {
 
 // translocation
 fn sv_translocation(pair: &mut SVChimericPair) -> bool {
-  let tlen = pair.read1.chr_read[0].pos - pair.read2.chr_read[0].pos;
+  let tlen = pair.read1.chr_read[0].position - pair.read2.chr_read[0].position;
   if tlen.abs() > TRANSLOCATION_DISTANCE
     || pair.read1.chr_read[0].chr != pair.read2.chr_read[0].chr
   {

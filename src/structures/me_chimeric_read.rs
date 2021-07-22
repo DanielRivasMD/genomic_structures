@@ -17,21 +17,25 @@ use crate::structures::{
 /// Contain primary (index 0) and secondary aligned read annotation.
 #[derive(Debug, new, Default)]
 pub struct MEChimericRead {
-  /// Sequence.
+  /// Breakpoint.
   #[new(default)]
-  pub sequence: String,
-
-  /// Mobile element read.
-  #[new(default)]
-  pub me_read: Vec<MEAnchor>,
+  pub breakpoint: BreakPoint,
 
   /// Chromosomal read.
   #[new(default)]
   pub chr_read: Vec<ChrAnchor>,
 
-  /// Breakpoint.
+  /// Mobile element read.
   #[new(default)]
-  pub breakpoint: BreakPoint,
+  pub me_read: Vec<MEAnchor>,
+
+  /// Quality.
+  #[new(default)]
+  pub quality: String,
+
+  /// Sequence.
+  #[new(default)]
+  pub sequence: String,
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -82,7 +86,7 @@ impl fmt::Display for MEChimericRead {
     writeln!(
       f,
       "Chromosome: {}, Position: {}",
-      self.chr_read[0].chr, self.chr_read[0].pos,
+      self.chr_read[0].chr, self.chr_read[0].position,
     )
   }
 }
