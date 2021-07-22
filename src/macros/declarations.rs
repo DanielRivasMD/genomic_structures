@@ -19,16 +19,22 @@ macro_rules! load {
     // flag & read orientation
     $values.flag = $flines[1].parse::<i32>().context($err)?;
 
-    // mobile element
-    $values.mobel = $flines[2].to_string();
+    // scaffold
+    $values.scaffold = $flines[2].to_string();
 
-    // alignment interpretation
+    // position
     $values.position = $flines[3].parse::<i32>().context($err)?;
+
+    //  quality
+    $values.quality = $flines[4].parse::<i32>().context($err)?;
 
     // cigar
     $values
       .cigar
       .loader(&$flines[5].to_string(), $values.position);
+
+    // alignment length
+    $values.tlen = $flines[8].parse::<i32>().context($err)?;
 
     // sequence
     $values.sequence = $flines[9].to_string();
