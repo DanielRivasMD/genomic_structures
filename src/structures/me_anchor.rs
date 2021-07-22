@@ -12,7 +12,7 @@ use crate::{
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /// Mobile element anchor structure.
-#[derive(Debug, new)]
+#[derive(Debug, new, Default)]
 pub struct MEAnchor {
   /// CIGAR.
   #[new(value = "CIGAR::new()")]
