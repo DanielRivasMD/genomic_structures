@@ -36,15 +36,15 @@ macro_rules! load {
 
   // mobile element
   ( $record: expr, $read_no: tt, $values: expr, $err: expr ) => {
-    if $values.pv_flag <= 255 {
+    if $values.flag <= 255 {
       $record.$read_no.sequence = $values.sequence.clone();
     }
     $record.$read_no.me_read.push(MEAnchor::loader(
       $values.cigar.clone(),
-      $values.pv_flag,
+      $values.flag,
       $values.mobel.clone(),
       $values.mobel_orientation.clone(),
-      $values.pv_position,
+      $values.position,
       $values.mobel_size,
     ));
   };
@@ -62,11 +62,18 @@ macro_rules! load {
 #[macro_export]
 macro_rules! reload {
   // chromosomal loci
-  ( $record: expr, $read_no: tt, $flines: expr ) => {
-    if ($record.$read_no.sequence == $flines[9])
-      || ($record.$read_no.sequence_reverser() == $flines[9])
+  ( $record: expr, $read_no: tt, $values: expr ) => {
+    if $record.$read_no.sequence == $values.sequence
+      || $record.$read_no.sequence_reverser() == $values.sequence
     {
-      $record.$read_no.chr_read.push(ChrAnchor::loader(&$flines))
+      $record.$read_no.chr_read.push(ChrAnchor::loader(
+        $values.cigar.clone(),
+        $values.flag,
+        $values.chr.clone(),
+        $values.mapq,
+        $values.position,
+        $values.tlen,
+      ))
     }
   };
 }
