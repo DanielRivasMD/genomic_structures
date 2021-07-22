@@ -1,7 +1,7 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /// Contain read's CIGAR information.
-#[derive(Debug, new, Clone)]
+#[derive(Debug, new, Clone, Default)]
 pub struct CIGAR {
   /// Left clip position coordinate.
   #[new(default)]
