@@ -44,6 +44,7 @@ pub use crate::structures::{
   me_chimeric_pair::MEChimericPair,
   me_chimeric_read::MEChimericRead,
   me_library::MELibrary,
+  raw_values::RawValues,
   sv_chimeric_pair::SVChimericPair,
   sv_chimeric_read::SVChimericRead,
   sv_type::SVType,
