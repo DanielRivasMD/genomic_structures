@@ -2,7 +2,7 @@
 
 // crate utilities
 use crate::{
-  functions::identificator::identificator,
+  functions::identificator::identify,
   structures::{
     sv_chimeric_read::SVChimericRead,
     sv_type::SVType,
@@ -31,11 +31,11 @@ pub struct SVChimericPair {
 
 impl SVChimericPair {
   /// Identify type of structural variant.
-  pub fn identificator(
+  pub fn identify(
     &mut self,
     expected_tlen: i32,
   ) -> bool {
-    identificator(self, expected_tlen)
+    identify(self, expected_tlen)
   }
 }
 

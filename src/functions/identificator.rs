@@ -3,7 +3,7 @@
 // crate utilities
 use crate::TRANSLOCATION_DISTANCE;
 use crate::{
-  functions::flag_interpretor::interpretor,
+  functions::flag_interpretor::interpret,
   structures::{
     sv_chimeric_pair::SVChimericPair,
     sv_type::SVType,
@@ -18,7 +18,7 @@ use crate::{
 ///
 /// ```
 /// ```
-pub fn identificator(
+pub fn identify(
   pair: &mut SVChimericPair,
   expected_tlen: i32,
 ) -> bool {
@@ -37,8 +37,8 @@ pub fn identificator(
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-pub trait SVIdentificator {
-  fn identificator(
+pub trait SVIdentify {
+  fn identify(
     self,
     expected_tlen: i32,
   ) -> bool;
@@ -63,8 +63,8 @@ fn sv_deletion(
 // duplication
 fn sv_duplication(pair: &mut SVChimericPair) -> bool {
   if pair.read1.chr_read[0].tlen > 0
-    && !interpretor(pair.read1.chr_read[0].flag, 5)
-    && !interpretor(pair.read2.chr_read[0].flag, 5)
+    && !interpret(pair.read1.chr_read[0].flag, 5)
+    && !interpret(pair.read2.chr_read[0].flag, 5)
   {
     pair.svtag = SVType::Duplication;
     true
@@ -75,8 +75,8 @@ fn sv_duplication(pair: &mut SVChimericPair) -> bool {
 
 // inversion
 fn sv_inversion(pair: &mut SVChimericPair) -> bool {
-  if interpretor(pair.read1.chr_read[0].flag, 5)
-    == interpretor(pair.read2.chr_read[0].flag, 5)
+  if interpret(pair.read1.chr_read[0].flag, 5)
+    == interpret(pair.read2.chr_read[0].flag, 5)
     && (pair.read1.chr_read[0].chr == pair.read2.chr_read[0].chr)
   {
     pair.svtag = SVType::Inversion;
@@ -88,8 +88,8 @@ fn sv_inversion(pair: &mut SVChimericPair) -> bool {
 
 // insertion
 fn sv_insertion(pair: &mut SVChimericPair) -> bool {
-  if interpretor(pair.read1.chr_read[0].flag, 3)
-    || interpretor(pair.read2.chr_read[0].flag, 3)
+  if interpret(pair.read1.chr_read[0].flag, 3)
+    || interpret(pair.read2.chr_read[0].flag, 3)
   {
     pair.svtag = SVType::Insertion;
     true

@@ -4,7 +4,7 @@
 use crate::BIN_SIZE;
 use crate::{
   functions::flag_interpretor::{
-    interpretor,
+    interpret,
     SamFlag,
   },
   structures::cigar::CIGAR,
@@ -107,7 +107,7 @@ impl ChrAnchor {
   ///   2000
   /// );
   /// ```
-  pub fn binner(&self) -> i32 {
+  pub fn bin(&self) -> i32 {
     let binned = self.position % BIN_SIZE;
     self.position - binned
   }
@@ -117,11 +117,11 @@ impl ChrAnchor {
 
 impl SamFlag for ChrAnchor {
   /// Binary interpretation on a SAM flag for ChrAnchor struct.
-  fn interpretor(
+  fn interpret(
     &self,
     p: usize,
   ) -> bool {
-    interpretor(self.flag, p)
+    interpret(self.flag, p)
   }
 }
 

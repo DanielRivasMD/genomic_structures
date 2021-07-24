@@ -63,15 +63,15 @@ use libc::{
 /// }
 /// assert_eq!(thresholder(6., 1000., 0.001, &hm, 25), 5);
 /// ```
-pub fn thresholder(
+pub fn threshold(
   pop_reads: f64,
   chromosome_size: f64,
   false_discovery_tolerance: f64,
   read_hm: &HashMap<String, Vec<String>>,
   psize: usize,
 ) -> usize {
-  let eff_genome_length = effective_genome_length_calculator!(chromosome_size);
-  let lambda = lambda_calculator!(pop_reads, eff_genome_length);
+  let eff_genome_length = effective_genome_length_calculate!(chromosome_size);
+  let lambda = lambda_calculate!(pop_reads, eff_genome_length);
   let p_values = r_ppoisson(lambda, psize);
 
   let mut peak_prob = vec![0.; psize];
@@ -79,7 +79,7 @@ pub fn thresholder(
     peak_prob[ix] = p_val * chromosome_size;
   }
 
-  let bin_tb = tabler(read_hm, psize);
+  let bin_tb = table(read_hm, psize);
   let cum_bin_tb = cumsum(bin_tb);
   let mut false_disc_values = vec![0.; psize];
   for ix in 0..psize {
@@ -114,7 +114,7 @@ extern "C" {
 }
 
 // effective genome / chromosome / scaffold length
-fn effective_genome_length_calculator(
+fn effective_genome_length_calculate(
   genome_length: f64,
   bin_size: f64,
   bin_overlap: f64,
@@ -123,7 +123,7 @@ fn effective_genome_length_calculator(
 }
 
 // Poisson lambda λ
-fn lambda_calculator(
+fn lambda_calculate(
   pop_reads: f64,
   eff_genome_length: f64,
   bin_size: f64,
@@ -147,7 +147,7 @@ fn r_ppoisson(
 }
 
 // table convertor
-fn tabler(
+fn table(
   bined_hm: &HashMap<String, Vec<String>>,
   psize: usize,
 ) -> Vec<f64> {
@@ -178,11 +178,11 @@ fn cumsum(mut cum_vec: Vec<f64>) -> Vec<f64> {
 mod priv_tests {
   use super::{
     cumsum,
-    effective_genome_length_calculator,
-    lambda_calculator,
+    effective_genome_length_calculate,
+    lambda_calculate,
     ppois,
     r_ppoisson,
-    tabler,
+    table,
   };
   use crate::{
     BIN_OVERLAP,
@@ -216,15 +216,15 @@ mod priv_tests {
     - _09 (vec![0., 1., 2., 3., 4., 5., 6., 7., 8., 9., 10., ], 9., vec![0.000_123_409_804_086_679_56, 0.001_234_098_040_866_797, 0.006_232_195_106_377_316, 0.021_226_486_302_908_888, 0.054_963_641_495_104_916, 0.115_690_520_841_057_73, 0.206_780_839_859_987_08, 0.323_896_964_312_895_94, 0.455_652_604_322_418_8, 0.587_408_244_331_941_3, 0.705_988_320_340_511_7, ])
     - _10 (vec![0., 1., 2., 3., 4., 5., 6., 7., 8., 9., 10., ], 10., vec![4.539_992_976_248_485_4e-5, 0.000_499_399_227_387_333_3, 0.002_769_395_715_511_576, 0.010_336_050_675_925_728, 0.029_252_688_076_961_082, 0.067_085_962_879_031_8, 0.130_141_420_882_483_07, 0.220_220_646_601_699_07, 0.332_819_678_750_718_8, 0.457_929_714_471_852_27, 0.583_039_750_192_985_4, ])
 
-    fn test_effective_genome_length_calculator(glen, expected) => {
-      assert_eq!(super::effective_genome_length_calculator(glen, super::BIN_SIZE as f64, super::BIN_OVERLAP as f64), expected);
+    fn test_effective_genome_length_calculate(glen, expected) => {
+      assert_eq!(super::effective_genome_length_calculate(glen, super::BIN_SIZE as f64, super::BIN_OVERLAP as f64), expected);
     }
 
     - _00 (2000., 4000., )
     - _01 (3243556456., 6487112912., )
 
-    fn test_lambda_calculator(preads, eflen, expected) => {
-      assert_eq!(super::lambda_calculator(preads, eflen, super::BIN_SIZE as f64), expected);
+    fn test_lambda_calculate(preads, eflen, expected) => {
+      assert_eq!(super::lambda_calculate(preads, eflen, super::BIN_SIZE as f64), expected);
     }
 
     - _00 (100., 400., 25., )
@@ -247,12 +247,12 @@ mod priv_tests {
     - _09 (9., 20, vec![0.998_765_901_959_133_2, 0.993_767_804_893_622_7, 0.978_773_513_697_091_1, 0.945_036_358_504_895_1, 0.884_309_479_158_942_3, 0.793_219_160_140_012_9, 0.676_103_035_687_104_1, 0.544_347_395_677_581_3, 0.412_591_755_668_058_7, 0.294_011_679_659_488_27, 0.196_991_617_470_657_4, 0.124_226_570_829_035_32, 0.073_850_769_307_911_79, 0.041_466_325_472_903_74, 0.022_035_659_171_898_98, 0.011_105_909_377_583_822, 0.005_319_571_251_181_654, 0.002_426_402_187_980_514, 0.001_055_953_684_358_956_8, 0.000_439_251_857_729_305_86, ])
     - _10 (10., 20, vec![0.999_500_600_772_612_7, 0.997_230_604_284_488_4, 0.989_663_949_324_074_3, 0.970_747_311_923_038_9, 0.932_914_037_120_968_2, 0.869_858_579_117_517, 0.779_779_353_398_301, 0.667_180_321_249_281_3, 0.542_070_285_528_147_7, 0.416_960_249_807_014_6, 0.303_223_853_696_893_4, 0.208_443_523_605_125_75, 0.135_535_577_380_688_78, 0.083_458_472_934_663_02, 0.048_740_403_303_978_66, 0.027_041_609_784_801_08, 0.014_277_613_597_049_599, 0.007_186_504_603_854_282, 0.003_454_341_975_856_811_7, 0.001_588_260_661_858_020_8, ])
 
-    fn test_tabler(hm_keys, hm_vals, psize, expected) => {
+    fn test_table(hm_keys, hm_vals, psize, expected) => {
       let mut bined_hm = std::collections::HashMap::new();
       for ix in 0..hm_keys.len() {
         bined_hm.insert(hm_keys[ix].clone(), hm_vals[ix].clone());
       }
-      assert_eq!(super::tabler(&bined_hm, psize), expected);
+      assert_eq!(super::table(&bined_hm, psize), expected);
     }
 
     - _00 (

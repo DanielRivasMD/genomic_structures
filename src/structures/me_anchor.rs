@@ -3,7 +3,7 @@
 // crate utilities
 use crate::{
   functions::flag_interpretor::{
-    interpretor,
+    interpret,
     SamFlag,
   },
   structures::cigar::CIGAR,
@@ -93,11 +93,11 @@ impl MEAnchor {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 impl SamFlag for MEAnchor {
-  fn interpretor(
+  fn interpret(
     &self,
     p: usize,
   ) -> bool {
-    interpretor(self.flag, p)
+    interpret(self.flag, p)
   }
 }
 

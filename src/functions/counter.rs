@@ -14,7 +14,7 @@ use crate::structures::{
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /// Count reads per strand and orientation.
-pub fn strand_counter(
+pub fn strand_count(
   read_id: String,
   str: &str,
   mut read_count: i32,
@@ -22,10 +22,10 @@ pub fn strand_counter(
   me_pair: &[MEAnchor],
   position_hm: &mut HashMap<String, Vec<String>>,
 ) -> i32 {
-  let mut mobel_counter = ElementCounter::new();
+  let mut mobel_counter = ElementCount::new();
 
   for i in me_pair.iter() {
-    mobel_counter.counter(&i.orientation);
+    mobel_counter.count(&i.orientation);
   }
 
   match str {
@@ -33,28 +33,28 @@ pub fn strand_counter(
       if chr_pair.flag == 0
         && mobel_counter.upstream >= mobel_counter.downstream
       {
-        chr_counter!(read_id, read_count, chr_pair, position_hm);
+        chr_count!(read_id, read_count, chr_pair, position_hm);
       }
     }
     "F3" => {
       if chr_pair.flag == 16
         && mobel_counter.upstream <= mobel_counter.downstream
       {
-        chr_counter!(read_id, read_count, chr_pair, position_hm);
+        chr_count!(read_id, read_count, chr_pair, position_hm);
       }
     }
     "R5" => {
       if chr_pair.flag == 16
         && mobel_counter.upstream >= mobel_counter.downstream
       {
-        chr_counter!(read_id, read_count, chr_pair, position_hm);
+        chr_count!(read_id, read_count, chr_pair, position_hm);
       }
     }
     "R3" => {
       if chr_pair.flag == 0
         && mobel_counter.upstream <= mobel_counter.downstream
       {
-        chr_counter!(read_id, read_count, chr_pair, position_hm);
+        chr_count!(read_id, read_count, chr_pair, position_hm);
       }
     }
     // TODO: add non-compatible count?
@@ -67,7 +67,7 @@ pub fn strand_counter(
 
 // hold count upstream & downstream
 #[derive(Debug, new)]
-struct ElementCounter {
+struct ElementCount {
   #[new(default)]
   upstream:   i32,
   #[new(default)]
@@ -77,8 +77,8 @@ struct ElementCounter {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // count on element
-impl ElementCounter {
-  fn counter(
+impl ElementCount {
+  fn count(
     &mut self,
     orientation: &str,
   ) {
@@ -93,7 +93,7 @@ impl ElementCounter {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // count reads at bin
-fn chr_counter(
+fn chr_count(
   read_id: String,
   position_hm: &mut HashMap<String, Vec<String>>,
   binned_position: String,

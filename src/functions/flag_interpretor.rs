@@ -27,7 +27,7 @@
 /// assert_eq!(interpretor(133, 7), false);
 /// assert_eq!(interpretor(157, 5), true);
 /// ```
-pub fn interpretor(
+pub fn interpret(
   n: i32,
   p: usize,
 ) -> bool {
@@ -43,7 +43,7 @@ pub fn interpretor(
 
 /// Binary interpretation on a SAM flag struct.
 pub trait SamFlag {
-  fn interpretor(
+  fn interpret(
     &self,
     p: usize,
   ) -> bool;

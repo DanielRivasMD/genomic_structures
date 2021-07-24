@@ -23,10 +23,10 @@ mod macros;
 mod functions;
 
 pub use crate::functions::{
-  counter::strand_counter,
-  flag_interpretor::interpretor,
-  identificator::identificator,
-  thresholder::thresholder,
+  counter::strand_count,
+  flag_interpretor::interpret,
+  identificator::identify,
+  thresholder::threshold,
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
