@@ -31,7 +31,7 @@ pub struct MEChimericRead {
 
   /// Quality.
   #[new(default)]
-  pub quality: String,
+  pub quality: i32,
 
   /// Sequence.
   #[new(default)]

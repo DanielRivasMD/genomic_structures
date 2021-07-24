@@ -44,6 +44,7 @@ macro_rules! load {
   ( $record: expr, $read_no: tt, $values: expr, $switches: expr, $err: expr ) => {
     if $values.flag <= 255 {
       $record.$read_no.sequence = $values.sequence.clone();
+      $record.$read_no.quality = $values.quality;
     }
     $record.$read_no.me_read.push(MEAnchor::load(
       $values.cigar.clone(),
