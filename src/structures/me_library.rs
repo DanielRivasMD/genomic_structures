@@ -11,11 +11,11 @@ use crate::structures::erv_annotations::ERVAnnotations;
 pub struct MELibrary {
   /// Mobile element sequence.
   #[new(default)]
-  pub me_seq: String,
+  pub sequence: String,
 
   /// Mobile element size.
   #[new(default)]
-  pub me_size: i32,
+  pub size: i32,
 
   /// ERV annotations.
   #[new(default)]
