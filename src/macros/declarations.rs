@@ -76,8 +76,8 @@ macro_rules! reload {
       $record.$read_no.chr_read.push(ChrAnchor::load(
         $values.cigar.clone(),
         $values.flag,
-        $values.chr.clone(),
-        $values.mapq,
+        $values.scaffold.clone(),
+        $values.quality,
         $values.position,
         $values.tlen,
       ))
