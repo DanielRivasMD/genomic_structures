@@ -12,9 +12,9 @@ use genomic_structures::ChrAnchor;
 
 data_test! {
 
-  fn test_chr_anchor_loader(chr, flag, pos, cigar, mapq, tlen, expected) => {
+  fn test_chr_anchor_load(chr, flag, pos, cigar, mapq, tlen, expected) => {
     let fline = vec!["", flag, chr, pos, mapq, cigar, "", "", tlen];
-    let test_anchor = super::ChrAnchor::loader(&fline);
+    let test_anchor = super::ChrAnchor::load(&fline);
     assert_eq!(test_anchor.chr, expected.chr);
     assert_eq!(test_anchor.flag, expected.flag);
     assert_eq!(test_anchor.pos, expected.pos);

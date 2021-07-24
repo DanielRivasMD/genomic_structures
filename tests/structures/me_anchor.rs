@@ -12,9 +12,9 @@ use genomic_structures::MEAnchor;
 
 data_test! {
 
-  fn test_me_anchor_loader(mobel, flag, pos, cigar, size, orient, expected) => {
+  fn test_me_anchor_load(mobel, flag, pos, cigar, size, orient, expected) => {
     let fline = vec!["", flag, mobel, pos, "", cigar, "", "", ""];
-    let test_anchor = super::MEAnchor::loader(&fline, size, orient);
+    let test_anchor = super::MEAnchor::load(&fline, size, orient);
     assert_eq!(test_anchor.mobel, expected.mobel);
     assert_eq!(test_anchor.size, expected.size);
     assert_eq!(test_anchor.flag, expected.flag);

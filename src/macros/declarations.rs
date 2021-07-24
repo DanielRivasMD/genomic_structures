@@ -31,7 +31,7 @@ macro_rules! load {
     // cigar
     $values
       .cigar
-      .loader(&$flines[5].to_string(), $values.position);
+      .update(&$flines[5].to_string(), $values.position);
 
     // alignment length
     $values.tlen = $flines[8].parse::<i32>().context($err)?;
@@ -45,7 +45,7 @@ macro_rules! load {
     if $values.flag <= 255 {
       $record.$read_no.sequence = $values.sequence.clone();
     }
-    $record.$read_no.me_read.push(MEAnchor::loader(
+    $record.$read_no.me_read.push(MEAnchor::load(
       $values.cigar.clone(),
       $values.flag,
       $values.scaffold.clone(),
@@ -58,7 +58,8 @@ macro_rules! load {
   // structural variant
   ( $record: expr, $read_no: tt, $flines: expr ) => {
     $record.$read_no.sequence = $flines[9].to_string();
-    $record.$read_no.chr_read = ChrAnchor::loader(&$flines);
+    $record.$read_no.chr_read = ChrAnchor::load(&$flines);
+    // TODO: update ChrAnchor::loader
   };
 }
 
@@ -72,7 +73,7 @@ macro_rules! reload {
     if $record.$read_no.sequence == $values.sequence
       || $record.$read_no.sequence_reverser() == $values.sequence
     {
-      $record.$read_no.chr_read.push(ChrAnchor::loader(
+      $record.$read_no.chr_read.push(ChrAnchor::load(
         $values.cigar.clone(),
         $values.flag,
         $values.chr.clone(),

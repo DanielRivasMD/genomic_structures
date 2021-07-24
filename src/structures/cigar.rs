@@ -54,7 +54,7 @@ impl CIGAR {
   /// assert_eq!(cigar.lclip, 10);
   /// assert_eq!(cigar.rclip, 5);
   /// ```
-  pub fn loader(
+  pub fn update(
     &mut self,
     to_interpret: &str,
     position: i32,

@@ -69,7 +69,7 @@ impl ChrAnchor {
   /// assert_eq!(loaded.mapq, manual.mapq);
   /// assert_eq!(loaded.tlen, manual.tlen);
   /// ```
-  pub fn loader(
+  pub fn load(
     cigar: CIGAR,
     flag: i32,
     chr: String,

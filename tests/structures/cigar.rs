@@ -13,7 +13,7 @@ use genomic_structures::CIGAR;
 data_test! {
 
   fn test_alignment(to_cigar, expected) => {
-    let cigar = super::CIGAR::loader(to_cigar);
+    let cigar = super::CIGAR::load(to_cigar);
     assert_eq!(cigar.align, expected);
   }
 
@@ -23,7 +23,7 @@ data_test! {
   - _03 ("10H3M2I80M5H", vec![3, 80])
 
   fn test_deletion(to_cigar, expected) => {
-    let cigar = super::CIGAR::loader(to_cigar);
+    let cigar = super::CIGAR::load(to_cigar);
     assert_eq!(cigar.del, expected);
   }
 
@@ -33,7 +33,7 @@ data_test! {
   - _03 ("1H10D2M2D80M5H", vec![10, 2])
 
   fn test_insertion(to_cigar, expected) => {
-    let cigar = super::CIGAR::loader(to_cigar);
+    let cigar = super::CIGAR::load(to_cigar);
     assert_eq!(cigar.ins, expected);
   }
 
@@ -43,7 +43,7 @@ data_test! {
   - _03 ("10H1I2M2I80M5H", vec![1, 2])
 
   fn test_left_clip(to_cigar, expected) => {
-    let cigar = super::CIGAR::loader(to_cigar);
+    let cigar = super::CIGAR::load(to_cigar);
     assert_eq!(cigar.lclip, expected);
   }
 
@@ -53,7 +53,7 @@ data_test! {
   - _03 ("10H3D2I80M5H", 10)
 
   fn test_right_clip(to_cigar, expected) => {
-    let cigar = super::CIGAR::loader(to_cigar);
+    let cigar = super::CIGAR::load(to_cigar);
     assert_eq!(cigar.rclip, expected);
   }
 

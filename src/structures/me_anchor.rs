@@ -71,7 +71,7 @@ impl MEAnchor {
   /// assert_eq!(loaded.cigar, manual.cigar);
   /// assert_eq!(loaded.orientation, manual.orientation);
   /// ```
-  pub fn loader(
+  pub fn load(
     cigar: CIGAR,
     flag: i32,
     mobel: String,
