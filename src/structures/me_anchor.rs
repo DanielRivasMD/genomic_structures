@@ -88,6 +88,23 @@ impl MEAnchor {
       size,
     }
   }
+
+  pub fn update(
+    &mut self,
+    cigar: CIGAR,
+    flag: i32,
+    mobel: String,
+    // orientation: String,
+    position: i32,
+    // size: f64,
+  ) {
+    self.cigar = cigar;
+    self.flag = flag;
+    self.mobel = mobel;
+    // self.orientation = orientation.clone();
+    self.position = position;
+    // self.size = size;
+  }
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
