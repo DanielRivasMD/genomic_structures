@@ -10,7 +10,8 @@
 ///   - Load mobile element features.
 ///   - Load structural variant features.
 #[macro_export]
-macro_rules! load {
+macro_rules! update {
+  // TODO: add other fields
   // raw SAM alignment
   ( $values: expr, $flines: expr, $err: expr ) => {
     // read id
