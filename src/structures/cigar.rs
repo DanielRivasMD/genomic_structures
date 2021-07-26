@@ -33,7 +33,7 @@ pub struct CIGAR {
 
   /// String.
   #[new(default)]
-  pub stg: String,
+  pub signature: String,
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -59,7 +59,7 @@ impl CIGAR {
     to_interpret: &str,
     position: i32,
   ) {
-    self.stg = to_interpret.to_string().clone();
+    self.signature = to_interpret.to_string().clone();
     if to_interpret == "*" {
       self.align.push(0);
     } else {
