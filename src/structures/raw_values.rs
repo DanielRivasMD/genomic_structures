@@ -5,7 +5,7 @@ use crate::structures::cigar::CIGAR;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-#[derive(Debug, new)]
+#[derive(Debug, new, Clone, Default)]
 pub struct RawValues {
   #[new(value = "CIGAR::new()")]
   pub cigar: CIGAR,
