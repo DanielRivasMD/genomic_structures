@@ -7,6 +7,7 @@ use data_test::data_test;
 
 // crate utilities
 use genomic_structures::ChrAnchor;
+use genomic_structures::CIGAR;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -37,15 +38,15 @@ data_test! {
   // )
 
   fn test_chr_anchor_binner(chr_anchor, expected) => {
-    assert_eq!(chr_anchor.binner(), expected);
+    assert_eq!(chr_anchor.bin(), expected);
   }
 
   - _00 (
     super::ChrAnchor{
       chr: "chr7".to_string(),
       flag: 56,
-      pos: 2099,
-      cigar: "100M".to_string(),
+      position: 2099,
+      cigar: super::CIGAR::new(),
       mapq: 100,
       tlen: 100,
     },
