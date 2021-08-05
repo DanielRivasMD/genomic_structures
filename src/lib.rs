@@ -35,6 +35,7 @@ pub use crate::functions::{
 mod structures;
 
 pub use crate::structures::{
+  anchor_enum::AnchorEnum,
   break_point::BreakPoint,
   chr_anchor::ChrAnchor,
   chr_anchor_enum::ChrAnchorEnum,
