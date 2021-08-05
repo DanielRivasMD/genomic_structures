@@ -39,20 +39,20 @@ pub struct CIGAR {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 impl CIGAR {
+  //  /// use genomic_structures::CIGAR;
+  //  ///
+  //  /// let cigar = CIGAR::loader("10H1I2M2D80M5H");
+  //  /// assert_eq!(cigar.align, vec![2, 80]);
+  //  /// assert_eq!(cigar.del, vec![2]);
+  //  /// assert_eq!(cigar.ins, vec![1]);
+  //  /// assert_eq!(cigar.lclip, 10);
+  //  /// assert_eq!(cigar.rclip, 5);
   // TODO: update documentation
   /// Load string into CIGAR struct.
   ///
   /// # Examples
   ///
   /// ```
-  /// use genomic_structures::CIGAR;
-  ///
-  /// let cigar = CIGAR::loader("10H1I2M2D80M5H");
-  /// assert_eq!(cigar.align, vec![2, 80]);
-  /// assert_eq!(cigar.del, vec![2]);
-  /// assert_eq!(cigar.ins, vec![1]);
-  /// assert_eq!(cigar.lclip, 10);
-  /// assert_eq!(cigar.rclip, 5);
   /// ```
   pub fn update(
     &mut self,
@@ -111,16 +111,16 @@ impl CIGAR {
   }
 
   // TODO: verify & rewrite boundries
+//  /// use genomic_structures::CIGAR;
+//  ///
+//  /// let mut cigar = CIGAR::loader("10H84M6H");
+//  /// assert_eq!((90, 190), cigar.boundries(100));
 
   /// Define left and right boundries.
   ///
   /// # Examples
   ///
   /// ```
-  /// use genomic_structures::CIGAR;
-  ///
-  /// let mut cigar = CIGAR::loader("10H84M6H");
-  /// assert_eq!((90, 190), cigar.boundries(100));
   /// ```
   fn boundries(
     &mut self,

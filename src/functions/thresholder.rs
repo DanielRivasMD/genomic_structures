@@ -32,36 +32,36 @@ use libc::{
 /// # Examples
 ///
 /// ```
-/// use genomic_structures::thresholder;
-/// let ks = vec![
-///   "100".to_string(),
-///   "200".to_string(),
-///   "300".to_string(),
-///   "400".to_string(),
-///   "500".to_string(),
-///   "600".to_string(),
-/// ];
-/// let vs = vec![
-///   vec!["100.1".to_string(), "100.2".to_string()],
-///   vec![
-///     "200.1".to_string(),
-///     "200.2".to_string(),
-///     "200.3".to_string(),
-///   ],
-///   vec!["300.1".to_string(), "300.".to_string()],
-///   vec!["400.1".to_string(), "400.2".to_string()],
-///   vec![
-///     "500.1".to_string(),
-///     "500.2".to_string(),
-///     "500.3".to_string(),
-///   ],
-///   vec!["600.1".to_string(), "600.2".to_string()],
-/// ];
-/// let mut hm = std::collections::HashMap::new();
-/// for ix in 0..ks.len() {
-///   hm.insert(ks[ix].clone(), vs[ix].clone());
-/// }
-/// assert_eq!(thresholder(6., 1000., 0.001, &hm, 25), 5);
+///// use genomic_structures::thresholder;
+///// let ks = vec![
+/////   "100".to_string(),
+/////   "200".to_string(),
+/////   "300".to_string(),
+/////   "400".to_string(),
+/////   "500".to_string(),
+/////   "600".to_string(),
+///// ];
+///// let vs = vec![
+/////   vec!["100.1".to_string(), "100.2".to_string()],
+/////   vec![
+/////     "200.1".to_string(),
+/////     "200.2".to_string(),
+/////     "200.3".to_string(),
+/////   ],
+/////   vec!["300.1".to_string(), "300.".to_string()],
+/////   vec!["400.1".to_string(), "400.2".to_string()],
+/////   vec![
+/////     "500.1".to_string(),
+/////     "500.2".to_string(),
+/////     "500.3".to_string(),
+/////   ],
+/////   vec!["600.1".to_string(), "600.2".to_string()],
+///// ];
+///// let mut hm = std::collections::HashMap::new();
+///// for ix in 0..ks.len() {
+/////   hm.insert(ks[ix].clone(), vs[ix].clone());
+///// }
+///// assert_eq!(thresholder(6., 1000., 0.001, &hm, 25), 5);
 /// ```
 pub fn threshold(
   pop_reads: f64,

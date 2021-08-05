@@ -43,31 +43,31 @@ pub struct ChrAnchor {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 impl ChrAnchor {
+//  /// use genomic_structures::ChrAnchor;
+//  ///
+//  /// let loaded = ChrAnchor::loader(&vec![
+//  ///   "", "56", "chr7", "2099", "100", "100M", "", "", "100",
+//  /// ]);
+//  /// let manual = ChrAnchor {
+//  ///   chr:   "chr7".to_string(),
+//  ///   flag:  56,
+//  ///   pos:   2099,
+//  ///   cigar: "100M".to_string(),
+//  ///   mapq:  100,
+//  ///   tlen:  100,
+//  /// };
+//  ///
+//  /// assert_eq!(loaded.chr, manual.chr);
+//  /// assert_eq!(loaded.flag, manual.flag);
+//  /// assert_eq!(loaded.pos, manual.pos);
+//  /// assert_eq!(loaded.cigar, manual.cigar);
+//  /// assert_eq!(loaded.mapq, manual.mapq);
+//  /// assert_eq!(loaded.tlen, manual.tlen);
   /// Load vector of strings (line from a file) onto ChrAnchor struct.
   ///
   /// # Examples
   ///
   /// ```
-  /// use genomic_structures::ChrAnchor;
-  ///
-  /// let loaded = ChrAnchor::loader(&vec![
-  ///   "", "56", "chr7", "2099", "100", "100M", "", "", "100",
-  /// ]);
-  /// let manual = ChrAnchor {
-  ///   chr:   "chr7".to_string(),
-  ///   flag:  56,
-  ///   pos:   2099,
-  ///   cigar: "100M".to_string(),
-  ///   mapq:  100,
-  ///   tlen:  100,
-  /// };
-  ///
-  /// assert_eq!(loaded.chr, manual.chr);
-  /// assert_eq!(loaded.flag, manual.flag);
-  /// assert_eq!(loaded.pos, manual.pos);
-  /// assert_eq!(loaded.cigar, manual.cigar);
-  /// assert_eq!(loaded.mapq, manual.mapq);
-  /// assert_eq!(loaded.tlen, manual.tlen);
   /// ```
   pub fn load(
     cigar: CIGAR,
@@ -87,25 +87,25 @@ impl ChrAnchor {
     }
   }
 
+  //  /// use genomic_structures::ChrAnchor;
+  //  ///
+  //  /// assert_eq!(
+  //  ///   ChrAnchor {
+  //  ///     chr:   "chr7".to_string(),
+  //  ///     flag:  56,
+  //  ///     pos:   2099,
+  //  ///     cigar: "100M".to_string(),
+  //  ///     mapq:  100,
+  //  ///     tlen:  100,
+  //  ///   }
+  //  ///   .binner(),
+  //  ///   2000
+  //  /// );
   /// Bin chromosomal position.
   ///
   /// # Examples
   ///
   /// ```
-  /// use genomic_structures::ChrAnchor;
-  ///
-  /// assert_eq!(
-  ///   ChrAnchor {
-  ///     chr:   "chr7".to_string(),
-  ///     flag:  56,
-  ///     pos:   2099,
-  ///     cigar: "100M".to_string(),
-  ///     mapq:  100,
-  ///     tlen:  100,
-  ///   }
-  ///   .binner(),
-  ///   2000
-  /// );
   /// ```
   pub fn bin(&self) -> i32 {
     let binned = self.position % BIN_SIZE;
