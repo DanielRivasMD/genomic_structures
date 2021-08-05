@@ -87,6 +87,23 @@ impl ChrAnchor {
     }
   }
 
+  pub fn update(
+    &mut self,
+    cigar: CIGAR,
+    flag: i32,
+    chr: String,
+    mapq: i32,
+    position: i32,
+    tlen: i32
+  ) {
+    self.cigar = cigar;
+    self.flag = flag;
+    self.chr = chr;
+    self.mapq = mapq;
+    self.position = position;
+    self.tlen = tlen;
+  }
+
   //  /// use genomic_structures::ChrAnchor;
   //  ///
   //  /// assert_eq!(
