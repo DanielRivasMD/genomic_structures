@@ -6,7 +6,6 @@ use data_test::data_test;
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // crate utilities
-use genomic_structures::ChrAnchorEnum;
 use genomic_structures::MEChimericPair;
 use genomic_structures::MEChimericRead;
 
@@ -15,7 +14,7 @@ use genomic_structures::MEChimericRead;
 data_test! {
 
   fn test_me_chimeric_read(sequence, expected) => {
-    let mut toretrieve = super::MEChimericPair::new(super::ChrAnchorEnum::None);
+    let mut toretrieve = super::MEChimericPair::new();
     toretrieve.read1 = super::MEChimericRead::new();
     toretrieve.read1.sequence = sequence;
     let retrieved = toretrieve.chr_anchor_retriever();
