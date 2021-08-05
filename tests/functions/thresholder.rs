@@ -6,18 +6,18 @@ use data_test::data_test;
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // crate utilities
-use genomic_structures::thresholder;
+use genomic_structures::threshold;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 data_test! {
 
-  fn test_thresholder(read_count, chr_size, fdr, hm_keys, hm_vals, expected) => {
+  fn test_threshold(read_count, chr_size, fdr, hm_keys, hm_vals, expected) => {
     let mut bined_hm = std::collections::HashMap::new();
     for ix in 0..hm_keys.len() {
       bined_hm.insert(hm_keys[ix].clone(), hm_vals[ix].clone());
     }
-    assert_eq!(super::thresholder(read_count, chr_size, fdr, &bined_hm, 25), expected);
+    assert_eq!(super::threshold(read_count, chr_size, fdr, &bined_hm, 25), expected);
   }
 
   - _00 (6., 1000., 0.001,
