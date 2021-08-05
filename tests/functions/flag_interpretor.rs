@@ -6,14 +6,14 @@ use data_test::data_test;
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // crate utilities
-use genomic_structures::interpretor;
+use genomic_structures::interpret;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 data_test! {
 
-  fn test_interpretor(flag, digit, expected) => {
-    assert_eq!(super::interpretor(flag, digit), expected);
+  fn test_interpret(flag, digit, expected) => {
+    assert_eq!(super::interpret(flag, digit), expected);
   }
   - r_p_01 (1, 1, true)
   - r_p_02 (177, 1, true)

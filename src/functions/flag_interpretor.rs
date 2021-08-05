@@ -19,13 +19,13 @@
 /// # Examples
 ///
 /// ```
-/// use genomic_structures::interpretor;
+/// use genomic_structures::interpret;
 ///
-/// assert_eq!(interpretor(177, 1), true);
-/// assert_eq!(interpretor(177, 2), false);
-/// assert_eq!(interpretor(2165, 3), true);
-/// assert_eq!(interpretor(133, 7), false);
-/// assert_eq!(interpretor(157, 5), true);
+/// assert_eq!(interpret(177, 1), true);
+/// assert_eq!(interpret(177, 2), false);
+/// assert_eq!(interpret(2165, 3), true);
+/// assert_eq!(interpret(133, 7), false);
+/// assert_eq!(interpret(157, 5), true);
 /// ```
 pub fn interpret(
   n: i32,
