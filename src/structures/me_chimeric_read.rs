@@ -41,6 +41,13 @@ pub struct MEChimericRead {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 impl MEChimericRead {
+  pub fn load(
+    me_anchor: MEAnchor,
+  ) -> Self {
+    let mut me_chimeric_read = MEChimericRead::new();
+    me_chimeric_read.me_read.push(me_anchor);
+    return me_chimeric_read
+  }
   /// Obtain reverse complement sequence.
   ///
   /// # Examples
