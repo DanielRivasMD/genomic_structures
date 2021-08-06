@@ -48,18 +48,23 @@ macro_rules! update {
   };
 
   // mobile element on hash map
-  ( $record: expr, $read_no: tt, $values: expr, $switches: expr, $err: expr ) => {
+  ( $record: expr, $read_no: tt, $values: expr, $mobel_size: expr, $switches: expr, $err: expr ) => {
+
+    // record data on primary alignment
     if $values.flag <= 255 {
       $record.$read_no.sequence = $values.sequence.clone();
       $record.$read_no.quality = $values.quality;
     }
+
+    // record mobile element data
+    // TODO: update values
     $record.$read_no.me_read.push(MEAnchor::load(
       $values.cigar.clone(),
       $values.flag,
       $values.scaffold.clone(),
-      $switches.mobel_anchor.orientation.clone(),
+      $values.mobel_tag(400, true), // $values.orientation,
       $values.position,
-      $switches.mobel_anchor.size,
+      $mobel_size,
     ));
   };
 
