@@ -12,6 +12,7 @@ pub mod me_chimeric_pair;
 pub mod me_chimeric_read;
 pub mod me_library;
 pub mod raw_values;
+pub mod read_control;
 pub mod sv_chimeric_pair;
 pub mod sv_chimeric_read;
 pub mod sv_type;
