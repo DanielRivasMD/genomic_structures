@@ -54,6 +54,18 @@ impl CIGAR {
   ///
   /// ```
   /// ```
+  ///
+  pub fn load(
+    to_interpret: &str,
+    position: i32,
+  ) -> Self {
+    let mut cigar_out = CIGAR::new();
+    cigar_out.update(to_interpret, position);
+    return cigar_out
+  }
+
+  /// Update CIGAR values.
+  ///
   pub fn update(
     &mut self,
     to_interpret: &str,
