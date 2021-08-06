@@ -31,9 +31,7 @@ macro_rules! update {
     $values.quality = $flines[4].parse::<i32>().context($err)?;
 
     // cigar
-    $values
-      .cigar
-      .update(&$flines[5].to_string(), $values.position);
+    $values.cigar = CIGAR::load($flines[5], $values.position);
 
     // $flines[6]
     // $flines[7]
