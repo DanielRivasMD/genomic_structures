@@ -9,6 +9,7 @@ use std::fmt;
 // crate utilities
 use crate::structures::{
   chr_anchor_enum::ChrAnchorEnum,
+  me_anchor::MEAnchor,
   me_chimeric_read::MEChimericRead,
 };
 
@@ -36,6 +37,13 @@ pub struct MEChimericPair {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 impl MEChimericPair {
+  pub fn load(
+    me_anchor: MEAnchor,
+  ) -> Self {
+    let mut me_chimeric_pair = MEChimericPair::new();
+    me_chimeric_pair.read1 = MEChimericRead::load(me_anchor);
+    return me_chimeric_pair
+  }
   /// Retrieve chromosomal anchor.
   ///
   /// # Examples
