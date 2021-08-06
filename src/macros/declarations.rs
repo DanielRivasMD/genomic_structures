@@ -16,7 +16,7 @@ macro_rules! update {
   // error to parse i32
   ( $values: expr, $flines: expr, $err: expr ) => {
     // read id
-    $values.read_id = $flines[0].to_string();
+    $values.read_id.current = $flines[0].to_string();
 
     // flag & read orientation
     $values.flag = $flines[1].parse::<i32>().context($err)?;

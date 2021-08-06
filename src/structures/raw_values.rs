@@ -2,6 +2,7 @@
 
 // crate utilities
 use crate::structures::cigar::CIGAR;
+use crate::structures::read_control::ReadControl;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -23,7 +24,7 @@ pub struct RawValues {
   pub quality: i32,
 
   #[new(default)]
-  pub read_id: String,
+  pub read_id: ReadControl,
 
   #[new(default)]
   pub sequence: String,
@@ -31,6 +32,7 @@ pub struct RawValues {
   #[new(default)]
   pub tlen: i32,
   // TODO: expand to other annotations?
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 impl RawValues {
@@ -42,7 +44,7 @@ impl RawValues {
     let mut raw_values = RawValues::new();
 
     // read id
-    raw_values.read_id = flines[0].to_string();
+    raw_values.read_id.current = flines[0].to_string();
 
     // flag & read orientation
     raw_values.flag = flines[1].parse::<i32>().unwrap();
