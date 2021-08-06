@@ -31,6 +31,23 @@ pub struct RawValues {
   #[new(default)]
   pub tlen: i32,
   // TODO: expand to other annotations?
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+impl RawValues {
+  pub fn mobel_tag(
+    &self,
+    // me_anchor: MEAnchor,
+    me_limit: i32,
+    orientation: bool
+  ) -> String {
+    if self.cigar.left_boundry <= me_limit && orientation {
+      return String::from("upstream");
+    } else if self.cigar.right_boundry as f64 <= me_limit.into() && !orientation {
+      return String::from("downstream");
+    } else {
+      return String::new();
+    }
+  }
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
