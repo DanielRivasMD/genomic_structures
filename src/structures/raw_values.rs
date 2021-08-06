@@ -34,6 +34,48 @@ pub struct RawValues {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 impl RawValues {
+  // raw SAM alignment
+  pub fn load(flines: Vec<&str>) -> Self
+  {
+    // TODO: add other fields
+    // create empty struct
+    let mut raw_values = RawValues::new();
+
+    // read id
+    raw_values.read_id = flines[0].to_string();
+
+    // flag & read orientation
+    raw_values.flag = flines[1].parse::<i32>().unwrap();
+
+    // scaffold
+    raw_values.scaffold = flines[2].to_string();
+
+    // position
+    raw_values.position = flines[3].parse::<i32>().unwrap();
+
+    //  quality
+    raw_values.quality = flines[4].parse::<i32>().unwrap();
+
+    // cigar
+    raw_values
+      .cigar
+      .update(&flines[5].to_string(), raw_values.position);
+
+    // flines[6]
+
+    // flines[7]
+
+    // alignment length
+    raw_values.tlen = flines[8].parse::<i32>().unwrap();
+
+    // sequence
+    raw_values.sequence = flines[9].to_string();
+
+    // flines[10]
+
+    return raw_values
+  }
+
   pub fn mobel_tag(
     &self,
     // me_anchor: MEAnchor,
