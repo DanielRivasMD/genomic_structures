@@ -13,6 +13,7 @@
 macro_rules! update {
   // TODO: add other fields
   // raw SAM alignment
+  // error to parse i32
   ( $values: expr, $flines: expr, $err: expr ) => {
     // read id
     $values.read_id = $flines[0].to_string();
@@ -34,11 +35,16 @@ macro_rules! update {
       .cigar
       .update(&$flines[5].to_string(), $values.position);
 
+    // $flines[6]
+    // $flines[7]
+
     // alignment length
     $values.tlen = $flines[8].parse::<i32>().context($err)?;
 
     // sequence
     $values.sequence = $flines[9].to_string();
+
+    // $flines[10]
   };
 
   // mobile element on hash map
