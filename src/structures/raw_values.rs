@@ -98,6 +98,15 @@ impl RawValues {
       return String::new();
     }
   }
+
+  pub fn extra_get(&self) -> f64 {
+    match self.extra {
+      ExtraValuesEnum::MobelSize(value) => value,
+      ExtraValuesEnum::None => { println!("No annotation to retrive");
+      0.
+    }
+    }
+  }
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
