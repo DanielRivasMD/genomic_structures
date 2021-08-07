@@ -1,6 +1,7 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // crate utilities
+use crate::structures::extra_values_enum::ExtraValuesEnum;
 use crate::structures::cigar::CIGAR;
 use crate::structures::read_control::ReadControl;
 
@@ -32,6 +33,11 @@ pub struct RawValues {
   #[new(default)]
   pub tlen: i32,
   // TODO: expand to other annotations?
+
+  #[new(default)]
+  pub extra: ExtraValuesEnum,
+
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
