@@ -46,7 +46,7 @@ macro_rules! update {
   };
 
   // mobile element on hash map
-  ( $record: expr, $read_no: tt, $values: expr, $mobel_size: expr, $switches: expr, $err: expr ) => {
+  ( $record: expr, $read_no: tt, $values: expr, $switches: expr, $err: expr ) => {
 
     // record data on primary alignment
     if $values.flag <= 255 {
@@ -62,7 +62,7 @@ macro_rules! update {
       $values.scaffold.clone(),
       $values.mobel_tag(400, true), // $values.orientation,
       $values.position,
-      $mobel_size,
+      $values.extra_get(),
     ));
   };
 
