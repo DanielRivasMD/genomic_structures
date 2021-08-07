@@ -7,6 +7,7 @@ pub mod chr_anchor;
 pub mod chr_anchor_enum;
 pub mod cigar;
 pub mod erv_annotations;
+pub mod extra_values_enum;
 pub mod me_anchor;
 pub mod me_chimeric_pair;
 pub mod me_chimeric_read;

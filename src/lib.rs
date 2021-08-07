@@ -41,6 +41,7 @@ pub use crate::structures::{
   chr_anchor_enum::ChrAnchorEnum,
   cigar::CIGAR,
   erv_annotations::ERVAnnotations,
+  extra_values_enum::ExtraValuesEnum,
   me_anchor::MEAnchor,
   me_chimeric_pair::MEChimericPair,
   me_chimeric_read::MEChimericRead,
