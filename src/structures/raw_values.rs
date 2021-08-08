@@ -88,26 +88,12 @@ impl RawValues {
     return raw_values
   }
 
-  pub fn mobel_tag(
-    &self,
-    // me_anchor: MEAnchor,
-    me_limit: i32,
-    orientation: bool
-  ) -> String {
-    if self.cigar.left_boundry <= me_limit && orientation {
-      return String::from("upstream");
-    } else if self.cigar.right_boundry as f64 <= me_limit.into() && !orientation {
-      return String::from("downstream");
-    } else {
-      return String::new();
-    }
-  }
-
   pub fn extra_get(&self) -> f64 {
     match self.extra {
       ExtraValuesEnum::MobelSize(value) => value,
       ExtraValuesEnum::None => { println!("No annotation to retrive");
-      0.
+        0.
+      }
     }
   }
 
