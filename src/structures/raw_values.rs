@@ -8,6 +8,7 @@ use crate::structures::read_control::ReadControl;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
+// TODO: think about a way to use raw values only with reference to strings
 #[derive(Debug, new, Clone, Default)]
 pub struct RawValues {
   #[new(value = "CIGAR::new()")]

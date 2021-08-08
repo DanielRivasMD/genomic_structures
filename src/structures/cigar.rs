@@ -134,6 +134,7 @@ impl CIGAR {
   ///
   /// ```
   /// ```
+  // FIX: boundry interpretation is bugged
   fn boundries(
     &mut self,
     position: i32,

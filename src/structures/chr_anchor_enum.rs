@@ -19,6 +19,7 @@ pub enum ChrAnchorEnum {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
+// manual default trait implementation
 impl Default for ChrAnchorEnum {
   fn default() -> Self {
     Self::None

@@ -65,13 +65,13 @@ impl MEChimericPair {
   /// ```
   pub fn chr_anchor_retriever(&self) -> &MEChimericRead {
     match self.chranch {
+      ChrAnchorEnum::Read1 => &self.read1,
+      ChrAnchorEnum::Read2 => &self.read2,
       ChrAnchorEnum::None => {
         // TODO: think about an alternative here
         println!("This is a default value");
         &self.read1
       }
-      ChrAnchorEnum::Read1 => &self.read1,
-      ChrAnchorEnum::Read2 => &self.read2,
     }
     .borrow()
   }
@@ -81,7 +81,7 @@ impl MEChimericPair {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-// display trait implementation
+// manual display trait implementation
 impl fmt::Display for MEChimericPair {
   fn fmt(
     &self,

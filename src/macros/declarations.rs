@@ -45,9 +45,8 @@ macro_rules! update {
     // $flines[10]
   };
 
-  // mobile element on hash map
+  // mobile element on hashmap
   ( $record: expr, $read_no: tt, $values: expr, $switches: expr, $err: expr ) => {
-
     // record data on primary alignment
     if $values.flag <= 255 {
       $record.$read_no.sequence = $values.sequence.clone();
@@ -55,7 +54,6 @@ macro_rules! update {
     }
 
     // record mobile element data
-    // TODO: update values
     $record.$read_no.me_read.push(MEAnchor::load(
       $values.cigar.clone(),
       $values.flag,
@@ -136,3 +134,5 @@ macro_rules! chr_count {
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// TODO: write test for macros
