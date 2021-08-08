@@ -109,6 +109,14 @@ impl RawValues {
       ExtraValuesEnum::None => { println!("No annotation to retrive");
       0.
     }
+  }
+
+  pub fn orientation_get(&self) -> String {
+    match self.orientation {
+      // redesigned the mobile element chimeric read to accept enum
+      OrientationEnum::Downstream => String::from("downstream"), //println!("Downstream"),
+      OrientationEnum::Upstream => String::from("upstream"), // println!("Upstream"),
+      OrientationEnum::None => String::new(), // print!("No values"),
     }
   }
 }
