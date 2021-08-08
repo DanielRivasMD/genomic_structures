@@ -46,6 +46,7 @@ pub use crate::structures::{
   me_chimeric_pair::MEChimericPair,
   me_chimeric_read::MEChimericRead,
   me_library::MELibrary,
+  orientation_enum::OrientationEnum,
   raw_values::RawValues,
   read_control::ReadControl,
   sv_chimeric_pair::SVChimericPair,

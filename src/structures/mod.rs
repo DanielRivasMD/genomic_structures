@@ -12,6 +12,7 @@ pub mod me_anchor;
 pub mod me_chimeric_pair;
 pub mod me_chimeric_read;
 pub mod me_library;
+pub mod orientation_enum;
 pub mod raw_values;
 pub mod read_control;
 pub mod sv_chimeric_pair;
