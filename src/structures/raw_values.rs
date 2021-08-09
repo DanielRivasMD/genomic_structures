@@ -1,7 +1,6 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // crate utilities
-use crate::structures::extra_values_enum::ExtraValuesEnum;
 use crate::structures::cigar::CIGAR;
 use crate::structures::orientation_enum::OrientationEnum;
 use crate::structures::read_control::ReadControl;
@@ -11,14 +10,14 @@ use crate::structures::read_control::ReadControl;
 // TODO: think about a way to use raw values only with reference to strings
 #[derive(Debug, new, Clone, Default)]
 pub struct RawValues {
-  #[new(value = "CIGAR::new()")]
-  pub cigar: CIGAR,
-
   #[new(default)]
-  pub scaffold: String,
+  pub read_id: ReadControl,
 
   #[new(default)]
   pub flag: i32,
+
+  #[new(default)]
+  pub scaffold: String,
 
   #[new(default)]
   pub position: i32,
@@ -26,22 +25,21 @@ pub struct RawValues {
   #[new(default)]
   pub quality: i32,
 
+  #[new(value = "CIGAR::new()")]
+  pub cigar: CIGAR,
+
   #[new(default)]
-  pub read_id: ReadControl,
+  pub tlen: i32,
 
   #[new(default)]
   pub sequence: String,
 
-  #[new(default)]
-  pub tlen: i32,
   // TODO: expand to other annotations?
-
   #[new(default)]
   pub orientation: OrientationEnum,
 
   #[new(default)]
   pub extra: ExtraValuesEnum,
-
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
