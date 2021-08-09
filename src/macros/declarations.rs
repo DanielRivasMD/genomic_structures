@@ -1,52 +1,5 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-/// Load records:
-///   - Load records contained in SAM file for processing on mobile element
-///     alignment:
-///     - Read ID.
-///     - Alignment flag and interprets orientation.
-///     - Mobile element aligned.
-///     - CIGAR calculating alignment coordinates and boundries.
-///   - Load mobile element features.
-///   - Load structural variant features.
-#[macro_export]
-macro_rules! update {
-  // TODO: add other fields
-  // raw SAM alignment
-  // error to parse i32
-  ( $values: expr, $flines: expr, $err: expr ) => {
-    // read id
-    $values.read_id.current = $flines[0].to_string();
-
-    // flag & read orientation
-    $values.flag = $flines[1].parse::<i32>().context($err)?;
-
-    // scaffold
-    $values.scaffold = $flines[2].to_string();
-
-    // position
-    $values.position = $flines[3].parse::<i32>().context($err)?;
-
-    //  quality
-    $values.quality = $flines[4].parse::<i32>().context($err)?;
-
-    // cigar
-    $values.cigar = CIGAR::load($flines[5], $values.position);
-
-    // $flines[6]
-
-    // $flines[7]
-
-    // alignment length
-    $values.tlen = $flines[8].parse::<i32>().context($err)?;
-
-    // sequence
-    $values.sequence = $flines[9].to_string();
-
-    // $flines[10]
-  };
-}
-
 #[macro_export]
 macro_rules! load {
   // mobile element on hashmap
@@ -67,12 +20,7 @@ macro_rules! load {
       $values.extra_get(),
     ));
 
-  // structural variant
-  ( $record: expr, $read_no: tt, $flines: expr ) => {
-    $record.$read_no.sequence = $flines[9].to_string();
-    $record.$read_no.chr_read = ChrAnchor::load(&$flines);
-    // TODO: update ChrAnchor::loader
-    if $switch.mobel_switch {
+    if $switch.mobel {
       $record.chranch = ChrAnchorEnum::$read_chr;
     }
   };
@@ -93,6 +41,15 @@ macro_rules! load {
     }
   };
 }
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// // structural variant
+// ( $record: expr, $read_no: tt, $flines: expr ) => {
+//   $record.$read_no.sequence = $flines[9].to_string();
+//   $record.$read_no.chr_read = ChrAnchor::load(&$flines);
+//   // TODO: update ChrAnchor::loader
+// };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
