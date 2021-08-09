@@ -59,7 +59,7 @@ macro_rules! update {
       $values.cigar.clone(),
       $values.flag,
       $values.scaffold.clone(),
-      $values.orientation_get(),
+      $values.orientation.clone(),
       $values.position,
       $values.extra_get(),
     ));

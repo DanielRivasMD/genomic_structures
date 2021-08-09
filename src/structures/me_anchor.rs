@@ -6,7 +6,10 @@ use crate::{
     flag_interpretor::interpret,
     sam_flag::SamFlag,
   },
-  structures::cigar::CIGAR,
+  structures::{
+    cigar::CIGAR,
+    orientation_enum::OrientationEnum,
+  },
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -28,7 +31,7 @@ pub struct MEAnchor {
 
   /// Orientation.
   #[new(default)]
-  pub orientation: String,
+  pub orientation: OrientationEnum,
 
   /// Position.
   #[new(default)]
@@ -75,7 +78,7 @@ impl MEAnchor {
     cigar: CIGAR,
     flag: i32,
     mobel: String,
-    orientation: String,
+    orientation: OrientationEnum,
     position: i32,
     size: f64,
   ) -> Self {
