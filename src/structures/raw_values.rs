@@ -8,6 +8,8 @@ use anyhow::Result as anyResult;
 
 // crate utilities
 use crate::error::common_error::CommonError;
+use crate::functions::flag_interpretor::interpret;
+use crate::functions::flag_interpretor::SamFlag;
 use crate::structures::cigar::CIGAR;
 use crate::structures::extra_values_enum::ExtraValuesEnum;
 use crate::structures::orientation_enum::OrientationEnum;
@@ -124,6 +126,15 @@ impl RawValues {
 
   pub fn reset_orientation(&mut self) {
     self.orientation = OrientationEnum::None;
+  }
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+impl SamFlag for RawValues {
+  fn interpret(
+    &self,
+    p: usize,
+  ) -> bool {
+    interpret(self.flag, p)
   }
 }
 
