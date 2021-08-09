@@ -34,6 +34,7 @@ macro_rules! update {
     $values.cigar = CIGAR::load($flines[5], $values.position);
 
     // $flines[6]
+
     // $flines[7]
 
     // alignment length
