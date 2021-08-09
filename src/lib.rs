@@ -32,6 +32,7 @@ pub use crate::functions::{
   counter::strand_count,
   flag_interpretor::interpret,
   identificator::identify,
+  sam_flag::SamFlag,
   thresholder::threshold,
 };
 

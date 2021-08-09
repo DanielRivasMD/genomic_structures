@@ -2,9 +2,9 @@
 
 // crate utilities
 use crate::{
-  functions::flag_interpretor::{
-    interpret,
-    SamFlag,
+  functions::{
+    flag_interpretor::interpret,
+    sam_flag::SamFlag,
   },
   structures::cigar::CIGAR,
 };

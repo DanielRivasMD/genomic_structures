@@ -3,9 +3,9 @@
 // crate utilities
 use crate::BIN_SIZE;
 use crate::{
-  functions::flag_interpretor::{
-    interpret,
-    SamFlag,
+  functions::{
+    flag_interpretor::interpret,
+    sam_flag::SamFlag,
   },
   structures::cigar::CIGAR,
 };

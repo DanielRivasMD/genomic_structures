@@ -7,13 +7,19 @@ use anyhow::Result as anyResult;
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // crate utilities
-use crate::error::common_error::CommonError;
-use crate::functions::flag_interpretor::interpret;
-use crate::functions::flag_interpretor::SamFlag;
-use crate::structures::cigar::CIGAR;
-use crate::structures::extra_values_enum::ExtraValuesEnum;
-use crate::structures::orientation_enum::OrientationEnum;
-use crate::structures::read_control::ReadControl;
+use crate::{
+  error::common_error::CommonError,
+  functions::{
+    flag_interpretor::interpret,
+    sam_flag::SamFlag,
+  },
+  structures::{
+    cigar::CIGAR,
+    extra_values_enum::ExtraValuesEnum,
+    orientation_enum::OrientationEnum,
+    read_control::ReadControl,
+  },
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
