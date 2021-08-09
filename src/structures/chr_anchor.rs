@@ -94,7 +94,7 @@ impl ChrAnchor {
     chr: String,
     mapq: i32,
     position: i32,
-    tlen: i32
+    tlen: i32,
   ) {
     self.cigar = cigar;
     self.flag = flag;

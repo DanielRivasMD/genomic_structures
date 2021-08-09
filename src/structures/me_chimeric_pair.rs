@@ -37,12 +37,10 @@ pub struct MEChimericPair {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 impl MEChimericPair {
-  pub fn load(
-    me_anchor: MEAnchor,
-  ) -> Self {
+  pub fn load(me_anchor: MEAnchor) -> Self {
     let mut me_chimeric_pair = MEChimericPair::new();
     me_chimeric_pair.read1 = MEChimericRead::load(me_anchor);
-    return me_chimeric_pair
+    return me_chimeric_pair;
   }
   /// Retrieve chromosomal anchor.
   ///

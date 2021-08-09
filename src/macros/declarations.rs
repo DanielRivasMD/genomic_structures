@@ -27,8 +27,8 @@ macro_rules! load {
 
   // chromosomal loci
   ( $record: expr, $values: expr, $read_no: tt ) => {
-    if $record.$read_no.sequence == $values.sequence
-      || $record.$read_no.sequence_reverser() == $values.sequence
+    if $record.$read_no.sequence == $values.sequence ||
+      $record.$read_no.sequence_reverser() == $values.sequence
     {
       $record.$read_no.chr_read.push(ChrAnchor::load(
         $values.cigar.clone(),
@@ -58,8 +58,8 @@ macro_rules! load {
 macro_rules! mapq {
   // mapq
   ( $record: expr, $read_no: tt ) => {
-    $record.$read_no.chr_read.is_empty()
-      || $record.$read_no.chr_read[0].mapq < MAPQ
+    $record.$read_no.chr_read.is_empty() ||
+      $record.$read_no.chr_read[0].mapq < MAPQ
   };
 }
 
