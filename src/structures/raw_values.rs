@@ -94,7 +94,7 @@ impl RawValues {
     self.quality = flines[4].parse::<i32>().context(CommonError::Parsing)?;
 
     // cigar
-    self.cigar.update(&flines[5].to_string(), self.position)?;
+    self.cigar = CIGAR::load(&flines[5].to_string(), self.position)?;
 
     // flines[6]
 
