@@ -1,5 +1,16 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
+// standard libraries
+use anyhow::Context;
+use anyhow::Result as anyResult;
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// crate utilities
+use crate::error::common_error::CommonError;
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
 /// Contain read's CIGAR information.
 #[derive(Debug, new, Clone, Default)]
 pub struct CIGAR {
@@ -54,23 +65,21 @@ impl CIGAR {
   ///
   /// ```
   /// ```
-  ///
   pub fn load(
     to_interpret: &str,
     position: i32,
-  ) -> Self {
+  ) -> anyResult<Self> {
     let mut cigar_out = CIGAR::new();
-    cigar_out.update(to_interpret, position);
-    return cigar_out
+    cigar_out.update(to_interpret, position)?;
+    return Ok(cigar_out);
   }
 
   /// Update CIGAR values.
-  ///
   pub fn update(
     &mut self,
     to_interpret: &str,
     position: i32,
-  ) {
+  ) -> anyResult<()> {
     self.signature = to_interpret.to_string().clone();
     if to_interpret == "*" {
       self.align.push(0);
@@ -92,25 +101,35 @@ impl CIGAR {
         match &to_interpret[*i..*i + 1] {
           "H" | "S" => {
             if self.align.iter().sum::<i32>() == 0 {
-              self.lclip = (&to_interpret[j..*i]).parse::<i32>().unwrap();
+              self.lclip = (&to_interpret[j..*i])
+                .parse::<i32>()
+                .context(CommonError::Parsing)?;
             } else {
-              self.rclip = (&to_interpret[j..*i]).parse::<i32>().unwrap();
+              self.rclip = (&to_interpret[j..*i])
+                .parse::<i32>()
+                .context(CommonError::Parsing)?;
             }
           }
           "M" => {
-            self
-              .align
-              .push((&to_interpret[j..*i]).parse::<i32>().unwrap());
+            self.align.push(
+              (&to_interpret[j..*i])
+                .parse::<i32>()
+                .context(CommonError::Parsing)?,
+            );
           }
           "I" => {
-            self
-              .ins
-              .push((&to_interpret[j..*i]).parse::<i32>().unwrap());
+            self.ins.push(
+              (&to_interpret[j..*i])
+                .parse::<i32>()
+                .context(CommonError::Parsing)?,
+            );
           }
           "D" => {
-            self
-              .del
-              .push((&to_interpret[j..*i]).parse::<i32>().unwrap());
+            self.del.push(
+              (&to_interpret[j..*i])
+                .parse::<i32>()
+                .context(CommonError::Parsing)?,
+            );
           }
           _ => {}
         }
@@ -120,13 +139,15 @@ impl CIGAR {
 
     // calculate boundries
     self.boundries(position);
+
+    Ok(())
   }
 
   // TODO: verify & rewrite boundries
-//  /// use genomic_structures::CIGAR;
-//  ///
-//  /// let mut cigar = CIGAR::loader("10H84M6H");
-//  /// assert_eq!((90, 190), cigar.boundries(100));
+  //  /// use genomic_structures::CIGAR;
+  //  ///
+  //  /// let mut cigar = CIGAR::loader("10H84M6H");
+  //  /// assert_eq!((90, 190), cigar.boundries(100));
 
   /// Define left and right boundries.
   ///
