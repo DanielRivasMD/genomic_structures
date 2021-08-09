@@ -45,17 +45,20 @@ macro_rules! update {
 
     // $flines[10]
   };
+}
 
+#[macro_export]
+macro_rules! load {
   // mobile element on hashmap
-  ( $record: expr, $read_no: tt, $values: expr, $switches: expr, $err: expr ) => {
+  ( $record: expr, $values: expr, $switch: expr, $read_me: tt, $read_chr: tt ) => {
     // record data on primary alignment
     if $values.flag <= 255 {
-      $record.$read_no.sequence = $values.sequence.clone();
-      $record.$read_no.quality = $values.quality;
+      $record.$read_me.sequence = $values.sequence.clone();
+      $record.$read_me.quality = $values.quality;
     }
 
     // record mobile element data
-    $record.$read_no.me_read.push(MEAnchor::load(
+    $record.$read_me.me_read.push(MEAnchor::load(
       $values.cigar.clone(),
       $values.flag,
       $values.scaffold.clone(),
@@ -63,23 +66,19 @@ macro_rules! update {
       $values.position,
       $values.extra_get(),
     ));
-  };
 
   // structural variant
   ( $record: expr, $read_no: tt, $flines: expr ) => {
     $record.$read_no.sequence = $flines[9].to_string();
     $record.$read_no.chr_read = ChrAnchor::load(&$flines);
     // TODO: update ChrAnchor::loader
+    if $switch.mobel_switch {
+      $record.chranch = ChrAnchorEnum::$read_chr;
+    }
   };
-}
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-
-/// Load record onto hashmap.
-#[macro_export]
-macro_rules! reload {
   // chromosomal loci
-  ( $record: expr, $read_no: tt, $values: expr ) => {
+  ( $record: expr, $values: expr, $read_no: tt ) => {
     if $record.$read_no.sequence == $values.sequence
       || $record.$read_no.sequence_reverser() == $values.sequence
     {
