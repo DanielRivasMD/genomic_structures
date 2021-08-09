@@ -9,6 +9,7 @@ use anyhow::Result as anyResult;
 // crate utilities
 use crate::error::common_error::CommonError;
 use crate::structures::cigar::CIGAR;
+use crate::structures::extra_values_enum::ExtraValuesEnum;
 use crate::structures::orientation_enum::OrientationEnum;
 use crate::structures::read_control::ReadControl;
 
@@ -105,7 +106,8 @@ impl RawValues {
   pub fn extra_get(&self) -> f64 {
     match self.extra {
       ExtraValuesEnum::MobelSize(value) => value,
-      ExtraValuesEnum::None => { println!("No annotation to retrive");
+      ExtraValuesEnum::None => {
+        println!("No annotation to retrive");
         0.
       }
     }
@@ -114,10 +116,14 @@ impl RawValues {
   pub fn orientation_get(&self) -> String {
     match self.orientation {
       // redesigned the mobile element chimeric read to accept enum
-      OrientationEnum::Downstream => String::from("downstream"), //println!("Downstream"),
-      OrientationEnum::Upstream => String::from("upstream"), // println!("Upstream"),
-      OrientationEnum::None => String::new(), // print!("No values"),
+      OrientationEnum::Downstream => String::from("downstream"),
+      OrientationEnum::Upstream => String::from("upstream"),
+      OrientationEnum::None => String::new(),
     }
+  }
+
+  pub fn reset_orientation(&mut self) {
+    self.orientation = OrientationEnum::None;
   }
 }
 
