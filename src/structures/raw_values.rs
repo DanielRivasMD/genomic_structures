@@ -24,6 +24,7 @@ use crate::{
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // TODO: think about a way to use raw values only with reference to strings
+// values ordered as SAM format
 #[derive(Debug, new, Clone, Default)]
 pub struct RawValues {
   #[new(default)]
@@ -59,6 +60,16 @@ pub struct RawValues {
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+/// Load records:
+///   - Load records contained in SAM file for processing on mobile element
+///     alignment:
+///     - Read ID.
+///     - Alignment flag and interprets orientation.
+///     - Mobile element aligned.
+///     - CIGAR calculating alignment coordinates and boundries.
+///   - Load mobile element features.
+///   - Load structural variant features.
 
 impl RawValues {
   // raw SAM alignment
@@ -110,7 +121,9 @@ impl RawValues {
 
     Ok(())
   }
+}
 
+impl RawValues {
   pub fn extra_get(&self) -> f64 {
     match self.extra {
       ExtraValuesEnum::MobelSize(value) => value,
