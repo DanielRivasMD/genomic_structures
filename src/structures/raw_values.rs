@@ -127,6 +127,12 @@ impl RawValues {
   pub fn reset_orientation(&mut self) {
     self.orientation = OrientationEnum::None;
   }
+
+  pub fn read_orientation_get(&self) -> bool {
+    self.interpret(5)
+  }
+}
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 impl SamFlag for RawValues {
