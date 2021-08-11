@@ -9,6 +9,7 @@ use std::collections::HashMap;
 use crate::structures::{
   chr_anchor::ChrAnchor,
   me_anchor::MEAnchor,
+  orientation_enum::OrientationEnum,
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -30,29 +31,29 @@ pub fn strand_count(
 
   match str {
     "F5" => {
-      if chr_pair.flag == 0
-        && mobel_counter.upstream >= mobel_counter.downstream
+      if chr_pair.flag == 0 &&
+        mobel_counter.upstream >= mobel_counter.downstream
       {
         chr_count!(read_id, read_count, chr_pair, position_hm);
       }
     }
     "F3" => {
-      if chr_pair.flag == 16
-        && mobel_counter.upstream <= mobel_counter.downstream
+      if chr_pair.flag == 16 &&
+        mobel_counter.upstream <= mobel_counter.downstream
       {
         chr_count!(read_id, read_count, chr_pair, position_hm);
       }
     }
     "R5" => {
-      if chr_pair.flag == 16
-        && mobel_counter.upstream >= mobel_counter.downstream
+      if chr_pair.flag == 16 &&
+        mobel_counter.upstream >= mobel_counter.downstream
       {
         chr_count!(read_id, read_count, chr_pair, position_hm);
       }
     }
     "R3" => {
-      if chr_pair.flag == 0
-        && mobel_counter.upstream <= mobel_counter.downstream
+      if chr_pair.flag == 0 &&
+        mobel_counter.upstream <= mobel_counter.downstream
       {
         chr_count!(read_id, read_count, chr_pair, position_hm);
       }
@@ -80,12 +81,12 @@ struct ElementCount {
 impl ElementCount {
   fn count(
     &mut self,
-    orientation: &str,
+    orientation: &OrientationEnum,
   ) {
-    if orientation == "upstream" {
-      self.upstream += 1;
-    } else if orientation == "downstream" {
-      self.downstream += 1;
+    match orientation {
+      OrientationEnum::Upstream => self.upstream += 1,
+      OrientationEnum::Downstream => self.downstream += 1,
+      OrientationEnum::None => (),
     }
   }
 }
