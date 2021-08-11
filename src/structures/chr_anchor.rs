@@ -7,7 +7,10 @@ use crate::{
     flag_interpretor::interpret,
     sam_flag::SamFlag,
   },
-  structures::cigar::CIGAR,
+  structures::{
+    anchor_enum::AnchorEnum,
+    cigar::CIGAR,
+  },
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -15,6 +18,10 @@ use crate::{
 /// Chromosomal anchor structure.
 #[derive(Debug, new, Clone, Default)]
 pub struct ChrAnchor {
+  /// Anchoring orientation.
+  #[new(default)]
+  pub anchor: AnchorEnum,
+
   /// CIGAR.
   #[new(value = "CIGAR::new()")]
   pub cigar: CIGAR,
@@ -78,6 +85,7 @@ impl ChrAnchor {
     tlen: i32,
   ) -> Self {
     Self {
+      anchor: AnchorEnum::None,
       cigar,
       flag,
       chr,
@@ -96,6 +104,8 @@ impl ChrAnchor {
     position: i32,
     tlen: i32,
   ) {
+    // TODO: update initializers
+    self.anchor = AnchorEnum::None;
     self.cigar = cigar;
     self.flag = flag;
     self.chr = chr;
