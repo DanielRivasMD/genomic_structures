@@ -49,6 +49,7 @@ pub struct CIGAR {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
+// create
 impl CIGAR {
   //  /// use genomic_structures::CIGAR;
   //  ///
@@ -69,9 +70,9 @@ impl CIGAR {
     to_interpret: &str,
     position: i32,
   ) -> anyResult<Self> {
-    let mut cigar_out = CIGAR::new();
+    let mut cigar_out = Self::new();
     cigar_out.update(to_interpret, position)?;
-    return Ok(cigar_out);
+    Ok(cigar_out)
   }
 
   /// Update CIGAR values.
@@ -142,7 +143,12 @@ impl CIGAR {
 
     Ok(())
   }
+}
 
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//
+impl CIGAR {
   // TODO: verify & rewrite boundries
   //  /// use genomic_structures::CIGAR;
   //  ///
