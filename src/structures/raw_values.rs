@@ -23,6 +23,8 @@ use crate::{
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
+// TODO: raw parser straigth from record line
+
 // TODO: think about a way to use raw values only with reference to strings
 // values ordered as SAM format
 #[derive(Debug, new, Clone, Default)]

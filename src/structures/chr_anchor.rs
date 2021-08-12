@@ -51,26 +51,26 @@ pub struct ChrAnchor {
 
 // create
 impl ChrAnchor {
-//  /// use genomic_structures::ChrAnchor;
-//  ///
-//  /// let loaded = ChrAnchor::loader(&vec![
-//  ///   "", "56", "chr7", "2099", "100", "100M", "", "", "100",
-//  /// ]);
-//  /// let manual = ChrAnchor {
-//  ///   chr:   "chr7".to_string(),
-//  ///   flag:  56,
-//  ///   pos:   2099,
-//  ///   cigar: "100M".to_string(),
-//  ///   mapq:  100,
-//  ///   tlen:  100,
-//  /// };
-//  ///
-//  /// assert_eq!(loaded.chr, manual.chr);
-//  /// assert_eq!(loaded.flag, manual.flag);
-//  /// assert_eq!(loaded.pos, manual.pos);
-//  /// assert_eq!(loaded.cigar, manual.cigar);
-//  /// assert_eq!(loaded.mapq, manual.mapq);
-//  /// assert_eq!(loaded.tlen, manual.tlen);
+  //  /// use genomic_structures::ChrAnchor;
+  //  ///
+  //  /// let loaded = ChrAnchor::loader(&vec![
+  //  ///   "", "56", "chr7", "2099", "100", "100M", "", "", "100",
+  //  /// ]);
+  //  /// let manual = ChrAnchor {
+  //  ///   chr:   "chr7".to_string(),
+  //  ///   flag:  56,
+  //  ///   pos:   2099,
+  //  ///   cigar: "100M".to_string(),
+  //  ///   mapq:  100,
+  //  ///   tlen:  100,
+  //  /// };
+  //  ///
+  //  /// assert_eq!(loaded.chr, manual.chr);
+  //  /// assert_eq!(loaded.flag, manual.flag);
+  //  /// assert_eq!(loaded.pos, manual.pos);
+  //  /// assert_eq!(loaded.cigar, manual.cigar);
+  //  /// assert_eq!(loaded.mapq, manual.mapq);
+  //  /// assert_eq!(loaded.tlen, manual.tlen);
   /// Load vector of strings (line from a file) onto ChrAnchor struct.
   ///
   /// # Examples
@@ -158,5 +158,28 @@ impl SamFlag for ChrAnchor {
     interpret(self.flag, p)
   }
 }
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// // test private functions
+// #[cfg(test)]
+// mod priv_tests {
+//   use super::ChrAnchor;
+//   use crate::functions::flag_interpretor::SamFlag;
+
+//   use data_test::data_test;
+
+//   data_test! {
+
+//     fn test_chr_interpretor(chr_anchor, value, expected) => {
+//       assert_eq!(chr_anchor.interpretor(value), expected);
+//     }
+
+//
+//     - _00 ( super::ChrAnchor { chr:   "chr7".to_string(), flag:  177, pos:
+//       2099, cigar: "100M".to_string(), mapq:  100, tlen:  100, }, 1, true
+//     )
+//   }
+// }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////

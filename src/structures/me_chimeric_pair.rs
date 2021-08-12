@@ -57,19 +57,19 @@ impl MEChimericPair {
   /// # Examples
   ///
   /// ```
-//  /// use genomic_structures::ChrAnchorEnum;
-//  /// use genomic_structures::MEChimericPair;
-//  /// use genomic_structures::MEChimericRead;
-//  ///
-//  /// let mut toretrieve = MEChimericPair::new(ChrAnchorEnum::None);
-//  /// toretrieve.read1 = MEChimericRead::new();
-//  /// toretrieve.read1.sequence = "GATTACA".to_string();
-//  /// let retrieved = toretrieve.chr_anchor_retriever();
-//  ///
-//  /// let mut predefined = MEChimericRead::new();
-//  /// predefined.sequence = "GATTACA".to_string();
-//  ///
-//  /// assert_eq!(retrieved.sequence, predefined.sequence);
+  //  /// use genomic_structures::ChrAnchorEnum;
+  //  /// use genomic_structures::MEChimericPair;
+  //  /// use genomic_structures::MEChimericRead;
+  //  ///
+  //  /// let mut toretrieve = MEChimericPair::new(ChrAnchorEnum::None);
+  //  /// toretrieve.read1 = MEChimericRead::new();
+  //  /// toretrieve.read1.sequence = "GATTACA".to_string();
+  //  /// let retrieved = toretrieve.chr_anchor_retriever();
+  //  ///
+  //  /// let mut predefined = MEChimericRead::new();
+  //  /// predefined.sequence = "GATTACA".to_string();
+  //  ///
+  //  /// assert_eq!(retrieved.sequence, predefined.sequence);
   /// ```
   pub fn chr_anchor_retriever(&self) -> &MEChimericRead {
     match self.chranch {
@@ -85,6 +85,14 @@ impl MEChimericPair {
   }
 
   // TODO: add trait implementation for mobile element retrieval
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+/// Retrieve chromosomal anchor from mobile element chimeric pair
+/// (MEChimericPair).
+pub trait Name {
+  // add code here
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////

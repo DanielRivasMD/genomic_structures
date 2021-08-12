@@ -46,29 +46,29 @@ pub struct MEAnchor {
 
 // create
 impl MEAnchor {
- // TODO: update tests
-//  /// use genomic_structures::MEAnchor;
-//  ///
-//  /// let loaded = MEAnchor::loader(
-//  ///   &vec!["", "75", "me11", "650", "100", "100M", "", "", "100"],
-//  ///   1000.,
-//  ///   &"FS5",
-//  /// );
-//  /// let manual = MEAnchor {
-//  ///   mobel:       "me11".to_string(),
-//  ///   size:        1000.,
-//  ///   flag:        75,
-//  ///   pos:         650,
-//  ///   cigar:       "100M".to_string(),
-//  ///   orientation: "FS5".to_string(),
-//  /// };
-//  ///
-//  /// assert_eq!(loaded.mobel, manual.mobel);
-//  /// assert_eq!(loaded.size, manual.size);
-//  /// assert_eq!(loaded.flag, manual.flag);
-//  /// assert_eq!(loaded.pos, manual.pos);
-//  /// assert_eq!(loaded.cigar, manual.cigar);
-//  /// assert_eq!(loaded.orientation, manual.orientation);
+  // TODO: update tests
+  //  /// use genomic_structures::MEAnchor;
+  //  ///
+  //  /// let loaded = MEAnchor::loader(
+  //  ///   &vec!["", "75", "me11", "650", "100", "100M", "", "", "100"],
+  //  ///   1000.,
+  //  ///   &"FS5",
+  //  /// );
+  //  /// let manual = MEAnchor {
+  //  ///   mobel:       "me11".to_string(),
+  //  ///   size:        1000.,
+  //  ///   flag:        75,
+  //  ///   pos:         650,
+  //  ///   cigar:       "100M".to_string(),
+  //  ///   orientation: "FS5".to_string(),
+  //  /// };
+  //  ///
+  //  /// assert_eq!(loaded.mobel, manual.mobel);
+  //  /// assert_eq!(loaded.size, manual.size);
+  //  /// assert_eq!(loaded.flag, manual.flag);
+  //  /// assert_eq!(loaded.pos, manual.pos);
+  //  /// assert_eq!(loaded.cigar, manual.cigar);
+  //  /// assert_eq!(loaded.orientation, manual.orientation);
   /// Load vector of strings (line from a file) onto MEAnchor struct.
   ///
   /// # Examples

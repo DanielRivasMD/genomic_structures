@@ -41,4 +41,23 @@ pub fn interpret(
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
+// // test private functions
+// #[cfg(test)]
+// mod priv_tests {
+//   use crate::structures::chr_anchor::ChrAnchor;
+//   use super::SamFlag;
 
+//   use data_test::data_test;
+
+//   data_test! {
+
+//     fn test_chr_interpret(chr_anchor, value, expected) => {
+//       assert_eq!(chr_anchor.interpret(value), expected);
+//     }
+
+//
+//     - _00 ( super::ChrAnchor { chr:   "chr7".to_string(), flag:  177, pos:
+//       2099, cigar: "100M".to_string(), mapq:  100, tlen:  100, }, 1, true
+//     )
+//   }
+// }
