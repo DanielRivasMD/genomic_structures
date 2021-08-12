@@ -82,14 +82,9 @@ impl MEAnchor {
     position: i32,
     size: f64,
   ) -> Self {
-    Self {
-      cigar,
-      flag,
-      mobel,
-      orientation,
-      position,
-      size,
-    }
+    let mut me_anchor = Self::new();
+    me_anchor.update(cigar, flag, mobel, orientation, position, size);
+    me_anchor
   }
 
   pub fn update(
@@ -97,16 +92,16 @@ impl MEAnchor {
     cigar: CIGAR,
     flag: i32,
     mobel: String,
-    // orientation: String,
+    orientation: OrientationEnum,
     position: i32,
-    // size: f64,
+    size: f64,
   ) {
     self.cigar = cigar;
     self.flag = flag;
     self.mobel = mobel;
-    // self.orientation = orientation.clone();
+    self.orientation = orientation;
     self.position = position;
-    // self.size = size;
+    self.size = size;
   }
 }
 
