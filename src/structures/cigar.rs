@@ -12,7 +12,7 @@ use crate::error::common_error::CommonError;
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /// Contain read's CIGAR information.
-#[derive(Debug, new, Clone, Default)]
+#[derive(Debug, new, Clone, Default, PartialEq)]
 pub struct CIGAR {
   /// Alignment as a vector of coordinates.
   #[new(default)]

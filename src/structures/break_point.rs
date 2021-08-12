@@ -1,7 +1,7 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /// Determine breaking point.
-#[derive(Debug, new, Default)]
+#[derive(Debug, new, Default, PartialEq)]
 pub struct BreakPoint {
   /// Sequence.
   pub sequence: String,

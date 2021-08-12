@@ -15,7 +15,7 @@ use crate::structures::{
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /// Contain primary (index 0) and secondary aligned read annotation.
-#[derive(Debug, new, Default)]
+#[derive(Debug, new, Default, PartialEq)]
 pub struct MEChimericRead {
   /// Breakpoint.
   #[new(default)]

@@ -10,7 +10,7 @@
 // | partial [50S50M] (ME limit) {inwards}       | complete [100M]  (ME limit) {outwards}      |
 // | partial [50S50M] (ME limit) {inwards}       | partial [50S50M]  (ME limit) {outwards}     |
 // |---------------------------------------------|---------------------------------------------|
-#[derive(Debug, new)]
+#[derive(Debug, new, PartialEq)]
 pub enum ChrAnchorEnum {
   Read1,
   Read2,

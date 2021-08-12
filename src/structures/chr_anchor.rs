@@ -16,7 +16,7 @@ use crate::{
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /// Chromosomal anchor structure.
-#[derive(Debug, new, Clone, Default)]
+#[derive(Debug, new, Clone, Default, PartialEq)]
 pub struct ChrAnchor {
   /// Anchoring orientation.
   #[new(default)]

@@ -17,7 +17,7 @@ use crate::structures::{
 
 // to load onto => hashmap for reads aligned to mobile elements
 /// Contain information about a chimeric pair.
-#[derive(Debug, new, Default)]
+#[derive(Debug, new, Default, PartialEq)]
 pub struct MEChimericPair {
   /// Read 1.
   #[new(default)]

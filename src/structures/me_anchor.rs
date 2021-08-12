@@ -15,7 +15,7 @@ use crate::{
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /// Mobile element anchor structure.
-#[derive(Debug, new, Clone, Default)]
+#[derive(Debug, new, Clone, Default, PartialEq)]
 pub struct MEAnchor {
   /// CIGAR.
   #[new(value = "CIGAR::new()")]
