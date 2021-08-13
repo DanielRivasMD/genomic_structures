@@ -45,7 +45,7 @@ pub fn interpret(
 // #[cfg(test)]
 // mod priv_tests {
 //   use crate::structures::chr_anchor::ChrAnchor;
-//   use super::SamFlag;
+//   use super::SAMFlag;
 
 //   use data_test::data_test;
 

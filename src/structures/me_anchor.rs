@@ -2,10 +2,7 @@
 
 // crate utilities
 use crate::{
-  functions::{
-    flag_interpretor::interpret,
-    sam_flag::SamFlag,
-  },
+  functions::sam_flag::SAMFlag,
   structures::{
     cigar::CIGAR,
     orientation_enum::OrientationEnum,
@@ -109,12 +106,9 @@ impl MEAnchor {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // implement SAM flag
-impl SamFlag for MEAnchor {
-  fn interpret(
-    &self,
-    p: usize,
-  ) -> bool {
-    interpret(self.flag, p)
+impl SAMFlag for MEAnchor {
+  fn get_flag(&self) -> i32 {
+    self.flag
   }
 }
 

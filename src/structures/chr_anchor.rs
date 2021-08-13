@@ -3,10 +3,7 @@
 // crate utilities
 use crate::BIN_SIZE;
 use crate::{
-  functions::{
-    flag_interpretor::interpret,
-    sam_flag::SamFlag,
-  },
+  functions::sam_flag::SAMFlag,
   structures::{
     anchor_enum::AnchorEnum,
     cigar::CIGAR,
@@ -149,13 +146,9 @@ impl ChrAnchor {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // implement SAM flag
-impl SamFlag for ChrAnchor {
-  /// Binary interpretation on a SAM flag for ChrAnchor struct.
-  fn interpret(
-    &self,
-    p: usize,
-  ) -> bool {
-    interpret(self.flag, p)
+impl SAMFlag for ChrAnchor {
+  fn get_flag(&self) -> i32 {
+    self.flag
   }
 }
 

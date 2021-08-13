@@ -9,10 +9,7 @@ use anyhow::Result as anyResult;
 // crate utilities
 use crate::{
   error::common_error::CommonError,
-  functions::{
-    flag_interpretor::interpret,
-    sam_flag::SamFlag,
-  },
+  functions::sam_flag::SAMFlag,
   structures::{
     cigar::CIGAR,
     extra_values_enum::ExtraValuesEnum,
@@ -156,12 +153,9 @@ impl RawValues {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-impl SamFlag for RawValues {
-  fn interpret(
-    &self,
-    p: usize,
-  ) -> bool {
-    interpret(self.flag, p)
+impl SAMFlag for RawValues {
+  fn get_flag(&self) -> i32 {
+    self.flag
   }
 }
 
