@@ -17,7 +17,7 @@ macro_rules! load {
       $values.scaffold.clone(),
       $values.orientation.clone(),
       $values.position,
-      $values.extra_get(),
+      $values.get_extra(),
     ));
 
     if $switch.mobel {

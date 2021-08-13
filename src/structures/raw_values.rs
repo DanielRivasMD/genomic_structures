@@ -126,7 +126,7 @@ impl RawValues {
 }
 
 impl RawValues {
-  pub fn extra_get(&self) -> f64 {
+  pub fn get_extra(&self) -> f64 {
     match self.extra {
       ExtraValuesEnum::MobelSize(value) => value,
       ExtraValuesEnum::None => {
@@ -136,7 +136,7 @@ impl RawValues {
     }
   }
 
-  pub fn orientation_get(&self) -> String {
+  pub fn get_orientation(&self) -> String {
     match self.orientation {
       // redesigned the mobile element chimeric read to accept enum
       OrientationEnum::Downstream => String::from("downstream"),
@@ -149,7 +149,7 @@ impl RawValues {
     self.orientation = OrientationEnum::None;
   }
 
-  pub fn read_orientation_get(&self) -> bool {
+  pub fn get_read_orientation(&self) -> bool {
     self.interpret(5)
   }
 }
