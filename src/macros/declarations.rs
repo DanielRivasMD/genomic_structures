@@ -32,8 +32,8 @@ macro_rules! load {
     {
       $record.$read_no.chr_read.push(ChrAnchor::load(
         $values.cigar.clone(),
-        $values.flag,
         $values.scaffold.clone(),
+        $values.flag,
         $values.quality,
         $values.position,
         $values.tlen,

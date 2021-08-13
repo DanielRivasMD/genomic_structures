@@ -23,13 +23,13 @@ pub struct ChrAnchor {
   #[new(value = "CIGAR::new()")]
   pub cigar: CIGAR,
 
-  /// Flag.
-  #[new(default)]
-  pub flag: i32,
-
   /// Chromosome.
   #[new(default)]
   pub chr: String,
+
+  /// Flag.
+  #[new(default)]
+  pub flag: i32,
 
   /// Mapping quality (MAPQ).
   #[new(default)]
@@ -76,8 +76,8 @@ impl ChrAnchor {
   /// ```
   pub fn load(
     cigar: CIGAR,
-    flag: i32,
     chr: String,
+    flag: i32,
     mapq: i32,
     position: i32,
     tlen: i32,
@@ -96,8 +96,8 @@ impl ChrAnchor {
   pub fn update(
     &mut self,
     cigar: CIGAR,
-    flag: i32,
     chr: String,
+    flag: i32,
     mapq: i32,
     position: i32,
     tlen: i32,
@@ -105,8 +105,8 @@ impl ChrAnchor {
     // TODO: update initializers
     self.anchor = AnchorEnum::None;
     self.cigar = cigar;
-    self.flag = flag;
     self.chr = chr;
+    self.flag = flag;
     self.mapq = mapq;
     self.position = position;
     self.tlen = tlen;
