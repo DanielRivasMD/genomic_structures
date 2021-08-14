@@ -19,15 +19,15 @@ pub struct ChrAnchor {
   #[new(default)]
   pub anchor: AnchorEnum,
 
-  /// CIGAR.
+  /// CIGAR string.
   #[new(value = "CIGAR::new()")]
   pub cigar: CIGAR,
 
-  /// Chromosome.
+  /// Chromosomal alignment allocation.
   #[new(default)]
   pub chr: String,
 
-  /// Flag.
+  /// Alignment flag.
   #[new(default)]
   pub flag: i32,
 
@@ -35,7 +35,7 @@ pub struct ChrAnchor {
   #[new(default)]
   pub mapq: i32,
 
-  /// Position.
+  /// Alignment position.
   #[new(default)]
   pub position: i32,
 
@@ -48,31 +48,63 @@ pub struct ChrAnchor {
 
 // create
 impl ChrAnchor {
-  //  /// use genomic_structures::ChrAnchor;
-  //  ///
-  //  /// let loaded = ChrAnchor::loader(&vec![
-  //  ///   "", "56", "chr7", "2099", "100", "100M", "", "", "100",
-  //  /// ]);
-  //  /// let manual = ChrAnchor {
-  //  ///   chr:   "chr7".to_string(),
-  //  ///   flag:  56,
-  //  ///   pos:   2099,
-  //  ///   cigar: "100M".to_string(),
-  //  ///   mapq:  100,
-  //  ///   tlen:  100,
-  //  /// };
-  //  ///
-  //  /// assert_eq!(loaded.chr, manual.chr);
-  //  /// assert_eq!(loaded.flag, manual.flag);
-  //  /// assert_eq!(loaded.pos, manual.pos);
-  //  /// assert_eq!(loaded.cigar, manual.cigar);
-  //  /// assert_eq!(loaded.mapq, manual.mapq);
-  //  /// assert_eq!(loaded.tlen, manual.tlen);
-  /// Load vector of strings (line from a file) onto ChrAnchor struct.
+  ///
+  /// Load values onto `ChrAnchor`.
+  ///
+  /// # Parameters
+  ///
+  /// * `cigar` - CIGAR string.
+  ///
+  /// * `chr` - Chromosomal alignment allocation.
+  ///
+  /// * `flag` - Alignment flag.
+  ///
+  /// * `mapq` - Mapping quality (MAPQ).
+  ///
+  /// * `position` - Alignment position.
+  ///
+  /// * `tlen` - Template length (TLEN).
+  ///
+  /// # Returns
+  ///
+  /// Return an instance of `ChrAnchor` with SAM parameters.
   ///
   /// # Examples
   ///
   /// ```
+  /// use genomic_structures::{
+  ///   AnchorEnum,
+  ///   ChrAnchor,
+  ///   CIGAR,
+  /// };
+  ///
+  /// let cigar = "100M";
+  /// let chr = String::from("chr7");
+  /// let flag = 56;
+  /// let position = 2099;
+  /// let mapq = 60;
+  /// let tlen = 100;
+  ///
+  /// let produced = ChrAnchor::load(
+  ///   CIGAR::load(cigar, position).unwrap(),
+  ///   chr.clone(),
+  ///   flag,
+  ///   mapq,
+  ///   position,
+  ///   tlen,
+  /// );
+  ///
+  /// let manual = ChrAnchor {
+  ///   anchor:   AnchorEnum::None,
+  ///   cigar:    CIGAR::load(cigar, position).unwrap(),
+  ///   chr:      chr.clone(),
+  ///   flag:     flag,
+  ///   position: position,
+  ///   mapq:     mapq,
+  ///   tlen:     tlen,
+  /// };
+  ///
+  /// assert_eq!(produced, manual);
   /// ```
   pub fn load(
     cigar: CIGAR,
@@ -82,17 +114,71 @@ impl ChrAnchor {
     position: i32,
     tlen: i32,
   ) -> Self {
-    Self {
-      anchor: AnchorEnum::None,
-      cigar,
-      flag,
-      chr,
-      mapq,
-      position,
-      tlen,
-    }
+    let mut chr_anchor = Self::new();
+    chr_anchor.update(cigar, chr, flag, mapq, position, tlen);
+    // TODO: ignore anchor for now anchor: AnchorEnum::None,
+    chr_anchor
   }
 
+  ///
+  /// Update values of `ChrAnchor`.
+  ///
+  /// # Parameters
+  ///
+  /// * `cigar` - CIGAR string.
+  ///
+  /// * `chr` - Chromosomal alignment allocation.
+  ///
+  /// * `flag` - Alignment flag.
+  ///
+  /// * `mapq` - Mapping quality (MAPQ).
+  ///
+  /// * `position` - Alignment position.
+  ///
+  /// * `tlen` - Template length (TLEN).
+  ///
+  /// # Returns
+  ///
+  /// Return an updated instance of `ChrAnchor` with SAM parameters.
+  ///
+  /// # Examples
+  ///
+  /// ```
+  /// use genomic_structures::{
+  ///   AnchorEnum,
+  ///   ChrAnchor,
+  ///   CIGAR,
+  /// };
+  ///
+  /// let cigar = "100M";
+  /// let chr = String::from("chr7");
+  /// let flag = 56;
+  /// let position = 2099;
+  /// let mapq = 60;
+  /// let tlen = 100;
+  ///
+  /// let mut produced = ChrAnchor::new();
+  /// produced.update(
+  ///   CIGAR::load(cigar, position).unwrap(),
+  ///   chr.clone(),
+  ///   flag,
+  ///   mapq,
+  ///   position,
+  ///   tlen,
+  /// );
+  ///
+  /// let manual = ChrAnchor {
+  ///   anchor:   AnchorEnum::None,
+  ///   cigar:    CIGAR::load(cigar, position).unwrap(),
+  ///   chr:      chr.clone(),
+  ///   flag:     flag,
+  ///   position: position,
+  ///   mapq:     mapq,
+  ///   tlen:     tlen,
+  /// };
+  ///
+  /// assert_eq!(produced, manual);
+  /// ```
   pub fn update(
     &mut self,
     cigar: CIGAR,
@@ -103,7 +189,7 @@ impl ChrAnchor {
     tlen: i32,
   ) {
     // TODO: update initializers
-    self.anchor = AnchorEnum::None;
+    // TODO: ignore anchor for now self.anchor = AnchorEnum::None;
     self.cigar = cigar;
     self.chr = chr;
     self.flag = flag;
@@ -115,27 +201,39 @@ impl ChrAnchor {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//
+// methods
 impl ChrAnchor {
-  //  /// use genomic_structures::ChrAnchor;
-  //  ///
-  //  /// assert_eq!(
-  //  ///   ChrAnchor {
-  //  ///     chr:   "chr7".to_string(),
-  //  ///     flag:  56,
-  //  ///     pos:   2099,
-  //  ///     cigar: "100M".to_string(),
-  //  ///     mapq:  100,
-  //  ///     tlen:  100,
-  //  ///   }
-  //  ///   .binner(),
-  //  ///   2000
-  //  /// );
-  /// Bin chromosomal position.
+  ///
+  /// Bin alignment position.
+  ///
+  /// # Returns
+  /// Return binned position.
   ///
   /// # Examples
   ///
   /// ```
+  /// use genomic_structures::{
+  ///   ChrAnchor,
+  ///   CIGAR,
+  /// };
+  ///
+  /// let cigar = "100M";
+  /// let chr = String::from("chr7");
+  /// let flag = 56;
+  /// let position = 2099;
+  /// let mapq = 60;
+  /// let tlen = 100;
+  ///
+  /// let chr_anchor = ChrAnchor::load(
+  ///   CIGAR::load(cigar, position).unwrap(),
+  ///   chr,
+  ///   flag,
+  ///   mapq,
+  ///   position,
+  ///   tlen,
+  /// );
+  ///
+  /// assert_eq!(chr_anchor.bin(), 2000);
   /// ```
   pub fn bin(&self) -> i32 {
     let binned = self.position % BIN_SIZE;
@@ -151,28 +249,5 @@ impl SAMFlag for ChrAnchor {
     self.flag
   }
 }
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// // test private functions
-// #[cfg(test)]
-// mod priv_tests {
-//   use super::ChrAnchor;
-//   use crate::functions::flag_interpretor::SamFlag;
-
-//   use data_test::data_test;
-
-//   data_test! {
-
-//     fn test_chr_interpretor(chr_anchor, value, expected) => {
-//       assert_eq!(chr_anchor.interpretor(value), expected);
-//     }
-
-//
-//     - _00 ( super::ChrAnchor { chr:   "chr7".to_string(), flag:  177, pos:
-//       2099, cigar: "100M".to_string(), mapq:  100, tlen:  100, }, 1, true
-//     )
-//   }
-// }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
