@@ -188,6 +188,8 @@ mod lambda_calculate;
 mod r_ppoisson;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
+#[cfg(test)]
+mod table;
 
 // //     // test inverted probability poisson function
 // //     fn test_r_poisson(lambda, psize, expected) => {
