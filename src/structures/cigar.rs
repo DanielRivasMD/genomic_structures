@@ -20,27 +20,27 @@ pub struct CIGAR {
 
   /// Deletion as a vector of coordinates.
   #[new(default)]
-  pub del: Vec<i32>,
+  pub deletion: Vec<i32>,
 
   /// Insertion as a vector of coordinates.
   #[new(default)]
-  pub ins: Vec<i32>,
-
-  /// Left clip position coordinate.
-  #[new(default)]
-  pub lclip: i32,
+  pub insertion: Vec<i32>,
 
   /// Left boundry.
   #[new(default)]
   pub left_boundry: i32,
 
-  /// Right clip position coordinate.
+  /// Left clip position coordinate.
   #[new(default)]
-  pub rclip: i32,
+  pub left_clip: i32,
 
   /// Right boundry.
   #[new(default)]
   pub right_boundry: i32,
+
+  /// Right clip position coordinate.
+  #[new(default)]
+  pub rigth_clip: i32,
 
   /// String.
   #[new(default)]
@@ -51,20 +51,36 @@ pub struct CIGAR {
 
 // create
 impl CIGAR {
-  //  /// use genomic_structures::CIGAR;
-  //  ///
-  //  /// let cigar = CIGAR::loader("10H1I2M2D80M5H");
-  //  /// assert_eq!(cigar.align, vec![2, 80]);
-  //  /// assert_eq!(cigar.del, vec![2]);
-  //  /// assert_eq!(cigar.ins, vec![1]);
-  //  /// assert_eq!(cigar.lclip, 10);
-  //  /// assert_eq!(cigar.rclip, 5);
-  // TODO: update documentation
+  ///
   /// Load string into CIGAR struct.
+  ///
+  /// # Parameters
+  ///
+  /// * `to_interpret` - String to parse.
+  ///
+  /// * `position` - 1-based coordinate.
+  ///
+  /// # Returns
+  ///
+  /// Return CIGAR object.
   ///
   /// # Examples
   ///
   /// ```
+  /// use genomic_structures::CIGAR;
+  ///
+  /// let cigar =
+  ///   CIGAR::load("10H1I2M2D80M5H", 101).expect("CIGAR loading failed!");
+  /// assert_eq!(cigar, CIGAR {
+  ///   align:         vec![2, 80],
+  ///   deletion:      vec![2],
+  ///   insertion:     vec![1],
+  ///   left_boundry:  91,
+  ///   left_clip:     10,
+  ///   right_boundry: 190,
+  ///   rigth_clip:    5,
+  ///   signature:     String::from("10H1I2M2D80M5H"),
+  /// });
   /// ```
   pub fn load(
     to_interpret: &str,
@@ -81,16 +97,17 @@ impl CIGAR {
     to_interpret: &str,
     position: i32,
   ) -> anyResult<()> {
-    self.signature = to_interpret.to_string().clone();
+    self.signature = String::from(to_interpret).clone();
+    // identify no CIGAR annotation
     if to_interpret == "*" {
       self.align.push(0);
     } else {
       // iterate to find annotations
       let mut char_vec = vec![];
-      for i in to_interpret.char_indices() {
-        match i.1 {
+      for ix in to_interpret.char_indices() {
+        match ix.1 {
           'H' | 'S' | 'M' | 'D' | 'I' => {
-            char_vec.push(i.0);
+            char_vec.push(ix.0);
           }
           _ => (),
         }
@@ -98,15 +115,18 @@ impl CIGAR {
 
       let mut j = 0;
 
+      // iterate on identified characters
       for i in char_vec.iter() {
         match &to_interpret[*i..*i + 1] {
+          // TODO: change soft & hard clipe interpretation
           "H" | "S" => {
+            // indicate whether aligned bases have been recorded
             if self.align.iter().sum::<i32>() == 0 {
-              self.lclip = (&to_interpret[j..*i])
+              self.left_clip = (&to_interpret[j..*i])
                 .parse::<i32>()
                 .context(CommonError::Parsing)?;
             } else {
-              self.rclip = (&to_interpret[j..*i])
+              self.rigth_clip = (&to_interpret[j..*i])
                 .parse::<i32>()
                 .context(CommonError::Parsing)?;
             }
@@ -119,14 +139,14 @@ impl CIGAR {
             );
           }
           "I" => {
-            self.ins.push(
+            self.insertion.push(
               (&to_interpret[j..*i])
                 .parse::<i32>()
                 .context(CommonError::Parsing)?,
             );
           }
           "D" => {
-            self.del.push(
+            self.deletion.push(
               (&to_interpret[j..*i])
                 .parse::<i32>()
                 .context(CommonError::Parsing)?,
@@ -139,7 +159,7 @@ impl CIGAR {
     }
 
     // calculate boundries
-    self.boundries(position);
+    self.calculate_boundries(position);
 
     Ok(())
   }
@@ -150,24 +170,13 @@ impl CIGAR {
 //
 impl CIGAR {
   // TODO: verify & rewrite boundries
-  //  /// use genomic_structures::CIGAR;
-  //  ///
-  //  /// let mut cigar = CIGAR::loader("10H84M6H");
-  //  /// assert_eq!((90, 190), cigar.boundries(100));
-
-  /// Define left and right boundries.
-  ///
-  /// # Examples
-  ///
-  /// ```
-  /// ```
   // FIX: boundry interpretation is bugged
-  fn boundries(
+  fn calculate_boundries(
     &mut self,
     position: i32,
   ) {
-    self.left_boundry = self.left_boundry_calculator(position);
-    self.right_boundry = self.right_boundry_calculator(position);
+    self.left_boundry = self.calculate_left_boundry(position);
+    self.right_boundry = self.calculate_right_boundry(position);
   }
 
   // adjust alignment coordinates according to CIGAR interpretation
@@ -180,18 +189,19 @@ impl CIGAR {
     let ins_sum: i32 = self.ins.iter().sum();
     let del_sum: i32 = self.del.iter().sum();
     (self.lclip + position, align_sum + ins_sum + del_sum)
+    // BUG: no point on calculating left clip plus position
   }
 
   // left boundry
-  fn left_boundry_calculator(
+  fn calculate_left_boundry(
     &self,
     position: i32,
   ) -> i32 {
-    position - self.lclip
+    position - self.left_clip
   }
 
   // right boundry
-  fn right_boundry_calculator(
+  fn calculate_right_boundry(
     &self,
     position: i32,
   ) -> i32 {
