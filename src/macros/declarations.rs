@@ -28,7 +28,7 @@ macro_rules! load {
   // chromosomal loci
   ( chromosomal => $record: expr; $values: expr; $read_no: tt ) => {
     if $record.$read_no.sequence == $values.sequence ||
-      $record.$read_no.sequence_reverser() == $values.sequence
+      $record.$read_no.reverse_sequence() == $values.sequence
     {
       $record.$read_no.chr_read.push(ChrAnchor::load(
         $values.cigar.clone(),

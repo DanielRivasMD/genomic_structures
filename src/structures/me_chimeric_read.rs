@@ -21,15 +21,15 @@ pub struct MEChimericRead {
   #[new(default)]
   pub breakpoint: BreakPoint,
 
-  /// Chromosomal read.
+  /// Chromosomal anchor.
   #[new(default)]
   pub chr_read: Vec<ChrAnchor>,
 
-  /// Mobile element read.
+  /// Mobile element anchor.
   #[new(default)]
   pub me_read: Vec<MEAnchor>,
 
-  /// Quality.
+  /// Anchor mapping quality (MAPQ).
   #[new(default)]
   pub quality: i32,
 
@@ -60,24 +60,24 @@ impl MEChimericRead {
   /// ```
   /// use genomic_structures::MEChimericRead;
   ///
-  /// let mut toreverse = MEChimericRead::new();
-  /// toreverse.sequence = "GATTACA".to_string();
+  /// let mut to_reverse = MEChimericRead::new();
+  /// to_reverse.sequence = "GATTACA".to_string();
   /// let reversed = "TGTAATC".to_string();
   ///
-  /// assert_eq!(toreverse.sequence_reverser(), reversed);
+  /// assert_eq!(to_reverse.reverse_sequence(), reversed);
   /// ```
-  pub fn sequence_reverser(&self) -> String {
+  pub fn reverse_sequence(&self) -> String {
     self
       .sequence
       .chars()
-      .map(|x| {
-        match x {
+      .map(|nucleotide| {
+        match nucleotide {
           '!' => '?',
           'A' => 'T',
           'T' => 'A',
           'C' => 'G',
           'G' => 'C',
-          _ => x,
+          _ => nucleotide,
         }
       })
       .rev()
