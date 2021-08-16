@@ -16,6 +16,36 @@ pub struct BreakPoint {
 
 impl BreakPoint {
   ///
+  /// Load values onto `BreakPoint`.
+  ///
+  /// # Parameters
+  ///
+  /// * `sequence` - Original read sequence.
+  ///
+  /// * `offset` - Mobile element estimated boundry to offset sequence.
+  ///
+  /// # Examples
+  ///
+  /// ```
+  /// use genomic_structures::BreakPoint;
+  ///
+  /// let breakpoint = BreakPoint::load("GATTACAAAAA", 0.);
+  ///
+  /// assert_eq!(breakpoint, BreakPoint {
+  ///   sequence:   String::from("GATTACAAAAA"),
+  ///   coordinate: 1.,
+  /// })
+  /// ```
+  pub fn load(
+    sequence: &str,
+    offset: f64,
+  ) -> Self {
+    let mut breakpoint = BreakPoint::new();
+    breakpoint.update(sequence, offset);
+    breakpoint
+  }
+
+  ///
   /// Update  values of `BreakPoint`.
   ///
   /// # Parameters
