@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-/// Contain read ID from current and previous read.
+/// Memory containing struct about read ID.
 #[derive(Debug, new, Clone, Default)]
 pub struct ReadControl {
   // TODO: think about a way to implement read_id as &str
@@ -13,6 +13,7 @@ pub struct ReadControl {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
+// read memory
 impl ReadControl {
   pub fn read_memory(&mut self) {
     self.previous = self.current.clone();

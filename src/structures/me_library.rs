@@ -6,7 +6,7 @@ use crate::structures::erv_annotations::ERVAnnotations;
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // to load onto => hashmap for mobile elements library entries
-/// Construc and collect ERV library.
+/// Construc and collect endogenous retrovirus (ERV) library.
 #[derive(Debug, new, Default)]
 pub struct MELibrary {
   /// Mobile element sequence.
@@ -20,7 +20,6 @@ pub struct MELibrary {
   /// ERV annotations.
   #[new(default)]
   pub annotations_erv: ERVAnnotations,
-  // TODO: potentially expandable to other types of mobile elements
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////

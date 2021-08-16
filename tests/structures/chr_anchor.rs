@@ -9,7 +9,7 @@ use genomic_structures::{
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-// test update & load macro
+// load & update
 macro_rules! chr_anchor {
   ( $function: ident; $assertion: ident;
     loaded |> $loaded_cigar: expr, $loaded_chr: expr, $loaded_flag: expr, $loaded_position: expr, $loaded_mapq: expr, $loaded_tlen: expr;

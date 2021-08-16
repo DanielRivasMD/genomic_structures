@@ -5,6 +5,7 @@ use genomic_structures::BreakPoint;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
+// load & update
 macro_rules! break_point {
   ( $function: ident; $assertion: ident;
     params |> $sequence: expr, $offset: expr;

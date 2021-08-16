@@ -5,6 +5,7 @@ use genomic_structures::interpret;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
+// public function
 macro_rules! interpret {
   ( $function: ident;
     params |> $flag: expr, $digit: expr;

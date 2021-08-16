@@ -123,7 +123,7 @@ fn effective_genome_length_calculate(
   genome_length * bin_size / bin_overlap
 }
 
-// Poisson lambda λ
+// Poisson lambda (λ)
 fn lambda_calculate(
   pop_reads: f64,
   eff_genome_length: f64,

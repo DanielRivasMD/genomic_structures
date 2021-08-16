@@ -21,8 +21,9 @@ use crate::{
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // TODO: raw parser straigth from record line
-
+// TODO: add test
 // TODO: think about a way to use raw values only with reference to strings
+// TODO: update field documentation
 // values ordered as SAM format
 #[derive(Debug, new, Clone, Default)]
 pub struct RawValues {
@@ -60,20 +61,17 @@ pub struct RawValues {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-/// Load records:
-///   - Load records contained in SAM file for processing on mobile element
-///     alignment:
-///     - Read ID.
-///     - Alignment flag and interprets orientation.
-///     - Mobile element aligned.
-///     - CIGAR calculating alignment coordinates and boundries.
-///   - Load mobile element features.
-///   - Load structural variant features.
-
+// load & update
 impl RawValues {
-  // raw SAM alignment
-  // TODO: add other fields
-  // TODO: update documentation
+  ///
+  ///   - Load records contained in SAM file for processing on mobile element
+  ///     alignment:
+  ///     - Read ID.
+  ///     - Alignment flag and interprets orientation.
+  ///     - Mobile element aligned.
+  ///     - CIGAR calculating alignment coordinates and boundries.
+  ///   - Load mobile element features.
+  ///   - Load structural variant features.
   pub fn load(flines: Vec<&str>) -> anyResult<Self> {
     // create empty struct
     let mut raw_values = RawValues::new();
@@ -122,6 +120,9 @@ impl RawValues {
   }
 }
 
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// get & reset
 impl RawValues {
   pub fn get_extra(&self) -> f64 {
     match self.extra {
@@ -153,6 +154,7 @@ impl RawValues {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
+// implement SAM flag
 impl SAMFlag for RawValues {
   fn get_flag(&self) -> i32 {
     self.flag

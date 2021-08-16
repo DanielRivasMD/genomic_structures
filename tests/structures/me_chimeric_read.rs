@@ -5,6 +5,7 @@ use genomic_structures::MEChimericRead;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
+// load & update
 macro_rules! me_chimeric_read {
   ( $function: ident;
     $sequence: expr, $expected: expr

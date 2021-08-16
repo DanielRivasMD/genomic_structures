@@ -5,6 +5,7 @@ use genomic_structures::MEChimericPair;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
+// load & update
 macro_rules! me_chimeric_pair {
   ( $function: ident;
     $sequence: expr, $expected: expr

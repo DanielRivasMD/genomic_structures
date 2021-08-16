@@ -32,12 +32,9 @@ pub struct MEChimericPair {
   pub chranch: ChrAnchorEnum,
 }
 
-// TODO: add non-cigar anchor identification
-
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-// TODO: update me chimeric pair
-// create
+// load & update
 impl MEChimericPair {
   pub fn load(me_anchor: MEAnchor) -> Self {
     let mut me_chimeric_pair = Self::new();
@@ -45,13 +42,16 @@ impl MEChimericPair {
     return me_chimeric_pair;
   }
 
-  pub fn update(&mut self) {}
+  pub fn update(&mut self) {
+    unimplemented!();
+  }
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//
+// get
 impl MEChimericPair {
+  ///
   /// Retrieve chromosomal anchor.
   ///
   /// # Examples
@@ -86,14 +86,6 @@ impl MEChimericPair {
   }
 
   // TODO: add trait implementation for mobile element retrieval
-}
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-
-/// Retrieve chromosomal anchor from mobile element chimeric pair
-/// (MEChimericPair).
-pub trait Name {
-  // add code here
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -5,6 +5,7 @@ use crate::functions::flag_interpretor::interpret;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
+// get & interpret
 /// Binary interpretation on a SAM flag.
 pub trait SAMFlag {
   fn interpret(

@@ -5,6 +5,7 @@ use genomic_structures::threshold;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
+// public function
 macro_rules! threshold {
   ( $function: ident;
   params |> $read_count: expr, $scaffold_size: expr, $fdr: expr;

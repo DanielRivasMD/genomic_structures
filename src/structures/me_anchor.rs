@@ -46,7 +46,7 @@ pub struct MEAnchor {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-// create
+// load & update
 impl MEAnchor {
   ///
   /// Load values onto `MEAnchor`.
@@ -200,6 +200,7 @@ impl MEAnchor {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
+// calculate break point
 impl MEAnchor {
   ///
   /// Calculate break point.
@@ -225,7 +226,7 @@ impl MEAnchor {
   /// let position = 1;
   /// let size = 11000.;
   ///
-  /// let mut me_anchor = MEAnchor::load(
+  /// let mut loaded = MEAnchor::load(
   ///   CIGAR::load(cigar, position).unwrap(),
   ///   flag,
   ///   mobel.clone(),
@@ -234,7 +235,7 @@ impl MEAnchor {
   ///   size,
   /// );
   ///
-  /// me_anchor.calculate_break_point("MMMM0987654321B1234567890OOOOO");
+  /// loaded.calculate_break_point("MMMM0987654321B1234567890OOOOO");
   ///
   /// let mut manual = MEAnchor::new();
   /// manual.breakpoint = BreakPoint {
@@ -242,7 +243,7 @@ impl MEAnchor {
   ///   coordinate: 15.,
   /// };
   ///
-  /// assert_eq!(me_anchor.breakpoint, manual.breakpoint);
+  /// assert_eq!(loaded.breakpoint, manual.breakpoint);
   /// ```
   pub fn calculate_break_point(
     &mut self,

@@ -35,7 +35,7 @@ pub struct MEChimericRead {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-// create
+// load & update
 impl MEChimericRead {
   pub fn load(me_anchor: MEAnchor) -> Self {
     let mut me_chimeric_read = Self::new();
@@ -46,8 +46,9 @@ impl MEChimericRead {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//
+// reverse sequence
 impl MEChimericRead {
+  ///
   /// Obtain reverse complement sequence.
   ///
   /// # Examples
@@ -82,7 +83,7 @@ impl MEChimericRead {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-// display trait implementation
+// manual display trait implementation
 impl fmt::Display for MEChimericRead {
   fn fmt(
     &self,

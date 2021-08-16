@@ -10,7 +10,7 @@ use genomic_structures::{
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-// test update & load macro
+// load & update
 macro_rules! me_anchor {
   ( $function: ident; $assertion: ident;
     loaded |> $loaded_cigar: expr, $loaded_flag: expr, $loaded_mobel: expr, $loaded_orientation: expr, $loaded_position: expr, $loaded_size: expr;
@@ -64,6 +64,7 @@ me_anchor!(fail01; assert_ne;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
+// calculate break point
 macro_rules! calculate_break_point {
   ( $function: ident;
     loaded |> $loaded_sequence: expr, $loaded_cigar: expr, $loaded_flag: expr, $loaded_mobel: expr, $loaded_orientation: expr, $loaded_position: expr, $loaded_size: expr;

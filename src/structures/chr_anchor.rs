@@ -46,7 +46,7 @@ pub struct ChrAnchor {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-// create
+// load & update
 impl ChrAnchor {
   ///
   /// Load values onto `ChrAnchor`.
@@ -188,7 +188,6 @@ impl ChrAnchor {
     position: i32,
     tlen: i32,
   ) {
-    // TODO: update initializers
     // TODO: ignore anchor for now self.anchor = AnchorEnum::None;
     self.cigar = cigar;
     self.chr = chr;
@@ -201,7 +200,7 @@ impl ChrAnchor {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-// methods
+// bin
 impl ChrAnchor {
   ///
   /// Bin alignment position.

@@ -49,7 +49,7 @@ pub struct CIGAR {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-// create
+// load & update
 impl CIGAR {
   ///
   /// Load string into CIGAR struct.
@@ -91,7 +91,40 @@ impl CIGAR {
     Ok(cigar_out)
   }
 
+  ///
   /// Update CIGAR values.
+  ///
+  /// # Parameters
+  ///
+  /// * `to_interpret` - String to parse.
+  ///
+  /// * `position` - 1-based coordinate.
+  ///
+  /// # Returns
+  ///
+  /// Return CIGAR object.
+  ///
+  /// # Examples
+  ///
+  /// ```
+  /// use genomic_structures::CIGAR;
+  ///
+  /// let mut cigar = CIGAR::new();
+  /// cigar
+  ///   .update("10H1I2M2D80M5H", 101)
+  ///   .expect("CIGAR loading failed!");
+  ///
+  /// assert_eq!(cigar, CIGAR {
+  ///   align:         vec![2, 80],
+  ///   deletion:      vec![2],
+  ///   insertion:     vec![1],
+  ///   left_boundry:  91,
+  ///   left_clip:     10,
+  ///   right_boundry: 190,
+  ///   rigth_clip:    5,
+  ///   signature:     String::from("10H1I2M2D80M5H"),
+  /// });
+  /// ```
   pub fn update(
     &mut self,
     to_interpret: &str,
@@ -118,7 +151,7 @@ impl CIGAR {
       // iterate on identified characters
       for i in char_vec.iter() {
         match &to_interpret[*i..*i + 1] {
-          // TODO: change soft & hard clipe interpretation
+          // TODO: change soft & hard clip interpretation. perhaps add enum
           "H" | "S" => {
             // indicate whether aligned bases have been recorded
             if self.align.iter().sum::<i32>() == 0 {
@@ -167,10 +200,9 @@ impl CIGAR {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//
+// calculate boundry & total alignment
 impl CIGAR {
-  // TODO: verify & rewrite boundries
-  // FIX: boundry interpretation is bugged
+  // both boundries
   fn calculate_boundries(
     &mut self,
     position: i32,
