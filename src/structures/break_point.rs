@@ -4,10 +4,12 @@
 #[derive(Debug, new, Default, PartialEq)]
 pub struct BreakPoint {
   /// Sequence.
+  #[new(default)]
   pub sequence: String,
 
   /// Coordinates.
   pub coordinate: i32,
+  #[new(default)]
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
