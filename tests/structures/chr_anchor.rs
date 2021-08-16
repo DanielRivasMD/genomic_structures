@@ -18,7 +18,8 @@ macro_rules! chr_anchor {
     #[test]
     fn $function() {
       let loaded = ChrAnchor::load(
-        CIGAR::load($loaded_cigar, $loaded_position).unwrap(),
+        CIGAR::load($loaded_cigar, $loaded_position)
+          .expect("CIGAR loading failed!"),
         $loaded_chr.clone(),
         $loaded_flag,
         $loaded_mapq,
@@ -28,7 +29,8 @@ macro_rules! chr_anchor {
 
       let manual = ChrAnchor {
         anchor:   AnchorEnum::None,
-        cigar:    CIGAR::load($manual_cigar, $manual_position).unwrap(),
+        cigar:    CIGAR::load($manual_cigar, $manual_position)
+          .expect("CIGAR loading failed!"),
         chr:      $manual_chr.clone(),
         flag:     $manual_flag,
         position: $manual_position,

@@ -86,7 +86,7 @@ impl ChrAnchor {
   /// let tlen = 100;
   ///
   /// let produced = ChrAnchor::load(
-  ///   CIGAR::load(cigar, position).unwrap(),
+  ///   CIGAR::load(cigar, position).expect("CIGAR loading failed!"),
   ///   chr.clone(),
   ///   flag,
   ///   mapq,
@@ -96,7 +96,7 @@ impl ChrAnchor {
   ///
   /// let manual = ChrAnchor {
   ///   anchor:   AnchorEnum::None,
-  ///   cigar:    CIGAR::load(cigar, position).unwrap(),
+  ///   cigar:    CIGAR::load(cigar, position).expect("CIGAR loading failed!"),
   ///   chr:      chr.clone(),
   ///   flag:     flag,
   ///   position: position,
@@ -159,7 +159,7 @@ impl ChrAnchor {
   ///
   /// let mut produced = ChrAnchor::new();
   /// produced.update(
-  ///   CIGAR::load(cigar, position).unwrap(),
+  ///   CIGAR::load(cigar, position).expect("CIGAR loading failed!"),
   ///   chr.clone(),
   ///   flag,
   ///   mapq,
@@ -169,7 +169,7 @@ impl ChrAnchor {
   ///
   /// let manual = ChrAnchor {
   ///   anchor:   AnchorEnum::None,
-  ///   cigar:    CIGAR::load(cigar, position).unwrap(),
+  ///   cigar:    CIGAR::load(cigar, position).expect("CIGAR loading failed!"),
   ///   chr:      chr.clone(),
   ///   flag:     flag,
   ///   position: position,
@@ -224,7 +224,7 @@ impl ChrAnchor {
   /// let tlen = 100;
   ///
   /// let chr_anchor = ChrAnchor::load(
-  ///   CIGAR::load(cigar, position).unwrap(),
+  ///   CIGAR::load(cigar, position).expect("CIGAR loading failed!"),
   ///   chr,
   ///   flag,
   ///   mapq,

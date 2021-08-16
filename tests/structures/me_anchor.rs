@@ -19,7 +19,8 @@ macro_rules! me_anchor {
     #[test]
     fn $function() {
       let loaded = MEAnchor::load(
-        CIGAR::load($loaded_cigar, $loaded_position).unwrap(),
+        CIGAR::load($loaded_cigar, $loaded_position)
+          .expect("CIGAR loading failed!"),
         $loaded_flag,
         $loaded_mobel.clone(),
         $loaded_orientation,
@@ -29,7 +30,8 @@ macro_rules! me_anchor {
 
       let manual = MEAnchor {
         breakpoint:  BreakPoint::new(),
-        cigar:       CIGAR::load($manual_cigar, $manual_position).unwrap(),
+        cigar:       CIGAR::load($manual_cigar, $manual_position)
+          .expect("CIGAR loading failed!"),
         flag:        $manual_flag,
         mobel:       $manual_mobel.clone(),
         orientation: $manual_orientation,
@@ -73,7 +75,8 @@ macro_rules! calculate_break_point {
     #[test]
     fn $function() {
       let mut loaded = MEAnchor::load(
-        CIGAR::load($loaded_cigar, $loaded_position).unwrap(),
+        CIGAR::load($loaded_cigar, $loaded_position)
+          .expect("CIGAR loading failed!"),
         $loaded_flag,
         $loaded_mobel.clone(),
         $loaded_orientation,

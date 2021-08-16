@@ -87,7 +87,7 @@ impl MEAnchor {
   /// let size = 11000.;
   ///
   /// let produced = MEAnchor::load(
-  ///   CIGAR::load(cigar, position).unwrap(),
+  ///   CIGAR::load(cigar, position).expect("CIGAR loading failed!"),
   ///   flag,
   ///   mobel.clone(),
   ///   orientation,
@@ -97,7 +97,7 @@ impl MEAnchor {
   ///
   /// let manual = MEAnchor {
   ///   breakpoint:  BreakPoint::new(),
-  ///   cigar:       CIGAR::load(cigar, position).unwrap(),
+  ///   cigar:       CIGAR::load(cigar, position).expect("CIGAR loading failed!"),
   ///   flag:        flag,
   ///   mobel:       mobel.clone(),
   ///   orientation: OrientationEnum::None,
@@ -160,7 +160,7 @@ impl MEAnchor {
   ///
   /// let mut produced = MEAnchor::new();
   /// produced.update(
-  ///   CIGAR::load(cigar, position).unwrap(),
+  ///   CIGAR::load(cigar, position).expect("CIGAR loading failed!"),
   ///   flag,
   ///   mobel.clone(),
   ///   orientation,
@@ -170,7 +170,7 @@ impl MEAnchor {
   ///
   /// let manual = MEAnchor {
   ///   breakpoint:  BreakPoint::new(),
-  ///   cigar:       CIGAR::load(cigar, position).unwrap(),
+  ///   cigar:       CIGAR::load(cigar, position).expect("CIGAR loading failed!"),
   ///   flag:        flag,
   ///   mobel:       mobel.clone(),
   ///   orientation: OrientationEnum::None,
@@ -227,7 +227,7 @@ impl MEAnchor {
   /// let size = 11000.;
   ///
   /// let mut loaded = MEAnchor::load(
-  ///   CIGAR::load(cigar, position).unwrap(),
+  ///   CIGAR::load(cigar, position).expect("CIGAR loading failed!"),
   ///   flag,
   ///   mobel.clone(),
   ///   orientation,
