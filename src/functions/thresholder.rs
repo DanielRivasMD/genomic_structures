@@ -70,8 +70,8 @@ pub fn threshold(
   read_hm: &HashMap<String, Vec<String>>,
   psize: usize,
 ) -> usize {
-  let eff_genome_length = effective_genome_length_calculate!(chromosome_size);
-  let lambda = lambda_calculate!(pop_reads, eff_genome_length);
+  let eff_genome_length = calculate_effective_len!(chromosome_size);
+  let lambda = calculate_lambda!(pop_reads, eff_genome_length);
   let p_values = r_ppoisson(lambda, psize);
 
   let mut peak_prob = vec![0.; psize];
@@ -115,7 +115,7 @@ extern "C" {
 
 // TODO: rename
 // effective genome / chromosome / scaffold length
-fn effective_genome_length_calculate(
+fn calculate_effective_len(
   genome_length: f64,
   bin_size: f64,
   bin_overlap: f64,
@@ -124,7 +124,7 @@ fn effective_genome_length_calculate(
 }
 
 // Poisson lambda (λ)
-fn lambda_calculate(
+fn calculate_lambda(
   pop_reads: f64,
   eff_genome_length: f64,
   bin_size: f64,
@@ -181,10 +181,10 @@ fn cumsum(mut cum_vec: Vec<f64>) -> Vec<f64> {
 mod ppois;
 
 #[cfg(test)]
-mod effective_genome_length_calculate;
+mod calculate_effective_len;
 
 #[cfg(test)]
-mod lambda_calculate;
+mod calculate_lambda;
 
 // test inverted probability poisson function
 #[cfg(test)]

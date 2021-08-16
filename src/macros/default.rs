@@ -3,15 +3,15 @@
 /// Calculate effective genome / chromosome / scaffold length
 /// with default parameters: `BIN_SIZE` and `BIN_OVERLAP`.
 #[macro_export]
-macro_rules! effective_genome_length_calculate {
+macro_rules! calculate_effective_len {
   // explicit values
   ( $gl: expr, $bs: expr, $bo: expr ) => {
-    effective_genome_length_calculate($gl, $bs, $bo)
+    calculate_effective_len($gl, $bs, $bo)
   };
 
   // default values
   ( $gl: expr ) => {
-    effective_genome_length_calculate($gl, BIN_SIZE as f64, BIN_OVERLAP as f64)
+    calculate_effective_len($gl, BIN_SIZE as f64, BIN_OVERLAP as f64)
   };
 }
 
@@ -20,15 +20,15 @@ macro_rules! effective_genome_length_calculate {
 /// Calculate Poisson's lambda (λ)
 /// with default parameters: `BIN_SIZE`.
 #[macro_export]
-macro_rules! lambda_calculate {
+macro_rules! calculate_lambda {
   // explicit values
   ( $pr: expr, $egl: expr, $bs: expr ) => {
-    lambda_calculate($pr, $egl, $bs)
+    calculate_lambda($pr, $egl, $bs)
   };
 
   // default values
   ( $pr: expr, $egl: expr ) => {
-    lambda_calculate($pr, $egl, BIN_SIZE as f64)
+    calculate_lambda($pr, $egl, BIN_SIZE as f64)
   };
 }
 

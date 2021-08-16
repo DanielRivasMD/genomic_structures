@@ -9,18 +9,18 @@ use crate::{
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // private function
-use super::effective_genome_length_calculate;
+use super::calculate_effective_len;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // private function
-macro_rules! effective_genome_length_calculate {
+macro_rules! calculate_effective_len {
   ( $function: ident;
     $glen: expr, $expected: expr
   ) => {
     #[test]
     fn $function() {
-      let effective_length = effective_genome_length_calculate(
+      let effective_length = calculate_effective_len(
         $glen,
         BIN_SIZE as f64,
         BIN_OVERLAP as f64,
@@ -37,7 +37,7 @@ macro_rules! effective_genome_length_calculate {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // test
-effective_genome_length_calculate!(test01; 2000., 4000.);
-effective_genome_length_calculate!(test02; 3243556456., 6487112912.);
+calculate_effective_len!(test01; 2000., 4000.);
+calculate_effective_len!(test02; 3243556456., 6487112912.);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////

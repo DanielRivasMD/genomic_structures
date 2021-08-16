@@ -6,19 +6,19 @@ use crate::BIN_SIZE;
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // private function
-use super::lambda_calculate;
+use super::calculate_lambda;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // private function
-macro_rules! lambda_calculate {
+macro_rules! calculate_lambda {
   ( $function: ident;
     params |> $noreads: expr, $eflen: expr;
     expected |> $expected: expr;
   ) => {
     #[test]
     fn $function() {
-      let lambda = lambda_calculate($noreads, $eflen, BIN_SIZE as f64);
+      let lambda = calculate_lambda($noreads, $eflen, BIN_SIZE as f64);
       assert_eq!(
         lambda,
         $expected,
@@ -35,7 +35,7 @@ macro_rules! lambda_calculate {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // test
-lambda_calculate!(test01; params |> 100., 400.; expected |> 25.;);
-lambda_calculate!(test02; params |> 5050., 75400000.; expected |> 0.006_697_612_732_095_490_5;);
+calculate_lambda!(test01; params |> 100., 400.; expected |> 25.;);
+calculate_lambda!(test02; params |> 5050., 75400000.; expected |> 0.006_697_612_732_095_490_5;);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
