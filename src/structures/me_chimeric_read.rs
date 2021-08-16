@@ -7,7 +7,6 @@ use std::fmt;
 
 // crate utilities
 use crate::structures::{
-  break_point::BreakPoint,
   chr_anchor::ChrAnchor,
   me_anchor::MEAnchor,
 };
@@ -17,10 +16,6 @@ use crate::structures::{
 /// Contain primary (index 0) and secondary aligned read annotation.
 #[derive(Debug, new, Default, PartialEq)]
 pub struct MEChimericRead {
-  /// Breakpoint.
-  #[new(default)]
-  pub breakpoint: BreakPoint,
-
   /// Chromosomal anchor.
   #[new(default)]
   pub chr_read: Vec<ChrAnchor>,
@@ -83,8 +78,6 @@ impl MEChimericRead {
       .rev()
       .collect()
   }
-
-  //  TODO: add breakpoint determination as trait
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////

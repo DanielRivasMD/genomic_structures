@@ -2,6 +2,7 @@
 
 // crate utilities
 use genomic_structures::{
+  BreakPoint,
   MEAnchor,
   OrientationEnum,
   CIGAR,
@@ -27,6 +28,7 @@ macro_rules! me_anchor {
       );
 
       let manual = MEAnchor {
+        breakpoint:  BreakPoint::new(),
         cigar:       CIGAR::load($manual_cigar, $manual_position).unwrap(),
         flag:        $manual_flag,
         mobel:       $manual_mobel.clone(),

@@ -4,6 +4,7 @@
 use crate::{
   functions::sam_flag::SAMFlag,
   structures::{
+    break_point::BreakPoint,
     cigar::CIGAR,
     orientation_enum::OrientationEnum,
   },
@@ -14,6 +15,10 @@ use crate::{
 /// Mobile element anchor structure.
 #[derive(Debug, new, Default, PartialEq)]
 pub struct MEAnchor {
+  /// Breakpoint.
+  #[new(default)]
+  pub breakpoint: BreakPoint,
+
   /// CIGAR string.
   #[new(value = "CIGAR::new()")]
   pub cigar: CIGAR,
@@ -68,6 +73,7 @@ impl MEAnchor {
   ///
   /// ```
   /// use genomic_structures::{
+  ///   BreakPoint,
   ///   MEAnchor,
   ///   OrientationEnum,
   ///   CIGAR,
@@ -90,6 +96,7 @@ impl MEAnchor {
   /// );
   ///
   /// let manual = MEAnchor {
+  ///   breakpoint:  BreakPoint::new(),
   ///   cigar:       CIGAR::load(cigar, position).unwrap(),
   ///   flag:        flag,
   ///   mobel:       mobel.clone(),
@@ -138,6 +145,7 @@ impl MEAnchor {
   ///
   /// ```
   /// use genomic_structures::{
+  ///   BreakPoint,
   ///   MEAnchor,
   ///   OrientationEnum,
   ///   CIGAR,
@@ -161,6 +169,7 @@ impl MEAnchor {
   /// );
   ///
   /// let manual = MEAnchor {
+  ///   breakpoint:  BreakPoint::new(),
   ///   cigar:       CIGAR::load(cigar, position).unwrap(),
   ///   flag:        flag,
   ///   mobel:       mobel.clone(),
