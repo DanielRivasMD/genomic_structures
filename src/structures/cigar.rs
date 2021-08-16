@@ -181,15 +181,11 @@ impl CIGAR {
 
   // adjust alignment coordinates according to CIGAR interpretation
   // return tupple ( adjusted position, total aligned length )
-  fn adjuster(
-    &self,
-    position: i32,
-  ) -> (i32, i32) {
+  fn total_alignment(&self) -> i32 {
     let align_sum: i32 = self.align.iter().sum();
-    let ins_sum: i32 = self.ins.iter().sum();
-    let del_sum: i32 = self.del.iter().sum();
-    (self.lclip + position, align_sum + ins_sum + del_sum)
-    // BUG: no point on calculating left clip plus position
+    let ins_sum: i32 = self.insertion.iter().sum();
+    let del_sum: i32 = self.deletion.iter().sum();
+    align_sum + ins_sum + del_sum
   }
 
   // left boundry
@@ -205,8 +201,9 @@ impl CIGAR {
     &self,
     position: i32,
   ) -> i32 {
-    let lpos = self.left_boundry_calculator(position);
-    lpos + (self.lclip + self.adjuster(position).1 + self.rclip)
+    let leftmost = self.calculate_left_boundry(position);
+    // accomodate 1-based coordinate system
+    leftmost + (self.left_clip + self.total_alignment() + self.rigth_clip) - 1
   }
 }
 
