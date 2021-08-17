@@ -1,7 +1,7 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /// Memory containing struct about read ID.
-#[derive(Debug, new, Clone, Default)]
+#[derive(Debug, new, Default)]
 pub struct ReadControl {
   // TODO: think about a way to implement read_id as &str
   #[new(default)]

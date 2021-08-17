@@ -1,7 +1,7 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /// Annotate extra information.
-#[derive(Debug, new, Clone)]
+#[derive(Debug, new)]
 pub enum ExtraValuesEnum {
   MobelSize(f64),
   None,
