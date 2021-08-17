@@ -33,3 +33,29 @@ me_chimeric_read!(test03; String::from("CAAGAAC"), String::from("GTTCTTG"));
 me_chimeric_read!(test04; String::from("GATTACA"), String::from("TGTAATC"));
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// reverse sequence
+macro_rules! reverse_sequence {
+  ( $function: ident;
+    $sequence: expr, $expected: expr
+  ) => {
+    #[test]
+    fn $function() {
+      let mut me_chimeric_read = MEChimericRead::new();
+      me_chimeric_read.sequence = $sequence;
+      let reversed = me_chimeric_read.reverse_sequence();
+      assert_eq!(
+        reversed, $expected,
+        "\n\nValue: {:?}.\nExpected: {:?}.\n\n",
+        reversed, $expected,
+      );
+    }
+  };
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// test
+reverse_sequence!(rev01; "GATTACA".to_string(), "TGTAATC".to_string());
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
