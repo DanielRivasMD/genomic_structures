@@ -2,7 +2,7 @@
 
 // crate utilities
 use crate::{
-  functions::sam_flag::SAMFlag,
+  functions::flag_interpretor::SAMFlag,
   structures::{
     break_point::BreakPoint,
     cigar::CIGAR,

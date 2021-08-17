@@ -9,7 +9,7 @@ use anyhow::Result as anyResult;
 // crate utilities
 use crate::{
   error::common_error::CommonError,
-  functions::sam_flag::SAMFlag,
+  functions::flag_interpretor::SAMFlag,
   structures::{
     cigar::CIGAR,
     extra_values_enum::ExtraValuesEnum,

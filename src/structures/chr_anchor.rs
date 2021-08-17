@@ -3,7 +3,7 @@
 // crate utilities
 use crate::BIN_SIZE;
 use crate::{
-  functions::sam_flag::SAMFlag,
+  functions::flag_interpretor::SAMFlag,
   structures::{
     anchor_enum::AnchorEnum,
     cigar::CIGAR,
