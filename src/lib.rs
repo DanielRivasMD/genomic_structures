@@ -33,6 +33,7 @@ pub use crate::functions::{
   flag_interpretor::interpret,
   identificator::identify,
   position_binner::bin,
+  sequences::reverse_sequence,
   thresholder::threshold,
 };
 
