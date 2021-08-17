@@ -7,6 +7,7 @@ mod cigar;
 mod me_anchor;
 mod me_chimeric_pair;
 mod me_chimeric_read;
+mod raw_values;
 // mod sv_chimeric_pair;
 // mod sv_chimeric_read;
 
