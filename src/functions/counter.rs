@@ -6,6 +6,7 @@ use std::collections::HashMap;
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // crate utilities
+use crate::functions::position_binner::Anchor;
 use crate::structures::{
   chr_anchor::ChrAnchor,
   me_anchor::MEAnchor,

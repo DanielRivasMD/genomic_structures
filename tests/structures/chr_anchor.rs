@@ -2,6 +2,7 @@
 
 // crate utilities
 use genomic_structures::{
+  Anchor,
   AnchorEnum,
   ChrAnchor,
   CIGAR,

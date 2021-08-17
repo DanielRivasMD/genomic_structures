@@ -1,9 +1,11 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // crate utilities
-use crate::BIN_SIZE;
 use crate::{
-  functions::flag_interpretor::SAMFlag,
+  functions::{
+    flag_interpretor::SAMFlag,
+    position_binner::Anchor,
+  },
   structures::{
     anchor_enum::AnchorEnum,
     cigar::CIGAR,
@@ -201,42 +203,9 @@ impl ChrAnchor {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // bin
-impl ChrAnchor {
-  ///
-  /// Bin alignment position.
-  ///
-  /// # Returns
-  /// Return binned position.
-  ///
-  /// # Examples
-  ///
-  /// ```
-  /// use genomic_structures::{
-  ///   ChrAnchor,
-  ///   CIGAR,
-  /// };
-  ///
-  /// let cigar = "100M";
-  /// let chr = "chr7".to_string();
-  /// let flag = 56;
-  /// let position = 2099;
-  /// let mapq = 60;
-  /// let tlen = 100;
-  ///
-  /// let chr_anchor = ChrAnchor::load(
-  ///   CIGAR::load(cigar, position).expect("CIGAR loading failed!"),
-  ///   chr,
-  ///   flag,
-  ///   mapq,
-  ///   position,
-  ///   tlen,
-  /// );
-  ///
-  /// assert_eq!(chr_anchor.bin(), 2000);
-  /// ```
-  pub fn bin(&self) -> i32 {
-    let binned = self.position % BIN_SIZE;
-    self.position - binned
+impl Anchor for ChrAnchor {
+  fn get_position(&self) -> i32 {
+    self.position
   }
 }
 
