@@ -25,7 +25,7 @@ use crate::{
 // TODO: think about a way to use raw values only with reference to strings
 // TODO: update field documentation
 // values ordered as SAM format
-#[derive(Debug, new, Default)]
+#[derive(Debug, new, Default, PartialEq)]
 pub struct RawValues {
   #[new(default)]
   pub read_id: ReadControl,
