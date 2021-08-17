@@ -6,9 +6,12 @@ use std::fmt;
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // crate utilities
-use crate::structures::{
-  chr_anchor::ChrAnchor,
-  me_anchor::MEAnchor,
+use crate::{
+  functions::sequences::Sequence,
+  structures::{
+    chr_anchor::ChrAnchor,
+    me_anchor::MEAnchor,
+  },
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -47,37 +50,9 @@ impl MEChimericRead {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // reverse sequence
-impl MEChimericRead {
-  ///
-  /// Obtain reverse complement sequence.
-  ///
-  /// # Examples
-  ///
-  /// ```
-  /// use genomic_structures::MEChimericRead;
-  ///
-  /// let mut to_reverse = MEChimericRead::new();
-  /// to_reverse.sequence = "GATTACA".to_string();
-  /// let reversed = "TGTAATC".to_string();
-  ///
-  /// assert_eq!(to_reverse.reverse_sequence(), reversed);
-  /// ```
-  pub fn reverse_sequence(&self) -> String {
-    self
-      .sequence
-      .chars()
-      .map(|nucleotide| {
-        match nucleotide {
-          '!' => '?',
-          'A' => 'T',
-          'T' => 'A',
-          'C' => 'G',
-          'G' => 'C',
-          _ => nucleotide,
-        }
-      })
-      .rev()
-      .collect()
+impl Sequence for MEChimericRead {
+  fn get_sequence(&self) -> &str {
+    &self.sequence
   }
 }
 
