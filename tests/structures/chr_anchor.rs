@@ -62,5 +62,30 @@ chr_anchor!(fail01; assert_ne;
   loaded |> "100M", String::from("chr5"), 56, 2099, 60, 100;
   manual |> "100M", String::from("chr7"), 56, 2099, 60, 100;
 );
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// bin
+macro_rules! bin {
+  ( $function: ident;
+    $position: expr, $expected: expr
+  ) => {
+    #[test]
+    fn $function() {
+      let mut chr_anchor = ChrAnchor::new();
+      chr_anchor.position = $position;
+      let binned = chr_anchor.bin();
+      assert_eq!(
+        binned, $expected,
+        "\n\nValue: {:?}.\nExpected: {:?}.\n\n",
+        binned, $expected,
+      );
+    }
+  };
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// test
+bin!(bin01; 2099, 2000);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
