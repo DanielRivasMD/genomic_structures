@@ -3,7 +3,7 @@
 #[macro_export]
 macro_rules! load {
   // mobile element on hashmap
-  ( mobile element => $record: expr; $values: expr; $switch: expr; $read_me: tt; $read_chr: tt ) => {
+  ( mobile element |> $record: expr; $values: expr; $switch: expr; $read_me: tt; $read_chr: tt ) => {
     // record data on primary alignment
     if $values.flag <= 255 {
       $record.$read_me.sequence = $values.sequence.clone();
@@ -26,7 +26,7 @@ macro_rules! load {
   };
 
   // chromosomal loci
-  ( chromosomal => $record: expr; $values: expr; $read_no: tt ) => {
+  ( chromosomal |> $record: expr; $values: expr; $read_no: tt ) => {
     if $record.$read_no.sequence == $values.sequence ||
       $record.$read_no.reverse_sequence() == $values.sequence
     {
