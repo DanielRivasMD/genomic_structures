@@ -28,6 +28,7 @@ pub use crate::error::common_error::CommonError;
 // functions
 mod functions;
 
+// functions
 pub use crate::functions::{
   counter::strand_count,
   flag_interpretor::interpret,
@@ -37,24 +38,36 @@ pub use crate::functions::{
   thresholder::threshold,
 };
 
+// traits
+pub use crate::functions::{
+  flag_interpretor::SAMFlag,
+  position_binner::Anchor,
+  sequences::Sequence,
+};
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-// structures
+// structs
 mod structures;
 
+// enums
 pub use crate::structures::{
   anchor_enum::AnchorEnum,
+  chr_anchor_enum::ChrAnchorEnum,
+  extra_values_enum::ExtraValuesEnum,
+  orientation_enum::OrientationEnum,
+};
+
+// structs
+pub use crate::structures::{
   break_point::BreakPoint,
   chr_anchor::ChrAnchor,
-  chr_anchor_enum::ChrAnchorEnum,
   cigar::CIGAR,
   erv_annotations::ERVAnnotations,
-  extra_values_enum::ExtraValuesEnum,
   me_anchor::MEAnchor,
   me_chimeric_pair::MEChimericPair,
   me_chimeric_read::MEChimericRead,
   me_library::MELibrary,
-  orientation_enum::OrientationEnum,
   raw_values::RawValues,
   read_control::ReadControl,
   sv_chimeric_pair::SVChimericPair,
