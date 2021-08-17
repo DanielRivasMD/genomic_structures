@@ -11,7 +11,7 @@ use genomic_structures::{
 
 // load & update
 macro_rules! chr_anchor {
-  ( $function: ident; $assertion: ident;
+  ( $function: ident;
     loaded |> $loaded_cigar: expr, $loaded_chr: expr, $loaded_flag: expr, $loaded_position: expr, $loaded_mapq: expr, $loaded_tlen: expr;
     manual |> $manual_cigar: expr, $manual_chr: expr, $manual_flag: expr, $manual_position: expr, $manual_mapq: expr, $manual_tlen: expr;
   ) => {
@@ -38,12 +38,10 @@ macro_rules! chr_anchor {
         tlen:     $manual_tlen,
       };
 
-      $assertion!(
-        loaded,
-        manual,
+      assert_eq!(
+        loaded, manual,
         "\n\nLoaded value:\n{:#?}.\n\nManual value:\n{:#?}.\n\n",
-        loaded,
-        manual,
+        loaded, manual,
       );
     }
   };
@@ -52,16 +50,11 @@ macro_rules! chr_anchor {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // test
-chr_anchor!(test01; assert_eq;
-  loaded |> "100M", String::from("chr7"), 56, 2099, 60, 100;
-  manual |> "100M", String::from("chr7"), 56, 2099, 60, 100;
+chr_anchor!(test01;
+  loaded |> "100M", "chr7".to_string(), 56, 2099, 60, 100;
+  manual |> "100M", "chr7".to_string(), 56, 2099, 60, 100;
 );
 
-// fail
-chr_anchor!(fail01; assert_ne;
-  loaded |> "100M", String::from("chr5"), 56, 2099, 60, 100;
-  manual |> "100M", String::from("chr7"), 56, 2099, 60, 100;
-);
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // bin

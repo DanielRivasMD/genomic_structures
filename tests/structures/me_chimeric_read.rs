@@ -27,10 +27,10 @@ macro_rules! me_chimeric_read {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // test
-me_chimeric_read!(test01; String::from("AAAAAAA"), String::from("TTTTTTT"));
-me_chimeric_read!(test02; String::from("MACTHAA"), String::from("TTHAGTM"));
-me_chimeric_read!(test03; String::from("CAAGAAC"), String::from("GTTCTTG"));
-me_chimeric_read!(test04; String::from("GATTACA"), String::from("TGTAATC"));
+me_chimeric_read!(test01; "AAAAAAA".to_string(), "TTTTTTT".to_string());
+me_chimeric_read!(test02; "MACTHAA".to_string(), "TTHAGTM".to_string());
+me_chimeric_read!(test03; "CAAGAAC".to_string(), "GTTCTTG".to_string());
+me_chimeric_read!(test04; "GATTACA".to_string(), "TGTAATC".to_string());
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 

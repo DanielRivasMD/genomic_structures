@@ -79,7 +79,7 @@ impl ChrAnchor {
   /// };
   ///
   /// let cigar = "100M";
-  /// let chr = String::from("chr7");
+  /// let chr = "chr7".to_string();
   /// let flag = 56;
   /// let position = 2099;
   /// let mapq = 60;
@@ -151,7 +151,7 @@ impl ChrAnchor {
   /// };
   ///
   /// let cigar = "100M";
-  /// let chr = String::from("chr7");
+  /// let chr = "chr7".to_string();
   /// let flag = 56;
   /// let position = 2099;
   /// let mapq = 60;
@@ -217,7 +217,7 @@ impl ChrAnchor {
   /// };
   ///
   /// let cigar = "100M";
-  /// let chr = String::from("chr7");
+  /// let chr = "chr7".to_string();
   /// let flag = 56;
   /// let position = 2099;
   /// let mapq = 60;

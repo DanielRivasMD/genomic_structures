@@ -27,9 +27,9 @@ macro_rules! me_chimeric_pair {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // test
-me_chimeric_pair!(test01; String::from("AAAAAAA"), String::from("AAAAAAA"));
-me_chimeric_pair!(test02; String::from("MACTHAA"), String::from("MACTHAA"));
-me_chimeric_pair!(test03; String::from("CAAGAAC"), String::from("CAAGAAC"));
-me_chimeric_pair!(test04; String::from("GATTACA"), String::from("GATTACA"));
+me_chimeric_pair!(test01; "AAAAAAA".to_string(), "AAAAAAA".to_string());
+me_chimeric_pair!(test02; "MACTHAA".to_string(), "MACTHAA".to_string());
+me_chimeric_pair!(test03; "CAAGAAC".to_string(), "CAAGAAC".to_string());
+me_chimeric_pair!(test04; "GATTACA".to_string(), "GATTACA".to_string());
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////

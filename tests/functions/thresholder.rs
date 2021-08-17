@@ -46,14 +46,14 @@ macro_rules! threshold {
 // test
 threshold!(test01;
   params |> 6., 1000., 0.001;
-  keys |> vec![ String::from("100"), String::from("200"), String::from("300"), String::from("400"), String::from("500"), String::from("600") ];
+  keys |> vec![ "100".to_string(), "200".to_string(), "300".to_string(), "400".to_string(), "500".to_string(), "600".to_string(), ];
   values |> [
-    vec![String::from("100.1"), String::from("100.2")],
-    vec![String::from("200.1"), String::from("200.2"), String::from("200.3")],
-    vec![String::from("300.1"), String::from("300.2")],
-    vec![String::from("400.1"), String::from("400.2")],
-    vec![String::from("500.1"), String::from("500.2"), String::from("500.3")],
-    vec![String::from("600.1"), String::from("600.2")],
+    vec!["100.1".to_string(), "100.2".to_string(), ],
+    vec!["200.1".to_string(), "200.2".to_string(), "200.3".to_string(), ],
+    vec!["300.1".to_string(), "300.2".to_string(), ],
+    vec!["400.1".to_string(), "400.2".to_string(), ],
+    vec!["500.1".to_string(), "500.2".to_string(), "500.3".to_string(), ],
+    vec!["600.1".to_string(), "600.2".to_string(), ],
   ];
   expected |> 5;
 );

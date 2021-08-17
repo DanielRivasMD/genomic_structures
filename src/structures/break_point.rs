@@ -33,7 +33,7 @@ impl BreakPoint {
   /// let breakpoint = BreakPoint::load("GATTACAAAAA", 0.);
   ///
   /// assert_eq!(breakpoint, BreakPoint {
-  ///   sequence:   String::from("GATTACAAAAA"),
+  ///   sequence:   "GATTACAAAAA".to_string(),
   ///   coordinate: 1.,
   /// })
   /// ```
@@ -64,7 +64,7 @@ impl BreakPoint {
   /// breakpoint.update("GATTACAAAAA", 0.);
   ///
   /// assert_eq!(breakpoint, BreakPoint {
-  ///   sequence:   String::from("GATTACAAAAA"),
+  ///   sequence:   "GATTACAAAAA".to_string(),
   ///   coordinate: 1.,
   /// })
   /// ```

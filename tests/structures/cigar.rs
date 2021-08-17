@@ -37,7 +37,7 @@ cigar!(test01;
     left_clip: 0,
     right_boundry: 200,
     rigth_clip: 0,
-    signature: String::from("100M"),
+    signature: "100M".to_string(),
   };
 );
 
@@ -51,7 +51,7 @@ cigar!(test02;
     left_clip: 54,
     right_boundry: 146,
     rigth_clip: 0,
-    signature: String::from("54H46M"),
+    signature: "54H46M".to_string(),
   };
 );
 
@@ -65,7 +65,7 @@ cigar!(test03;
     left_clip: 54,
     right_boundry: 146,
     rigth_clip: 0,
-    signature: String::from("54S46M"),
+    signature: "54S46M".to_string(),
   };
 );
 
@@ -79,7 +79,7 @@ cigar!(test04;
     left_clip: 3,
     right_boundry: 197,
     rigth_clip: 30,
-    signature: String::from("3H67M30H"),
+    signature: "3H67M30H".to_string(),
   };
 );
 
@@ -93,7 +93,7 @@ cigar!(test05;
     left_clip: 10,
     right_boundry: 190,
     rigth_clip: 5,
-    signature: String::from("10H3M2I80M5H"),
+    signature: "10H3M2I80M5H".to_string(),
   };
 );
 
@@ -107,7 +107,7 @@ cigar!(test06;
     left_clip: 13,
     right_boundry: 187,
     rigth_clip: 20,
-    signature: String::from("13H60D7M20H"),
+    signature: "13H60D7M20H".to_string(),
   };
 );
 
@@ -121,7 +121,7 @@ cigar!(test07;
     left_clip: 50,
     right_boundry: 150,
     rigth_clip: 0,
-    signature: String::from("50S4D6I40M"),
+    signature: "50S4D6I40M".to_string(),
   };
 );
 
@@ -135,7 +135,7 @@ cigar!(test08;
     left_clip: 1,
     right_boundry: 199,
     rigth_clip: 5,
-    signature: String::from("1H10D2M2D80M5H"),
+    signature: "1H10D2M2D80M5H".to_string(),
   };
 );
 
@@ -149,7 +149,7 @@ cigar!(test09;
     left_clip: 1,
     right_boundry: 99,
     rigth_clip: 5,
-    signature: String::from("1H10D2M2D80M5H"),
+    signature: "1H10D2M2D80M5H".to_string(),
   };
 );
 
@@ -163,7 +163,7 @@ cigar!(test10;
     left_clip: 50,
     right_boundry: 50,
     rigth_clip: 0,
-    signature: String::from("50S4D6I40M"),
+    signature: "50S4D6I40M".to_string(),
   };
 );
 

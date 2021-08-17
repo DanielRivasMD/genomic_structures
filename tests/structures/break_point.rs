@@ -32,7 +32,7 @@ macro_rules! break_point {
 break_point!(test01; assert_eq;
   params |> "B1234567890OOOOO", 0.;
   expected |> BreakPoint{
-    sequence: String::from("B1234567890"),
+    sequence: "B1234567890".to_string(),
     coordinate: 1.,
   };
 );
@@ -40,7 +40,7 @@ break_point!(test01; assert_eq;
 break_point!(test02; assert_eq;
   params |> "OOOOO0987654321B", 1.;
   expected |> BreakPoint{
-    sequence: String::from("0987654321B"),
+    sequence: "0987654321B".to_string(),
     coordinate: 0.,
   };
 );
@@ -48,7 +48,7 @@ break_point!(test02; assert_eq;
 break_point!(test03; assert_eq;
   params |> "MMMMMMMMM0987654321B1234567890OOOOO", -19.;
   expected |> BreakPoint{
-    sequence: String::from("MMMMMMMMM0987654321B1234567890"),
+    sequence: "MMMMMMMMM0987654321B1234567890".to_string(),
     coordinate: 20.,
   };
 );
@@ -56,7 +56,7 @@ break_point!(test03; assert_eq;
 break_point!(test04; assert_eq;
   params |> "OOOOO0987654321B1234567890MMMMMMMMM", 20.;
   expected |> BreakPoint{
-    sequence: String::from("0987654321B1234567890MMMMMMMMM"),
+    sequence: "0987654321B1234567890MMMMMMMMM".to_string(),
     coordinate: -19.,
   };
 );
@@ -65,7 +65,7 @@ break_point!(test04; assert_eq;
 break_point!(fail01; assert_ne;
   params |> "MRRRRRRRRRROOOOO", 0.;
   expected |> BreakPoint{
-    sequence: String::from("MRRRRRRRRRROOOOO"),
+    sequence: "MRRRRRRRRRROOOOO".to_string(),
     coordinate: 1.,
   };
 );
@@ -73,7 +73,7 @@ break_point!(fail01; assert_ne;
 break_point!(fail02; assert_ne;
   params |> "OOOOO0987654321B1234567890MMMMMMMMM", 20.;
   expected |> BreakPoint{
-    sequence: String::from("OOOOO0987654321B1234567890MMMMMMMMM"),
+    sequence: "OOOOO0987654321B1234567890MMMMMMMMM".to_string(),
     coordinate: -19.,
   };
 );

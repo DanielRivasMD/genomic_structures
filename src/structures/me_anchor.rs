@@ -81,7 +81,7 @@ impl MEAnchor {
   ///
   /// let cigar = "100M";
   /// let flag = 75;
-  /// let mobel = String::from("mobel77");
+  /// let mobel = "mobel77".to_string();
   /// let orientation = OrientationEnum::None;
   /// let position = 2099;
   /// let size = 11000.;
@@ -153,7 +153,7 @@ impl MEAnchor {
   ///
   /// let cigar = "100M";
   /// let flag = 75;
-  /// let mobel = String::from("mobel77");
+  /// let mobel = "mobel77".to_string();
   /// let orientation = OrientationEnum::None;
   /// let position = 2099;
   /// let size = 11000.;
@@ -221,7 +221,7 @@ impl MEAnchor {
   ///
   /// let cigar = "15S15M";
   /// let flag = 83;
-  /// let mobel = String::from("mobel77");
+  /// let mobel = "mobel77".to_string();
   /// let orientation = OrientationEnum::None;
   /// let position = 1;
   /// let size = 11000.;
@@ -239,7 +239,7 @@ impl MEAnchor {
   ///
   /// let mut manual = MEAnchor::new();
   /// manual.breakpoint = BreakPoint {
-  ///   sequence:   String::from("MMMM0987654321B1234567890"),
+  ///   sequence:   "MMMM0987654321B1234567890".to_string(),
   ///   coordinate: 15.,
   /// };
   ///

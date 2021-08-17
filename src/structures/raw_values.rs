@@ -21,7 +21,6 @@ use crate::{
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // TODO: raw parser straigth from record line
-// TODO: add test
 // TODO: think about a way to use raw values only with reference to strings
 // TODO: update field documentation
 // values ordered as SAM format
@@ -134,6 +133,7 @@ impl RawValues {
     }
   }
 
+  // TODO: update | deprecate?
   pub fn get_orientation(&self) -> String {
     match self.orientation {
       // redesigned the mobile element chimeric read to accept enum

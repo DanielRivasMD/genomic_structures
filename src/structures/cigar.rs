@@ -79,7 +79,7 @@ impl CIGAR {
   ///   left_clip:     10,
   ///   right_boundry: 190,
   ///   rigth_clip:    5,
-  ///   signature:     String::from("10H1I2M2D80M5H"),
+  ///   signature:     "10H1I2M2D80M5H".to_string(),
   /// });
   /// ```
   pub fn load(
@@ -122,7 +122,7 @@ impl CIGAR {
   ///   left_clip:     10,
   ///   right_boundry: 190,
   ///   rigth_clip:    5,
-  ///   signature:     String::from("10H1I2M2D80M5H"),
+  ///   signature:     "10H1I2M2D80M5H".to_string(),
   /// });
   /// ```
   pub fn update(
@@ -130,7 +130,7 @@ impl CIGAR {
     to_interpret: &str,
     position: i32,
   ) -> anyResult<()> {
-    self.signature = String::from(to_interpret).clone();
+    self.signature = to_interpret.to_string().clone();
     // identify no CIGAR annotation
     if to_interpret == "*" {
       self.align.push(0);
@@ -201,6 +201,7 @@ impl CIGAR {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // calculate boundry & total alignment
+// boundries are inherently test on load & update
 impl CIGAR {
   // both boundries
   fn calculate_boundries(

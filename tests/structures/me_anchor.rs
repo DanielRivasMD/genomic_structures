@@ -12,7 +12,7 @@ use genomic_structures::{
 
 // load & update
 macro_rules! me_anchor {
-  ( $function: ident; $assertion: ident;
+  ( $function: ident;
     loaded |> $loaded_cigar: expr, $loaded_flag: expr, $loaded_mobel: expr, $loaded_orientation: expr, $loaded_position: expr, $loaded_size: expr;
     manual |> $manual_cigar: expr, $manual_flag: expr, $manual_mobel: expr, $manual_orientation: expr, $manual_position: expr, $manual_size: expr;
   ) => {
@@ -39,12 +39,10 @@ macro_rules! me_anchor {
         size:        $manual_size,
       };
 
-      $assertion!(
-        loaded,
-        manual,
+      assert_eq!(
+        loaded, manual,
         "\n\nLoaded value:\n{:#?}.\n\nManual value:\n{:#?}.\n\n",
-        loaded,
-        manual,
+        loaded, manual,
       );
     }
   };
@@ -53,15 +51,9 @@ macro_rules! me_anchor {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // test
-me_anchor!(test01; assert_eq;
-  loaded |> "100M", 75, String::from("mobel77"), OrientationEnum::None, 2099, 11000.;
-  manual |> "100M", 75, String::from("mobel77"), OrientationEnum::None, 2099, 11000.;
-);
-
-// fail
-me_anchor!(fail01; assert_ne;
-  loaded |> "100M", 75, String::from("mobel77"), OrientationEnum::None, 2099, 11000.;
-  manual |> "100M", 95, String::from("mobel77"), OrientationEnum::None, 2099, 11000.;
+me_anchor!(test01;
+  loaded |> "100M", 75, "mobel77".to_string(), OrientationEnum::None, 2099, 11000.;
+  manual |> "100M", 75, "mobel77".to_string(), OrientationEnum::None, 2099, 11000.;
 );
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -105,18 +97,18 @@ macro_rules! calculate_break_point {
 
 // test
 calculate_break_point!(bp01;
-  loaded |> "MMMM0987654321B1234567890OOOOO", "15S15M", 83, String::from("mobel77"), OrientationEnum::None, 1, 11000.;
-  manual |> String::from("MMMM0987654321B1234567890"), 15.;
+  loaded |> "MMMM0987654321B1234567890OOOOO", "15S15M", 83, "mobel77".to_string(), OrientationEnum::None, 1, 11000.;
+  manual |> "MMMM0987654321B1234567890".to_string(), 15.;
 );
 
 calculate_break_point!(bp02;
-  loaded |> "B1234567890OOOOO", "1S15M", 83, String::from("mobel77"), OrientationEnum::None, 1, 11000.;
-  manual |> String::from("B1234567890"), 1.;
+  loaded |> "B1234567890OOOOO", "1S15M", 83, "mobel77".to_string(), OrientationEnum::None, 1, 11000.;
+  manual |> "B1234567890".to_string(), 1.;
 );
 
 calculate_break_point!(bp03;
-  loaded |> "OOOOO0987654321B", "30M1S", 75, String::from("mobel77"), OrientationEnum::None, 10971, 11000.;
-  manual |> String::from("0987654321B"), 0.;
+  loaded |> "OOOOO0987654321B", "30M1S", 75, "mobel77".to_string(), OrientationEnum::None, 10971, 11000.;
+  manual |> "0987654321B".to_string(), 0.;
 );
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
