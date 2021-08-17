@@ -163,13 +163,14 @@ fn table(
 }
 
 // cumulative sum
-fn cumsum(mut cum_vec: Vec<f64>) -> Vec<f64> {
-  let mut cumulus = 0.;
-  for cix in &mut cum_vec {
-    cumulus += *cix;
-    *cix = cumulus;
-  }
-  cum_vec
+fn cumsum(cum_vec: Vec<f64>) -> Vec<f64> {
+  let mut cumulus = Vec::new();
+  cum_vec.iter().fold(0., |cum, nex| {
+    let sum = cum + nex;
+    cumulus.push(sum);
+    sum
+  });
+  cumulus
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
