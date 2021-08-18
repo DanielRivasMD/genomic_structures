@@ -310,20 +310,40 @@ impl MEAnchor {
   /// ```
   pub fn tag(&mut self) {
     if self.cigar.left_boundry <= ME_LIMIT && self.interpret(5) {
-      // println!("UPSTREAM: {} <= {}", self.cigar.left_boundry, ME_LIMIT);
-      self.orientation = OrientationEnum::Upstream;
-    } else if self.size - self.cigar.right_boundry as f64 <= ME_LIMIT.into() &&
+      self.upstream();
+    } else if self.get_size() - self.cigar.right_boundry as f64 <=
+      ME_LIMIT.into() &&
       !self.interpret(5)
     {
-      // println!(
-      //   "DOWNSTREAM: {} - {} = {} <= {}",
-      //   self.size,
-      //   self.cigar.right_boundry,
-      //   self.size - self.cigar.right_boundry as f64,
-      //   ME_LIMIT
-      // );
-      self.orientation = OrientationEnum::Downstream;
+      self.downstream();
+    } else {
+      self.reset_orientation();
     }
+  }
+
+  // read orientation
+  fn read_orientation(&self) -> bool {
+    self.interpret(5)
+  }
+
+  // upstream
+  fn upstream(&mut self) {
+    self.orientation = OrientationEnum::Upstream;
+  }
+
+  // downstream
+  fn downstream(&mut self) {
+    self.orientation = OrientationEnum::Downstream;
+  }
+
+  // reset
+  fn reset_orientation(&mut self) {
+    self.orientation = OrientationEnum::None;
+  }
+
+  // get size
+  fn get_size(&self) -> f64 {
+    self.size
   }
 }
 
