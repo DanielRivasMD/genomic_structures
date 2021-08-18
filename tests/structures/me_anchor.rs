@@ -5,6 +5,7 @@ use genomic_structures::{
   BreakPoint,
   MEAnchor,
   OrientationEnum,
+  TagME,
   CIGAR,
 };
 

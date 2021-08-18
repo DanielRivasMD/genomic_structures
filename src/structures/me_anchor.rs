@@ -270,6 +270,53 @@ impl MEAnchor {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
+// implement SAM flag
+impl SAMFlag for MEAnchor {
+  fn get_flag(&self) -> i32 {
+    self.flag
+  }
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// implement tag mobile element
+impl TagME for MEAnchor {
+  // read orientation
+  fn read_orientation(&self) -> bool {
+    self.interpret(5)
+  }
+
+  // upstream
+  fn upstream(&mut self) {
+    self.orientation = OrientationEnum::Upstream;
+  }
+
+  // downstream
+  fn downstream(&mut self) {
+    self.orientation = OrientationEnum::Downstream;
+  }
+
+  // reset
+  fn reset_orientation(&mut self) {
+    self.orientation = OrientationEnum::None;
+  }
+
+  // get size
+  fn get_size(&self) -> f64 {
+    self.size
+  }
+
+  // cigar left boundry
+  fn get_cigar_left_boundry(&self) -> i32 {
+    self.cigar.left_boundry
+  }
+
+  // cigar right boundry
+  fn get_cigar_rigth_boundry(&self) -> i32 {
+    self.cigar.right_boundry
+  }
+}
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // tag
@@ -285,6 +332,7 @@ pub trait TagME {
   ///   BreakPoint,
   ///   MEAnchor,
   ///   OrientationEnum,
+  ///   TagME,
   ///   CIGAR,
   /// };
   ///
@@ -342,11 +390,6 @@ pub trait TagME {
   // cigar left boundry
   fn get_cigar_left_boundry(&self) -> i32;
 
-// implement SAM flag
-impl SAMFlag for MEAnchor {
-  fn get_flag(&self) -> i32 {
-    self.flag
-  }
   // cigar right boundry
   fn get_cigar_rigth_boundry(&self) -> i32;
 }
