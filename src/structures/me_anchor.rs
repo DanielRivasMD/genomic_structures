@@ -1,6 +1,7 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // crate utilities
+use crate::ME_LIMIT;
 use crate::{
   functions::flag_interpretor::SAMFlag,
   structures::{
@@ -249,16 +250,79 @@ impl MEAnchor {
     &mut self,
     sequence: &str,
   ) {
-    // TODO: consider implementing tagging
-    if self.cigar.left_boundry <= 0 && self.interpret(5) {
+    // tag
+    self.tag();
+    if self.cigar.left_boundry <= 0 &&
+      self.orientation == OrientationEnum::Upstream
+    {
       self
         .breakpoint
         .update(sequence, self.cigar.left_boundry as f64);
-    } else if self.cigar.right_boundry > self.size as i32 && !self.interpret(5)
+    } else if self.cigar.right_boundry > self.size as i32 &&
+      self.orientation == OrientationEnum::Downstream
     {
       self
         .breakpoint
         .update(sequence, self.cigar.right_boundry as f64 - self.size);
+    }
+  }
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// tag
+impl MEAnchor {
+  ///
+  /// Tag mobile element.
+  ///
+  /// # Examples
+  ///
+  /// ```
+  /// use genomic_structures::{
+  ///   BreakPoint,
+  ///   MEAnchor,
+  ///   OrientationEnum,
+  ///   CIGAR,
+  /// };
+  ///
+  /// let cigar = "15S15M";
+  /// let flag = 83;
+  /// let mobel = "mobel77".to_string();
+  /// let orientation = OrientationEnum::None;
+  /// let position = 1;
+  /// let size = 11000.;
+  ///
+  /// let mut loaded = MEAnchor::load(
+  ///   CIGAR::load(cigar, position).expect("CIGAR loading failed!"),
+  ///   flag,
+  ///   mobel.clone(),
+  ///   orientation,
+  ///   position,
+  ///   size,
+  /// );
+  ///
+  /// loaded.tag();
+  ///
+  /// let mut manual = MEAnchor::new();
+  /// manual.orientation = OrientationEnum::Upstream;
+  ///
+  /// assert_eq!(loaded.orientation, manual.orientation);
+  /// ```
+  pub fn tag(&mut self) {
+    if self.cigar.left_boundry <= ME_LIMIT && self.interpret(5) {
+      // println!("UPSTREAM: {} <= {}", self.cigar.left_boundry, ME_LIMIT);
+      self.orientation = OrientationEnum::Upstream;
+    } else if self.size - self.cigar.right_boundry as f64 <= ME_LIMIT.into() &&
+      !self.interpret(5)
+    {
+      // println!(
+      //   "DOWNSTREAM: {} - {} = {} <= {}",
+      //   self.size,
+      //   self.cigar.right_boundry,
+      //   self.size - self.cigar.right_boundry as f64,
+      //   ME_LIMIT
+      // );
+      self.orientation = OrientationEnum::Downstream;
     }
   }
 }

@@ -81,5 +81,6 @@ pub use crate::structures::{
 pub const BIN_OVERLAP: i32 = 50;
 pub const BIN_SIZE: i32 = 100;
 pub const TRANSLOCATION_DISTANCE: i32 = 1000;
+pub const ME_LIMIT: i32 = 200;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
