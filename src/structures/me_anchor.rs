@@ -270,8 +270,11 @@ impl MEAnchor {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
 // tag
-impl MEAnchor {
+/// Tag mobile element.
+pub trait TagME {
   ///
   /// Tag mobile element.
   ///
@@ -308,12 +311,12 @@ impl MEAnchor {
   ///
   /// assert_eq!(loaded.orientation, manual.orientation);
   /// ```
-  pub fn tag(&mut self) {
-    if self.cigar.left_boundry <= ME_LIMIT && self.interpret(5) {
+  fn tag(&mut self) {
+    if self.get_cigar_left_boundry() <= ME_LIMIT && self.read_orientation() {
       self.upstream();
-    } else if self.get_size() - self.cigar.right_boundry as f64 <=
+    } else if self.get_size() - self.get_cigar_rigth_boundry() as f64 <=
       ME_LIMIT.into() &&
-      !self.interpret(5)
+      !self.read_orientation()
     {
       self.downstream();
     } else {
@@ -322,38 +325,30 @@ impl MEAnchor {
   }
 
   // read orientation
-  fn read_orientation(&self) -> bool {
-    self.interpret(5)
-  }
+  fn read_orientation(&self) -> bool;
 
   // upstream
-  fn upstream(&mut self) {
-    self.orientation = OrientationEnum::Upstream;
-  }
+  fn upstream(&mut self);
 
   // downstream
-  fn downstream(&mut self) {
-    self.orientation = OrientationEnum::Downstream;
-  }
+  fn downstream(&mut self);
 
   // reset
-  fn reset_orientation(&mut self) {
-    self.orientation = OrientationEnum::None;
-  }
+  fn reset_orientation(&mut self);
 
   // get size
-  fn get_size(&self) -> f64 {
-    self.size
-  }
-}
+  fn get_size(&self) -> f64;
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
+  // cigar left boundry
+  fn get_cigar_left_boundry(&self) -> i32;
 
 // implement SAM flag
 impl SAMFlag for MEAnchor {
   fn get_flag(&self) -> i32 {
     self.flag
   }
+  // cigar right boundry
+  fn get_cigar_rigth_boundry(&self) -> i32;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////

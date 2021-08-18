@@ -75,6 +75,9 @@ pub use crate::structures::{
   sv_type::SVType,
 };
 
+// traits
+pub use crate::structures::me_anchor::TagME;
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // TODO: handle constants
