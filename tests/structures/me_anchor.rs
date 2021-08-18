@@ -75,7 +75,6 @@ macro_rules! calculate_break_point {
         $loaded_position,
         $loaded_size,
       );
-
       loaded.calculate_break_point($loaded_sequence);
 
       let mut manual = MEAnchor::new();
@@ -109,6 +108,52 @@ calculate_break_point!(bp02;
 calculate_break_point!(bp03;
   loaded |> "OOOOO0987654321B", "30M1S", 75, "mobel77".to_string(), OrientationEnum::None, 10971, 11000.;
   manual |> "0987654321B".to_string(), 0.;
+);
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// tag
+macro_rules! tag {
+  ( $function: ident;
+    loaded |> $loaded_cigar: expr, $loaded_flag: expr, $loaded_mobel: expr, $loaded_orientation: expr, $loaded_position: expr, $loaded_size: expr;
+    manual |> $manual_orientation: expr;
+  ) => {
+    #[test]
+    fn $function() {
+      let mut loaded = MEAnchor::load(
+        CIGAR::load($loaded_cigar, $loaded_position)
+          .expect("CIGAR loading failed!"),
+        $loaded_flag,
+        $loaded_mobel.clone(),
+        $loaded_orientation,
+        $loaded_position,
+        $loaded_size,
+      );
+      loaded.tag();
+
+      let mut manual = MEAnchor::new();
+      manual.orientation = $manual_orientation;
+
+      assert_eq!(
+        loaded.orientation, manual.orientation,
+        "\n\nLoaded value:\n{:#?}.\n\nManual value:\n{:#?}.\n\n",
+        loaded.orientation, manual.orientation,
+      );
+    }
+  };
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// test
+tag!(tag00;
+  loaded |> "30M1S", 83, "mobel77".to_string(), OrientationEnum::None, 10971, 11000.;
+  manual |> OrientationEnum::None;
+);
+
+tag!(tag01;
+  loaded |> "30M1S", 75, "mobel77".to_string(), OrientationEnum::None, 10971, 11000.;
+  manual |> OrientationEnum::Downstream;
 );
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
