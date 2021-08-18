@@ -13,6 +13,7 @@ use crate::{
   structures::{
     cigar::CIGAR,
     extra_values_enum::ExtraValuesEnum,
+    me_anchor::TagME,
     orientation_enum::OrientationEnum,
     read_control::ReadControl,
   },
@@ -142,14 +143,6 @@ impl RawValues {
       OrientationEnum::None => String::new(),
     }
   }
-
-  pub fn reset_orientation(&mut self) {
-    self.orientation = OrientationEnum::None;
-  }
-
-  pub fn get_read_orientation(&self) -> bool {
-    self.interpret(5)
-  }
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -158,6 +151,49 @@ impl RawValues {
 impl SAMFlag for RawValues {
   fn get_flag(&self) -> i32 {
     self.flag
+  }
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// implement tag mobile element
+impl TagME for RawValues {
+  // tag mobile element orientation as upstream
+  fn upstream(&mut self) {
+    self.orientation = OrientationEnum::Upstream;
+  }
+
+  // tag mobile element orientation as downstream
+  fn downstream(&mut self) {
+    self.orientation = OrientationEnum::Downstream;
+  }
+
+  // read orientation
+  // assign true when read is aligned on
+  // reversed strand in relation to assembly
+  // otherwise false
+  fn read_orientation(&self) -> bool {
+    self.interpret(5)
+  }
+
+  // reset
+  fn reset_orientation(&mut self) {
+    self.orientation = OrientationEnum::None;
+  }
+
+  // get size
+  fn get_size(&self) -> f64 {
+    self.get_extra()
+  }
+
+  // cigar left boundry
+  fn get_cigar_left_boundry(&self) -> i32 {
+    self.cigar.left_boundry
+  }
+
+  // cigar right boundry
+  fn get_cigar_rigth_boundry(&self) -> i32 {
+    self.cigar.right_boundry
   }
 }
 
