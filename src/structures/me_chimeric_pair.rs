@@ -49,7 +49,7 @@ impl MEChimericPair {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-// get
+// get & tag chromosomal anchor enum
 impl MEChimericPair {
   ///
   /// Retrieve chromosomal anchor.
@@ -85,6 +85,10 @@ impl MEChimericPair {
     .borrow()
   }
 
+  pub fn tag(&mut self) {
+    // TODO: check me anchors iteratively & activate switch
+    // TODO: assign enum
+  }
   // TODO: add trait implementation for mobile element retrieval
 }
 
