@@ -30,7 +30,7 @@ pub fn identify(
   psw.push(sv_inversion(pair));
   psw.push(sv_insertion(pair));
   psw.push(sv_translocation(pair));
-  // TODO: correct BUG. variant are called simultaneous
+  // BUG: variant are called simultaneous
 
   psw.contains(&true)
 }

@@ -12,7 +12,7 @@ use genomic_structures::MEChimericPair;
 // get
 macro_rules! get_chr_anchor {
   ( $function: ident;
-    $sequence: expr, $expected: expr
+    $sequence: expr, $expect: expr
   ) => {
     #[test]
     fn $function() {
@@ -20,9 +20,9 @@ macro_rules! get_chr_anchor {
       me_chimeric_pair.read1.sequence = $sequence;
       let retrieved = me_chimeric_pair.get_chr_anchor();
       assert_eq!(
-        retrieved.sequence, $expected,
+        retrieved.sequence, $expect,
         "\n\nInput sequence: {:?}.\nRetrieved sequence: {:?}.\nExpected: {:?}.\n\n",
-        $sequence, retrieved.sequence, $expected,
+        $sequence, retrieved.sequence, $expect,
       );
     }
   };

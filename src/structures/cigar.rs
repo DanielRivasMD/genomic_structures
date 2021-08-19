@@ -201,7 +201,7 @@ impl CIGAR {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // calculate boundry & total alignment
-// boundries are inherently test on load & update
+// boundries are inherently tested on load & update
 impl CIGAR {
   // both boundries
   fn calculate_boundries(

@@ -9,16 +9,16 @@ use genomic_structures::CIGAR;
 macro_rules! cigar {
   ( $function: ident;
     params |> $cigar: expr, $position: expr;
-    expected |> $expected: expr;
+    expect |> $expect: expr;
   ) => {
     #[test]
     fn $function() {
       let cigar =
         CIGAR::load($cigar, $position).expect("CIGAR loading failed!");
       assert_eq!(
-        cigar, $expected,
+        cigar, $expect,
         "\n\nCalculated CIGAR:\n{:#?}.\n\nExpected:\n{:#?}.\n\n",
-        cigar, $expected,
+        cigar, $expect,
       );
     }
   };
@@ -29,7 +29,7 @@ macro_rules! cigar {
 // test
 cigar!(test01;
   params |> "100M", 101;
-  expected |> CIGAR{
+  expect |> CIGAR{
     align: vec![100],
     deletion: vec![],
     insertion: vec![],
@@ -43,7 +43,7 @@ cigar!(test01;
 
 cigar!(test02;
   params |> "54H46M", 101;
-  expected |> CIGAR{
+  expect |> CIGAR{
     align: vec![46],
     deletion: vec![],
     insertion: vec![],
@@ -57,7 +57,7 @@ cigar!(test02;
 
 cigar!(test03;
   params |> "54S46M", 101;
-  expected |> CIGAR{
+  expect |> CIGAR{
     align: vec![46],
     deletion: vec![],
     insertion: vec![],
@@ -71,7 +71,7 @@ cigar!(test03;
 
 cigar!(test04;
   params |> "3H67M30H", 101;
-  expected |> CIGAR{
+  expect |> CIGAR{
     align: vec![67],
     deletion: vec![],
     insertion: vec![],
@@ -85,7 +85,7 @@ cigar!(test04;
 
 cigar!(test05;
   params |> "10H3M2I80M5H", 101;
-  expected |> CIGAR{
+  expect |> CIGAR{
     align: vec![3, 80],
     deletion: vec![],
     insertion: vec![2],
@@ -99,7 +99,7 @@ cigar!(test05;
 
 cigar!(test06;
   params |> "13H60D7M20H", 101;
-  expected |> CIGAR{
+  expect |> CIGAR{
     align: vec![7],
     deletion: vec![60],
     insertion: vec![],
@@ -113,7 +113,7 @@ cigar!(test06;
 
 cigar!(test07;
   params |> "50S4D6I40M", 101;
-  expected |> CIGAR{
+  expect |> CIGAR{
     align: vec![40],
     deletion: vec![4],
     insertion: vec![6],
@@ -127,7 +127,7 @@ cigar!(test07;
 
 cigar!(test08;
   params |> "1H10D2M2D80M5H", 101;
-  expected |> CIGAR{
+  expect |> CIGAR{
     align: vec![2, 80],
     deletion: vec![10, 2],
     insertion: vec![],
@@ -141,7 +141,7 @@ cigar!(test08;
 
 cigar!(test09;
   params |> "1H10D2M2D80M5H", 1;
-  expected |> CIGAR{
+  expect |> CIGAR{
     align: vec![2, 80],
     deletion: vec![10, 2],
     insertion: vec![],
@@ -155,7 +155,7 @@ cigar!(test09;
 
 cigar!(test10;
   params |> "50S4D6I40M", 1;
-  expected |> CIGAR{
+  expect |> CIGAR{
     align: vec![40],
     deletion: vec![4],
     insertion: vec![6],

@@ -15,15 +15,15 @@ use genomic_structures::{
 macro_rules! raw_values {
   ( $function: ident;
     params |> $fline: expr;
-    expected |> $expected: expr;
+    expect |> $expect: expr;
   ) => {
     #[test]
     fn $function() {
       let loaded = RawValues::load($fline).expect("RawValues loading failed!");
       assert_eq!(
-        loaded, $expected,
+        loaded, $expect,
         "\n\nLoaded RawValues:\n{:#?}.\n\nExpected:\n{:#?}.\n\n",
-        loaded, $expected,
+        loaded, $expect,
       );
     }
   };
@@ -34,7 +34,7 @@ macro_rules! raw_values {
 // test
 raw_values!(test01;
   params |> vec!["ID", "16", "scaffold", "1", "60", "100M", "", "", "100", "GATTACA", ""];
-  expected |> RawValues{
+  expect |> RawValues{
     read_id: ReadControl{
       current: "ID".to_string(),
       previous: "".to_string(),

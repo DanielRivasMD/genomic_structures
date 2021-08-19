@@ -9,7 +9,7 @@ use genomic_structures::BreakPoint;
 macro_rules! break_point {
   ( $function: ident; $assertion: ident;
     params |> $sequence: expr, $offset: expr;
-    expected |> $expected: expr;
+    expect |> $expect: expr;
   ) => {
     #[test]
     fn $function() {
@@ -17,10 +17,10 @@ macro_rules! break_point {
 
       $assertion!(
         break_point,
-        $expected,
+        $expect,
         "\n\nCalculated BreakPoint:\n{:#?}.\n\nExpected:\n{:#?}.\n\n",
         break_point,
-        $expected,
+        $expect,
       );
     }
   };
@@ -31,7 +31,7 @@ macro_rules! break_point {
 // test
 break_point!(test01; assert_eq;
   params |> "B1234567890OOOOO", 0.;
-  expected |> BreakPoint{
+  expect |> BreakPoint{
     sequence: "B1234567890".to_string(),
     coordinate: 1.,
   };
@@ -39,7 +39,7 @@ break_point!(test01; assert_eq;
 
 break_point!(test02; assert_eq;
   params |> "OOOOO0987654321B", 1.;
-  expected |> BreakPoint{
+  expect |> BreakPoint{
     sequence: "0987654321B".to_string(),
     coordinate: 0.,
   };
@@ -47,7 +47,7 @@ break_point!(test02; assert_eq;
 
 break_point!(test03; assert_eq;
   params |> "MMMMMMMMM0987654321B1234567890OOOOO", -19.;
-  expected |> BreakPoint{
+  expect |> BreakPoint{
     sequence: "MMMMMMMMM0987654321B1234567890".to_string(),
     coordinate: 20.,
   };
@@ -55,7 +55,7 @@ break_point!(test03; assert_eq;
 
 break_point!(test04; assert_eq;
   params |> "OOOOO0987654321B1234567890MMMMMMMMM", 20.;
-  expected |> BreakPoint{
+  expect |> BreakPoint{
     sequence: "0987654321B1234567890MMMMMMMMM".to_string(),
     coordinate: -19.,
   };
@@ -64,7 +64,7 @@ break_point!(test04; assert_eq;
 // fail
 break_point!(fail01; assert_ne;
   params |> "MRRRRRRRRRROOOOO", 0.;
-  expected |> BreakPoint{
+  expect |> BreakPoint{
     sequence: "MRRRRRRRRRROOOOO".to_string(),
     coordinate: 1.,
   };
@@ -72,7 +72,7 @@ break_point!(fail01; assert_ne;
 
 break_point!(fail02; assert_ne;
   params |> "OOOOO0987654321B1234567890MMMMMMMMM", 20.;
-  expected |> BreakPoint{
+  expect |> BreakPoint{
     sequence: "OOOOO0987654321B1234567890MMMMMMMMM".to_string(),
     coordinate: -19.,
   };

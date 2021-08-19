@@ -113,7 +113,6 @@ extern "C" {
   ) -> c_double;
 }
 
-// TODO: rename
 // effective genome / chromosome / scaffold length
 fn calculate_effective_len(
   genome_length: f64,

@@ -61,7 +61,7 @@ chr_anchor!(test01;
 // bin
 macro_rules! bin {
   ( $function: ident;
-    $position: expr, $expected: expr
+    $position: expr, $expect: expr
   ) => {
     #[test]
     fn $function() {
@@ -69,9 +69,9 @@ macro_rules! bin {
       chr_anchor.position = $position;
       let binned = chr_anchor.bin();
       assert_eq!(
-        binned, $expected,
+        binned, $expect,
         "\n\nValue: {:?}.\nExpected: {:?}.\n\n",
-        binned, $expected,
+        binned, $expect,
       );
     }
   };

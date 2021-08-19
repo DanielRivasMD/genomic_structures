@@ -117,7 +117,7 @@ calculate_break_point!(bp03;
 macro_rules! tag {
   ( $function: ident;
     loaded |> $loaded_cigar: expr, $loaded_flag: expr, $loaded_mobel: expr, $loaded_orientation: expr, $loaded_position: expr, $loaded_size: expr;
-    manual |> $manual_orientation: expr;
+    expect |> $manual_orientation: expr;
   ) => {
     #[test]
     fn $function() {
@@ -149,12 +149,17 @@ macro_rules! tag {
 // test
 tag!(tag00;
   loaded |> "30M1S", 83, "mobel77".to_string(), OrientationEnum::None, 10971, 11000.;
-  manual |> OrientationEnum::None;
+  expect |> OrientationEnum::None;
 );
 
 tag!(tag01;
   loaded |> "30M1S", 75, "mobel77".to_string(), OrientationEnum::None, 10971, 11000.;
-  manual |> OrientationEnum::Downstream;
+  expect |> OrientationEnum::Downstream;
+);
+
+tag!(tag02;
+  loaded |> "15S15M", 83, "mobel77".to_string(), OrientationEnum::None, 1, 11000.;
+  expect |> OrientationEnum::Upstream;
 );
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////

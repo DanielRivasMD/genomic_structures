@@ -23,38 +23,48 @@ use crate::{
 
 // TODO: raw parser straigth from record line
 // TODO: think about a way to use raw values only with reference to strings
-// TODO: update field documentation
 // values ordered as SAM format
+/// Structural representation of SAM file records.
 #[derive(Debug, new, Default, PartialEq)]
 pub struct RawValues {
+  /// Read ID with memory.
   #[new(default)]
   pub read_id: ReadControl,
 
+  // Alignement flag.
   #[new(default)]
   pub flag: i32,
 
+  /// Scaffold alignment allocation.
   #[new(default)]
   pub scaffold: String,
 
+  /// Alignment position.
   #[new(default)]
   pub position: i32,
 
+  /// Mapping quality (MAPQ).
   #[new(default)]
   pub quality: i32,
 
+  /// CIGAR string.
   #[new(value = "CIGAR::new()")]
   pub cigar: CIGAR,
 
+  /// Template length (TLEN).
   #[new(default)]
   pub tlen: i32,
 
+  /// Read sequence.
   #[new(default)]
   pub sequence: String,
 
   // TODO: expand to other annotations?
+  /// Orientation annotation.
   #[new(default)]
   pub orientation: OrientationEnum,
 
+  /// Additional annotations.
   #[new(default)]
   pub extra: ExtraValuesEnum,
 }
@@ -82,6 +92,7 @@ impl RawValues {
     return Ok(raw_values);
   }
 
+  /// Update records.
   pub fn update(
     &mut self,
     flines: Vec<&str>,
@@ -124,6 +135,7 @@ impl RawValues {
 
 // get & reset
 impl RawValues {
+  /// Retrieve additional annotations.
   pub fn get_extra(&self) -> f64 {
     match self.extra {
       ExtraValuesEnum::MobelSize(value) => value,
@@ -135,6 +147,7 @@ impl RawValues {
   }
 
   // TODO: update | deprecate?
+  /// Retrieve read orientation.
   pub fn get_orientation(&self) -> String {
     match self.orientation {
       // redesigned the mobile element chimeric read to accept enum
