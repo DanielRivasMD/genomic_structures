@@ -144,17 +144,6 @@ impl RawValues {
       ExtraValuesEnum::None => 0.,
     }
   }
-
-  // TODO: update | deprecate?
-  /// Retrieve read orientation.
-  pub fn get_orientation(&self) -> String {
-    match self.orientation {
-      // redesigned the mobile element chimeric read to accept enum
-      OrientationEnum::Downstream => String::from("downstream"),
-      OrientationEnum::Upstream => String::from("upstream"),
-      OrientationEnum::None => String::new(),
-    }
-  }
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
