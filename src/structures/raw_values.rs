@@ -139,10 +139,9 @@ impl RawValues {
   pub fn get_extra(&self) -> f64 {
     match self.extra {
       ExtraValuesEnum::MobelSize(value) => value,
-      ExtraValuesEnum::None => {
-        println!("No annotation to retrive");
-        0.
-      }
+      // zero value on mobile element size is indicative of not registered
+      // further logic invalidates not registered values => mobile element tag
+      ExtraValuesEnum::None => 0.,
     }
   }
 

@@ -364,6 +364,7 @@ pub trait TagME {
       self.upstream();
     } else if self.get_size() - self.get_cigar_rigth_boundry() as f64 <=
       ME_LIMIT.into() &&
+      self.get_size() != 0. &&
       !self.read_orientation()
     {
       self.downstream();
