@@ -11,6 +11,7 @@ use crate::structures::{
   chr_anchor_enum::ChrAnchorEnum,
   me_anchor::MEAnchor,
   me_chimeric_read::MEChimericRead,
+  orientation_enum::OrientationEnum,
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -86,8 +87,38 @@ impl MEChimericPair {
   }
 
   pub fn tag(&mut self) {
-    // TODO: check me anchors iteratively & activate switch
-    // TODO: assign enum
+    self.read1.tag();
+    self.read2.tag();
+
+    if self.read1.orientation == OrientationEnum::Upstream &&
+      self.read2.orientation == OrientationEnum::Upstream
+    {
+      let read1 = self.read1.count_tag().unwrap();
+      let read2 = self.read2.count_tag().unwrap();
+      if read1 < read2 {
+        self.chranch = ChrAnchorEnum::Read1;
+      } else if read1 > read2 {
+        self.chranch = ChrAnchorEnum::Read2;
+      } else {
+        println!("Probably ambigous");
+      }
+    } else if self.read1.orientation == OrientationEnum::Downstream &&
+      self.read2.orientation == OrientationEnum::Downstream
+    {
+      let read1 = self.read1.count_tag().unwrap();
+      let read2 = self.read2.count_tag().unwrap();
+      if read1 < read2 {
+        self.chranch = ChrAnchorEnum::Read2;
+      } else if read1 > read2 {
+        self.chranch = ChrAnchorEnum::Read1;
+      } else {
+        println!("Probably ambigous");
+      }
+    } else if self.read1.orientation == OrientationEnum::Palindromic &&
+      self.read2.orientation == OrientationEnum::Palindromic
+    {
+      println!("Palindromic");
+    }
   }
   // TODO: add trait implementation for mobile element retrieval
 }
