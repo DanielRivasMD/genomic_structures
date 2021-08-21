@@ -69,6 +69,25 @@ impl MEChimericRead {
     }
   }
 
+  pub fn count_tag(&self) -> Option<i32> {
+    let mut positions = Vec::new();
+    self.me_read.iter().for_each(|me_anchor| {
+      if me_anchor.orientation == self.orientation {
+        positions.push(me_anchor.position);
+      }
+    });
+
+    match self.orientation {
+      OrientationEnum::Upstream => positions.into_iter().min(),
+      OrientationEnum::Downstream => positions.into_iter().max(),
+      OrientationEnum::Palindromic => None,
+      OrientationEnum::None => None,
+    }
+  }
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
 // reverse sequence
 impl Sequence for MEChimericRead {
   fn get_sequence(&self) -> &str {
