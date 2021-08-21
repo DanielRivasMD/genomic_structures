@@ -5,6 +5,7 @@
 pub enum OrientationEnum {
   Downstream,
   Upstream,
+  Palindromic,
   None,
 }
 

@@ -87,6 +87,7 @@ impl ElementCount {
     match orientation {
       OrientationEnum::Upstream => self.upstream += 1,
       OrientationEnum::Downstream => self.downstream += 1,
+      OrientationEnum::Palindromic => (), // TODO: update orientation match
       OrientationEnum::None => (),
     }
   }
