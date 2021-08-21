@@ -11,7 +11,10 @@ use crate::{
   structures::{
     chr_anchor::ChrAnchor,
     me_anchor::MEAnchor,
-    orientation_enum::OrientationEnum,
+    orientation_enum::{
+      OrientationEnum,
+      OrientationPair,
+    },
   },
 };
 
@@ -57,15 +60,17 @@ impl MEChimericRead {
 impl MEChimericRead {
   ///
   pub fn tag(&mut self) {
-    let upstream = anchor_count!(self, Upstream);
-    let downstream = anchor_count!(self, Downstream);
+    let orientation = OrientationPair(
+      anchor_count!(self, Upstream),
+      anchor_count!(self, Downstream),
+    );
 
-    if upstream > downstream {
-      self.orientation = OrientationEnum::Upstream;
-    } else if upstream < downstream {
-      self.orientation = OrientationEnum::Downstream;
-    } else {
-      self.orientation = OrientationEnum::Palindromic;
+    self.orientation = match orientation {
+      OrientationPair(u, d) if u > d => OrientationEnum::Upstream,
+      OrientationPair(u, d) if u < d => OrientationEnum::Downstream,
+      OrientationPair(u, d) if u == d => OrientationEnum::Palindromic,
+      // TODO: check that this expresion does not bug single tags
+      OrientationPair(_, _) => OrientationEnum::None,
     }
   }
 
