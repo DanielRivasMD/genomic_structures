@@ -99,4 +99,23 @@ macro_rules! chr_count {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
+///
+macro_rules! anchor_count {
+  ( $me_chimeric_read: expr, $anchor: tt ) => {
+    $me_chimeric_read
+      .me_read
+      .iter()
+      .map(|me_anchor| {
+        let mut ct = 0;
+        if me_anchor.orientation == OrientationEnum::$anchor {
+          ct += 1;
+        }
+        ct
+      })
+      .count()
+  };
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
 // TODO: write test for macros
