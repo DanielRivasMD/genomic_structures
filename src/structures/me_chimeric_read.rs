@@ -27,6 +27,9 @@ pub struct MEChimericRead {
   #[new(default)]
   pub me_read: Vec<MEAnchor>,
 
+  #[new(default)]
+  pub orientation: OrientationEnum,
+
   /// Anchor mapping quality (MAPQ).
   #[new(default)]
   pub quality: i32,
