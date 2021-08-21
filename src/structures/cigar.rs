@@ -189,11 +189,10 @@ impl CIGAR {
         }
         j = i + 1;
       }
+
+      // calculate boundries
+      self.calculate_boundries(position);
     }
-
-    // calculate boundries
-    self.calculate_boundries(position);
-
     Ok(())
   }
 }
