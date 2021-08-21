@@ -6,7 +6,7 @@ pub struct OrientationPair(pub usize, pub usize);
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /// Annotate orientation.
-#[derive(Debug, new, Clone, PartialEq)]
+#[derive(Debug, new, Clone, Copy, PartialEq)]
 pub enum OrientationEnum {
   Downstream,
   Upstream,
