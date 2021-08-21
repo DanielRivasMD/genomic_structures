@@ -4,7 +4,7 @@
 #[macro_export]
 macro_rules! load {
   // mobile element on hashmap
-  ( mobile element |> $record: expr; $values: expr; $switch: expr; $read_me: tt; $read_chr: tt ) => {
+  ( mobile element |> $record: expr; $values: expr; $read_me: tt ) => {
     // record data on primary alignment
     if $values.flag <= 255 {
       $record.$read_me.sequence = $values.sequence.clone();
@@ -20,10 +20,6 @@ macro_rules! load {
       $values.position,
       $values.get_extra(),
     ));
-
-    if $switch.mobel {
-      $record.chranch = ChrAnchorEnum::$read_chr;
-    }
 
     // calculate break point
     // let seq_clone = $record.$read_me.sequence.clone();
