@@ -1,7 +1,6 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // crate utilities
-use crate::ME_LIMIT;
 use crate::{
   functions::flag_interpretor::SAMFlag,
   structures::{
@@ -9,6 +8,10 @@ use crate::{
     cigar::CIGAR,
     orientation_enum::OrientationEnum,
   },
+};
+use crate::{
+  ANCHOR_LIMIT,
+  ME_LIMIT,
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -360,14 +363,28 @@ pub trait TagME {
   /// assert_eq!(loaded.orientation, manual.orientation);
   /// ```
   fn tag(&mut self) {
+    // upstream: read anchor reverse & mate unmapped
     if self.get_cigar_left_boundry() <= ME_LIMIT && self.read_orientation() {
       self.upstream();
+    // upstream: read anchor & mate mapped reverse
+    } else if self.get_cigar_rigth_boundry() != 0 &&
+      self.get_cigar_rigth_boundry() <= ANCHOR_LIMIT &&
+      !self.read_orientation()
+    {
+      self.upstream();
+    // downstream: read anchor & mate unmapped
     } else if self.get_size() - self.get_cigar_rigth_boundry() as f64 <=
       ME_LIMIT.into() &&
       self.get_size() != 0. &&
       !self.read_orientation()
     {
       self.downstream();
+    // downstream: read anchor reverse & mate mapped
+    } else if self.get_size() - self.get_cigar_left_boundry() as f64 >=
+      ANCHOR_LIMIT.into() &&
+      self.read_orientation()
+    {
+      // orientation = none
     } else {
       self.reset_orientation();
     }
