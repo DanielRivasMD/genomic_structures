@@ -26,14 +26,14 @@ macro_rules! load {
     }
 
     // calculate break point
-    let seq_clone = $record.$read_me.sequence.clone();
+    // let seq_clone = $record.$read_me.sequence.clone();
     $record
       .$read_me
       .me_read
       .iter_mut()
       .last()
       .unwrap()
-      .calculate_break_point(&seq_clone);
+      .calculate_break_point(&$values.sequence);
   };
 
   // chromosomal loci
