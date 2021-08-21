@@ -90,6 +90,30 @@ impl MEChimericPair {
     self.read1.tag();
     self.read2.tag();
 
+    let tags = (self.read1.orientation, self.read2.orientation);
+
+    match tags {
+      (OrientationEnum::Upstream, OrientationEnum::Upstream) => {}
+      (OrientationEnum::Upstream, OrientationEnum::Downstream) => {}
+      (OrientationEnum::Upstream, OrientationEnum::Palindromic) => {}
+      (OrientationEnum::Upstream, OrientationEnum::None) => {}
+
+      (OrientationEnum::Downstream, OrientationEnum::Upstream) => {}
+      (OrientationEnum::Downstream, OrientationEnum::Downstream) => {}
+      (OrientationEnum::Downstream, OrientationEnum::Palindromic) => {}
+      (OrientationEnum::Downstream, OrientationEnum::None) => {}
+
+      (OrientationEnum::Palindromic, OrientationEnum::Upstream) => {}
+      (OrientationEnum::Palindromic, OrientationEnum::Downstream) => {}
+      (OrientationEnum::Palindromic, OrientationEnum::Palindromic) => {}
+      (OrientationEnum::Palindromic, OrientationEnum::None) => {}
+
+      (OrientationEnum::None, OrientationEnum::Upstream) => {}
+      (OrientationEnum::None, OrientationEnum::Downstream) => {}
+      (OrientationEnum::None, OrientationEnum::Palindromic) => {}
+      (OrientationEnum::None, OrientationEnum::None) => {}
+    }
+
     if self.read1.orientation == OrientationEnum::Upstream &&
       self.read2.orientation == OrientationEnum::Upstream
     {
