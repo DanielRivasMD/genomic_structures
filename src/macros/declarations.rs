@@ -106,13 +106,7 @@ macro_rules! anchor_count {
     $me_chimeric_read
       .me_read
       .iter()
-      .map(|me_anchor| {
-        let mut ct = 0;
-        if me_anchor.orientation == OrientationEnum::$anchor {
-          ct += 1;
-        }
-        ct
-      })
+      .filter(|me_anchor| me_anchor.orientation == OrientationEnum::$anchor)
       .count()
   };
 }
