@@ -380,11 +380,11 @@ pub trait TagME {
     {
       self.downstream();
     // downstream: read anchor reverse & mate mapped
-    } else if self.get_size() - self.get_cigar_left_boundry() as f64 >=
+    } else if self.get_size() - self.get_cigar_left_boundry() as f64 <=
       ANCHOR_LIMIT.into() &&
       self.read_orientation()
     {
-      // orientation = none
+      self.downstream();
     } else {
       self.reset_orientation();
     }
