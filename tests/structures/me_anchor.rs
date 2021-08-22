@@ -148,18 +148,28 @@ macro_rules! tag {
 
 // test
 tag!(tag00;
-  loaded |> "30M1S", 83, "mobel77".to_string(), OrientationEnum::None, 10971, 11000.;
+  loaded |> "30M1S", 83, "mobel77".to_string(), OrientationEnum::None, 10871, 11000.;
   expect |> OrientationEnum::None;
 );
 
 tag!(tag01;
-  loaded |> "30M1S", 75, "mobel77".to_string(), OrientationEnum::None, 10971, 11000.;
-  expect |> OrientationEnum::Downstream;
+  loaded |> "15S15M", 75, "mobel77".to_string(), OrientationEnum::None, 1, 11000.;
+  expect |> OrientationEnum::Upstream;
 );
 
 tag!(tag02;
   loaded |> "15S15M", 83, "mobel77".to_string(), OrientationEnum::None, 1, 11000.;
   expect |> OrientationEnum::Upstream;
+);
+
+tag!(tag03;
+  loaded |> "30M1S", 75, "mobel77".to_string(), OrientationEnum::None, 10971, 11000.;
+  expect |> OrientationEnum::Downstream;
+);
+
+tag!(tag04;
+  loaded |> "30M1S", 83, "mobel77".to_string(), OrientationEnum::None, 10971, 11000.;
+  expect |> OrientationEnum::Downstream;
 );
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
