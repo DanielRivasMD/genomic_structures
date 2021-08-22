@@ -73,7 +73,8 @@ impl MEChimericRead {
     }
   }
 
-  pub fn count_tag(&self) -> Option<i32> {
+  ///
+  pub fn edge(&self) -> Option<i32> {
     let mut positions = Vec::new();
     self.me_read.iter().for_each(|me_anchor| {
       if me_anchor.orientation == self.orientation {
