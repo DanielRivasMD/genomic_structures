@@ -97,6 +97,58 @@ test_tag!(tag06;
 );
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// count tag
+macro_rules! test_edge {
+  ( $function: ident;
+    expect |> $expect: expr;
+    vargs ... $($variadic_position: expr => $variadic_orientation: tt),*;
+  ) => {
+    #[test]
+    fn $function() {
+      let mut me_chimeric_read = MEChimericRead::new();
+      // variadic loading
+      $(
+        let mut me_anchor = MEAnchor::new();
+        me_anchor.orientation = OrientationEnum::$variadic_orientation;
+        me_anchor.position = $variadic_position;
+        me_chimeric_read.me_read.push(me_anchor);
+      )*
+      // tag
+      me_chimeric_read.tag();
+      // determine edge
+      let edge = me_chimeric_read.edge();
+      // assert
+      assert_eq!(edge, $expect);
+    }
+  };
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// test
+test_edge!(edge00;
+  expect |> None;
+  vargs ... 0 => None, 0 => None;
+);
+
+test_edge!(edge01;
+  expect |> Some(100);
+  vargs ... 100 => Upstream;
+);
+
+test_edge!(edge02;
+  expect |> Some(50);
+  vargs ... 50 => Upstream, 75 => Upstream;
+);
+
+test_edge!(edge04;
+  expect |> None;
+  vargs ... 50 => Downstream, 75 => Upstream;
+);
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
 // reverse sequence
 macro_rules! reverse_sequence {
   ( $function: ident;
