@@ -100,6 +100,7 @@ macro_rules! chr_count {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 ///
+#[macro_export]
 macro_rules! anchor_count {
   ( $me_chimeric_read: expr, $anchor: tt ) => {
     $me_chimeric_read
