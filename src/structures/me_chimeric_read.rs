@@ -56,7 +56,7 @@ impl MEChimericRead {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-// TODO: finish tagging implementation
+// tag
 impl MEChimericRead {
   ///
   pub fn tag(&mut self) {
@@ -68,8 +68,7 @@ impl MEChimericRead {
     self.orientation = match orientation {
       OrientationPair(u, d) if u > d => OrientationEnum::Upstream,
       OrientationPair(u, d) if u < d => OrientationEnum::Downstream,
-      OrientationPair(u, d) if u == d => OrientationEnum::Palindromic,
-      // TODO: check that this expresion does not bug single tags
+      OrientationPair(u, d) if u == d && u != 0 => OrientationEnum::Palindromic,
       OrientationPair(_, _) => OrientationEnum::None,
     }
   }
