@@ -8,6 +8,9 @@ use genomic_structures::{
   OrientationEnum,
 };
 
+// crate utilities
+use crate::load_me_anchor;
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // load & update
@@ -54,20 +57,10 @@ macro_rules! test_tag {
     #[test]
     fn $function() {
       let mut me_chimeric_pair = MEChimericPair::new();
-      // read1
-      $(
-        let mut me_anchor = MEAnchor::new();
-        me_anchor.orientation = OrientationEnum::$variadic_orientation1;
-        me_anchor.position = $variadic_position1;
-        me_chimeric_pair.read1.me_read.push(me_anchor);
-      )+
-      // read2
-      $(
-        let mut me_anchor = MEAnchor::new();
-        me_anchor.orientation = OrientationEnum::$variadic_orientation2;
-        me_anchor.position = $variadic_position2;
-        me_chimeric_pair.read2.me_read.push(me_anchor);
-      )+
+      // variadic loading read1
+      $( load_me_anchor!(me_chimeric_pair.read1, $variadic_position1, $variadic_orientation1); )+
+      // variadic loading read2
+      $( load_me_anchor!(me_chimeric_pair.read2, $variadic_position2, $variadic_orientation2); )+
       // tag
       me_chimeric_pair.tag();
       // assert

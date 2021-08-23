@@ -8,6 +8,9 @@ use genomic_structures::{
   Sequence,
 };
 
+// crate utilities
+use crate::load_me_anchor;
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // // load & update
@@ -39,17 +42,13 @@ use genomic_structures::{
 macro_rules! test_tag {
   ( $function: ident;
     expect |> $expect: tt;
-    vargs ... $($variadic_orientation: tt),*;
+    vargs ... $($variadic_orientation: tt),+;
   ) => {
     #[test]
     fn $function() {
       let mut me_chimeric_read = MEChimericRead::new();
       // variadic loading
-      $(
-        let mut me_anchor = MEAnchor::new();
-        me_anchor.orientation = OrientationEnum::$variadic_orientation;
-        me_chimeric_read.me_read.push(me_anchor);
-      )*
+      $( load_me_anchor!(me_chimeric_read, $variadic_orientation); )+
       // tag
       me_chimeric_read.tag();
       // assert
@@ -102,18 +101,13 @@ test_tag!(tag06;
 macro_rules! test_edge {
   ( $function: ident;
     expect |> $expect: expr;
-    vargs ... $($variadic_position: expr => $variadic_orientation: tt),*;
+    vargs ... $($variadic_position: expr => $variadic_orientation: tt),+;
   ) => {
     #[test]
     fn $function() {
       let mut me_chimeric_read = MEChimericRead::new();
       // variadic loading
-      $(
-        let mut me_anchor = MEAnchor::new();
-        me_anchor.orientation = OrientationEnum::$variadic_orientation;
-        me_anchor.position = $variadic_position;
-        me_chimeric_read.me_read.push(me_anchor);
-      )*
+      $( load_me_anchor!(me_chimeric_read, $variadic_position, $variadic_orientation); )+
       // tag
       me_chimeric_read.tag();
       // determine edge

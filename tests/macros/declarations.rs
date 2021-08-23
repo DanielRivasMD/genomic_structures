@@ -8,6 +8,9 @@ use genomic_structures::{
   OrientationEnum,
 };
 
+// crate utilities
+use crate::load_me_anchor;
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // anchor count
@@ -21,11 +24,7 @@ macro_rules! test_anchor_count {
     fn $function() {
       let mut me_chimeric_read = MEChimericRead::new();
       // variadic loading
-      $(
-        let mut me_anchor = MEAnchor::new();
-        me_anchor.orientation = OrientationEnum::$variadic_orientation;
-        me_chimeric_read.me_read.push(me_anchor);
-      )+
+      $( load_me_anchor!(me_chimeric_read, $variadic_orientation); )+
       // count anchors
       let count = anchor_count!(me_chimeric_read, $anchor);
       // assert
