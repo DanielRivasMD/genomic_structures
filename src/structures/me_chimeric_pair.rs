@@ -87,61 +87,82 @@ impl MEChimericPair {
   }
 
   pub fn tag(&mut self) {
+    // tag each read
     self.read1.tag();
     self.read2.tag();
+    let edges = (self.read1.edge(), self.read2.edge());
 
-    let tags = (self.read1.orientation, self.read2.orientation);
-
-    match tags {
-      (OrientationEnum::Upstream, OrientationEnum::Upstream) => {}
-      (OrientationEnum::Upstream, OrientationEnum::Downstream) => {}
-      (OrientationEnum::Upstream, OrientationEnum::Palindromic) => {}
-      (OrientationEnum::Upstream, OrientationEnum::None) => {}
-
-      (OrientationEnum::Downstream, OrientationEnum::Upstream) => {}
-      (OrientationEnum::Downstream, OrientationEnum::Downstream) => {}
-      (OrientationEnum::Downstream, OrientationEnum::Palindromic) => {}
-      (OrientationEnum::Downstream, OrientationEnum::None) => {}
-
-      (OrientationEnum::Palindromic, OrientationEnum::Upstream) => {}
-      (OrientationEnum::Palindromic, OrientationEnum::Downstream) => {}
-      (OrientationEnum::Palindromic, OrientationEnum::Palindromic) => {}
-      (OrientationEnum::Palindromic, OrientationEnum::None) => {}
-
-      (OrientationEnum::None, OrientationEnum::Upstream) => {}
-      (OrientationEnum::None, OrientationEnum::Downstream) => {}
-      (OrientationEnum::None, OrientationEnum::Palindromic) => {}
-      (OrientationEnum::None, OrientationEnum::None) => {}
-    }
-
-    if self.read1.orientation == OrientationEnum::Upstream &&
-      self.read2.orientation == OrientationEnum::Upstream
-    {
-      let read1 = self.read1.count_tag().unwrap();
-      let read2 = self.read2.count_tag().unwrap();
-      if read1 < read2 {
-        self.chranch = ChrAnchorEnum::Read1;
-      } else if read1 > read2 {
-        self.chranch = ChrAnchorEnum::Read2;
-      } else {
-        println!("Probably ambigous");
+    self.chranch = match (self.read1.orientation, self.read2.orientation) {
+      (OrientationEnum::Upstream, OrientationEnum::Upstream) => {
+        match edges {
+          // (r1, _) if r1 == 0 => ChrAnchorEnum::Read2,
+          // (_, r2) if r2 == 0 => ChrAnchorEnum::Read1,
+          (r1, r2) if r1 < r2 => ChrAnchorEnum::Read1,
+          (r1, r2) if r1 > r2 => ChrAnchorEnum::Read2,
+          (_, _) => ChrAnchorEnum::None,
+        }
       }
-    } else if self.read1.orientation == OrientationEnum::Downstream &&
-      self.read2.orientation == OrientationEnum::Downstream
-    {
-      let read1 = self.read1.count_tag().unwrap();
-      let read2 = self.read2.count_tag().unwrap();
-      if read1 < read2 {
-        self.chranch = ChrAnchorEnum::Read2;
-      } else if read1 > read2 {
-        self.chranch = ChrAnchorEnum::Read1;
-      } else {
-        println!("Probably ambigous");
+
+      (OrientationEnum::Upstream, OrientationEnum::None) => {
+        ChrAnchorEnum::Read2
       }
-    } else if self.read1.orientation == OrientationEnum::Palindromic &&
-      self.read2.orientation == OrientationEnum::Palindromic
-    {
-      println!("Palindromic");
+
+      // (OrientationEnum::Upstream, OrientationEnum::Downstream) => {
+      //   ChrAnchorEnum::None
+      // }
+      // (OrientationEnum::Upstream, OrientationEnum::Palindromic) => {
+      //   ChrAnchorEnum::None
+      // }
+      (OrientationEnum::Upstream, _) => ChrAnchorEnum::None,
+
+      (OrientationEnum::Downstream, OrientationEnum::Downstream) => {
+        match edges {
+          // (r1, _) if r1 == 0 => ChrAnchorEnum::Read2,
+          // (_, r2) if r2 == 0 => ChrAnchorEnum::Read1,
+          (r1, r2) if r1 < r2 => ChrAnchorEnum::Read2,
+          (r1, r2) if r1 > r2 => ChrAnchorEnum::Read1,
+          (_, _) => ChrAnchorEnum::None,
+        }
+      }
+
+      (OrientationEnum::Downstream, OrientationEnum::None) => {
+        ChrAnchorEnum::Read2
+      }
+
+      // (OrientationEnum::Downstream, OrientationEnum::Upstream) => {
+      //   ChrAnchorEnum::None
+      // }
+      // (OrientationEnum::Downstream, OrientationEnum::Palindromic) => {
+      //   ChrAnchorEnum::None
+      // }
+      (OrientationEnum::Downstream, _) => ChrAnchorEnum::None,
+
+      // (OrientationEnum::Palindromic, OrientationEnum::Upstream) => {
+      //   ChrAnchorEnum::None
+      // }
+      // (OrientationEnum::Palindromic, OrientationEnum::Downstream) => {
+      //   ChrAnchorEnum::None
+      // }
+      // (OrientationEnum::Palindromic, OrientationEnum::Palindromic) => {
+      //   ChrAnchorEnum::None
+      // }
+      // (OrientationEnum::Palindromic, OrientationEnum::None) => {
+      //   ChrAnchorEnum::None
+      // }
+      (OrientationEnum::Palindromic, _) => ChrAnchorEnum::None,
+
+      (OrientationEnum::None, OrientationEnum::Upstream) => {
+        ChrAnchorEnum::Read1
+      }
+      (OrientationEnum::None, OrientationEnum::Downstream) => {
+        ChrAnchorEnum::Read1
+      }
+
+      // (OrientationEnum::None, OrientationEnum::Palindromic) => {
+      //   ChrAnchorEnum::None
+      // }
+      // (OrientationEnum::None, OrientationEnum::None) => ChrAnchorEnum::None,
+      (OrientationEnum::None, _) => ChrAnchorEnum::None,
     }
   }
   // TODO: add trait implementation for mobile element retrieval
