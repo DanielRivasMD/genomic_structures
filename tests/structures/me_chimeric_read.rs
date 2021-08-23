@@ -127,23 +127,39 @@ macro_rules! test_edge {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // test
+// none
 test_edge!(edge00;
-  expect |> None;
+  expect |> 0;
   vargs ... 0 => None, 0 => None;
 );
 
+// upstream
 test_edge!(edge01;
-  expect |> Some(100);
+  expect |> 100;
   vargs ... 100 => Upstream;
 );
 
+// upstream <- minimum
 test_edge!(edge02;
-  expect |> Some(50);
+  expect |> 50;
   vargs ... 50 => Upstream, 75 => Upstream;
 );
 
+// upstream
+test_edge!(edge03;
+  expect |> 10000;
+  vargs ... 10000 => Downstream;
+);
+
+// downstream <- maximum
 test_edge!(edge04;
-  expect |> None;
+  expect |> 10075;
+  vargs ... 10050 => Downstream, 10075 => Downstream;
+);
+
+// palindromic
+test_edge!(edge05;
+  expect |> 0;
   vargs ... 50 => Downstream, 75 => Upstream;
 );
 
