@@ -74,7 +74,7 @@ impl MEChimericRead {
   }
 
   ///
-  pub fn edge(&self) -> Option<i32> {
+  pub fn edge(&self) -> i32 {
     let mut positions = Vec::new();
     self.me_read.iter().for_each(|me_anchor| {
       if me_anchor.orientation == self.orientation {
@@ -82,11 +82,22 @@ impl MEChimericRead {
       }
     });
 
+    // TODO: better way to work with options?
     match self.orientation {
-      OrientationEnum::Upstream => positions.into_iter().min(),
-      OrientationEnum::Downstream => positions.into_iter().max(),
-      OrientationEnum::Palindromic => None,
-      OrientationEnum::None => None,
+      OrientationEnum::Upstream => {
+        match positions.into_iter().min() {
+          Some(min) => min,
+          None => 0,
+        }
+      }
+      OrientationEnum::Downstream => {
+        match positions.into_iter().max() {
+          Some(max) => max,
+          None => 0,
+        }
+      }
+      OrientationEnum::Palindromic => 0,
+      OrientationEnum::None => 0,
     }
   }
 }
