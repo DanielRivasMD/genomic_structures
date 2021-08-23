@@ -11,7 +11,7 @@ use genomic_structures::{
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // load & update
-macro_rules! chr_anchor {
+macro_rules! test_chr_anchor {
   ( $function: ident;
     loaded |> $loaded_cigar: expr, $loaded_chr: expr, $loaded_flag: expr, $loaded_position: expr, $loaded_mapq: expr, $loaded_tlen: expr;
     manual |> $manual_cigar: expr, $manual_chr: expr, $manual_flag: expr, $manual_position: expr, $manual_mapq: expr, $manual_tlen: expr;
@@ -51,7 +51,7 @@ macro_rules! chr_anchor {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // test
-chr_anchor!(test01;
+test_chr_anchor!(test01;
   loaded |> "100M", "chr7".to_string(), 56, 2099, 60, 100;
   manual |> "100M", "chr7".to_string(), 56, 2099, 60, 100;
 );
@@ -59,7 +59,7 @@ chr_anchor!(test01;
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // bin
-macro_rules! bin {
+macro_rules! test_bin {
   ( $function: ident;
     $position: expr, $expect: expr
   ) => {
@@ -80,6 +80,6 @@ macro_rules! bin {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // test
-bin!(bin01; 2099, 2000);
+test_bin!(bin01; 2099, 2000);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////

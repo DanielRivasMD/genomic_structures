@@ -6,12 +6,11 @@ use super::table;
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // private function
-macro_rules! table {
+macro_rules! test_table {
   ( $function: ident;
       params |> $psize: expr;
-      keys |> $keys: expr;
-      values |> $values: expr;
-      expected |> $expected: expr;
+      values |> k >>> $keys: expr; v >>> $values: expr;
+      expect |> $expect: expr;
     ) => {
     #[test]
     fn $function() {
@@ -22,9 +21,9 @@ macro_rules! table {
       let table = table(&bined_hm, $psize);
 
       assert_eq!(
-        table, $expected,
+        table, $expect,
         "\n\nCalculated table:\n{:#?}.\n\nExpected value:\n{:#?}.\n\n",
-        table, $expected,
+        table, $expect,
       );
     }
   };
@@ -33,25 +32,26 @@ macro_rules! table {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // test
-table!(test01;
+test_table!(test01;
   params |> 5;
-  keys |> [
-    "100".to_string(),
-    "200".to_string(),
-    "300".to_string(),
-    "400".to_string(),
-    "500".to_string(),
-    "600".to_string(),
-  ];
-  values |> [
-    vec!["100.1".to_string(), "100.2".to_string(), ],
-    vec!["200.1".to_string(), "200.2".to_string(), "200.3".to_string(), ],
-    vec!["300.1".to_string(), ],
-    vec!["400.1".to_string(), "400.2".to_string(), ],
-    vec!["500.1".to_string(), "500.2".to_string(), "500.3".to_string(), ],
-    vec!["600.1".to_string(), "600.2".to_string(), ],
-  ];
-  expected |> vec![1., 3., 2., 0., 0., ];
+  values |>
+    k >>> [
+      "100".to_string(),
+      "200".to_string(),
+      "300".to_string(),
+      "400".to_string(),
+      "500".to_string(),
+      "600".to_string(),
+    ];
+    v >>> [
+      vec!["100.1".to_string(), "100.2".to_string(), ],
+      vec!["200.1".to_string(), "200.2".to_string(), "200.3".to_string(), ],
+      vec!["300.1".to_string(), ],
+      vec!["400.1".to_string(), "400.2".to_string(), ],
+      vec!["500.1".to_string(), "500.2".to_string(), "500.3".to_string(), ],
+      vec!["600.1".to_string(), "600.2".to_string(), ],
+    ];
+  expect |> vec![1., 3., 2., 0., 0., ];
 );
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -12,7 +12,7 @@ use genomic_structures::{
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // load & update
-macro_rules! me_anchor {
+macro_rules! test_me_anchor {
   ( $function: ident;
     loaded |> $loaded_cigar: expr, $loaded_flag: expr, $loaded_mobel: expr, $loaded_orientation: expr, $loaded_position: expr, $loaded_size: expr;
     manual |> $manual_cigar: expr, $manual_flag: expr, $manual_mobel: expr, $manual_orientation: expr, $manual_position: expr, $manual_size: expr;
@@ -52,7 +52,7 @@ macro_rules! me_anchor {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // test
-me_anchor!(test01;
+test_me_anchor!(test01;
   loaded |> "100M", 75, "mobel77".to_string(), OrientationEnum::None, 2099, 11000.;
   manual |> "100M", 75, "mobel77".to_string(), OrientationEnum::None, 2099, 11000.;
 );
@@ -60,7 +60,7 @@ me_anchor!(test01;
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // calculate break point
-macro_rules! calculate_break_point {
+macro_rules! test_calculate_break_point {
   ( $function: ident;
     loaded |> $loaded_sequence: expr, $loaded_cigar: expr, $loaded_flag: expr, $loaded_mobel: expr, $loaded_orientation: expr, $loaded_position: expr, $loaded_size: expr;
     manual |> $manual_sequence: expr, $manual_coordinate: expr;
@@ -96,17 +96,17 @@ macro_rules! calculate_break_point {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // test
-calculate_break_point!(bp01;
+test_calculate_break_point!(bp01;
   loaded |> "MMMM0987654321B1234567890OOOOO", "15S15M", 83, "mobel77".to_string(), OrientationEnum::None, 1, 11000.;
   manual |> "MMMM0987654321B1234567890".to_string(), 15.;
 );
 
-calculate_break_point!(bp02;
+test_calculate_break_point!(bp02;
   loaded |> "B1234567890OOOOO", "1S15M", 83, "mobel77".to_string(), OrientationEnum::None, 1, 11000.;
   manual |> "B1234567890".to_string(), 1.;
 );
 
-calculate_break_point!(bp03;
+test_calculate_break_point!(bp03;
   loaded |> "OOOOO0987654321B", "30M1S", 75, "mobel77".to_string(), OrientationEnum::None, 10971, 11000.;
   manual |> "0987654321B".to_string(), 0.;
 );
@@ -114,7 +114,7 @@ calculate_break_point!(bp03;
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // tag
-macro_rules! tag {
+macro_rules! test_tag {
   ( $function: ident;
     loaded |> $loaded_cigar: expr, $loaded_flag: expr, $loaded_mobel: expr, $loaded_orientation: expr, $loaded_position: expr, $loaded_size: expr;
     expect |> $manual_orientation: expr;
@@ -147,27 +147,27 @@ macro_rules! tag {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // test
-tag!(tag00;
+test_tag!(tag00;
   loaded |> "30M1S", 83, "mobel77".to_string(), OrientationEnum::None, 10871, 11000.;
   expect |> OrientationEnum::None;
 );
 
-tag!(tag01;
+test_tag!(tag01;
   loaded |> "15S15M", 75, "mobel77".to_string(), OrientationEnum::None, 1, 11000.;
   expect |> OrientationEnum::Upstream;
 );
 
-tag!(tag02;
+test_tag!(tag02;
   loaded |> "15S15M", 83, "mobel77".to_string(), OrientationEnum::None, 1, 11000.;
   expect |> OrientationEnum::Upstream;
 );
 
-tag!(tag03;
+test_tag!(tag03;
   loaded |> "30M1S", 75, "mobel77".to_string(), OrientationEnum::None, 10971, 11000.;
   expect |> OrientationEnum::Downstream;
 );
 
-tag!(tag04;
+test_tag!(tag04;
   loaded |> "30M1S", 83, "mobel77".to_string(), OrientationEnum::None, 10971, 11000.;
   expect |> OrientationEnum::Downstream;
 );

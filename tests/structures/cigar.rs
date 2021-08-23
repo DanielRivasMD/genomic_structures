@@ -6,7 +6,7 @@ use genomic_structures::CIGAR;
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // load & update
-macro_rules! cigar {
+macro_rules! test_cigar {
   ( $function: ident;
     params |> $cigar: expr, $position: expr;
     expect |> $expect: expr;
@@ -27,7 +27,7 @@ macro_rules! cigar {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // test
-cigar!(test01;
+test_cigar!(test01;
   params |> "100M", 101;
   expect |> CIGAR{
     align: vec![100],
@@ -41,7 +41,7 @@ cigar!(test01;
   };
 );
 
-cigar!(test02;
+test_cigar!(test02;
   params |> "54H46M", 101;
   expect |> CIGAR{
     align: vec![46],
@@ -55,7 +55,7 @@ cigar!(test02;
   };
 );
 
-cigar!(test03;
+test_cigar!(test03;
   params |> "54S46M", 101;
   expect |> CIGAR{
     align: vec![46],
@@ -69,7 +69,7 @@ cigar!(test03;
   };
 );
 
-cigar!(test04;
+test_cigar!(test04;
   params |> "3H67M30H", 101;
   expect |> CIGAR{
     align: vec![67],
@@ -83,7 +83,7 @@ cigar!(test04;
   };
 );
 
-cigar!(test05;
+test_cigar!(test05;
   params |> "10H3M2I80M5H", 101;
   expect |> CIGAR{
     align: vec![3, 80],
@@ -97,7 +97,7 @@ cigar!(test05;
   };
 );
 
-cigar!(test06;
+test_cigar!(test06;
   params |> "13H60D7M20H", 101;
   expect |> CIGAR{
     align: vec![7],
@@ -111,7 +111,7 @@ cigar!(test06;
   };
 );
 
-cigar!(test07;
+test_cigar!(test07;
   params |> "50S4D6I40M", 101;
   expect |> CIGAR{
     align: vec![40],
@@ -125,7 +125,7 @@ cigar!(test07;
   };
 );
 
-cigar!(test08;
+test_cigar!(test08;
   params |> "1H10D2M2D80M5H", 101;
   expect |> CIGAR{
     align: vec![2, 80],
@@ -139,7 +139,7 @@ cigar!(test08;
   };
 );
 
-cigar!(test09;
+test_cigar!(test09;
   params |> "1H10D2M2D80M5H", 1;
   expect |> CIGAR{
     align: vec![2, 80],
@@ -153,7 +153,7 @@ cigar!(test09;
   };
 );
 
-cigar!(test10;
+test_cigar!(test10;
   params |> "50S4D6I40M", 1;
   expect |> CIGAR{
     align: vec![40],

@@ -160,7 +160,7 @@ test_edge!(edge05;
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // reverse sequence
-macro_rules! reverse_sequence {
+macro_rules! test_reverse_sequence {
   ( $function: ident;
     $sequence: expr, $expect: expr
   ) => {
@@ -181,9 +181,9 @@ macro_rules! reverse_sequence {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // test
-reverse_sequence!(rev01; "AAAAAAA".to_string(), "TTTTTTT");
-reverse_sequence!(rev02; "MACTHAA".to_string(), "TTHAGTM");
-reverse_sequence!(rev03; "CAAGAAC".to_string(), "GTTCTTG");
-reverse_sequence!(rev04; "GATTACA".to_string(), "TGTAATC");
+test_reverse_sequence!(rev01; "AAAAAAA".to_string(), "TTTTTTT");
+test_reverse_sequence!(rev02; "MACTHAA".to_string(), "TTHAGTM");
+test_reverse_sequence!(rev03; "CAAGAAC".to_string(), "GTTCTTG");
+test_reverse_sequence!(rev04; "GATTACA".to_string(), "TGTAATC");
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////

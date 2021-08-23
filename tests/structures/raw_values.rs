@@ -12,7 +12,7 @@ use genomic_structures::{
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // load & update
-macro_rules! raw_values {
+macro_rules! test_raw_values {
   ( $function: ident;
     params |> $fline: expr;
     expect |> $expect: expr;
@@ -32,7 +32,7 @@ macro_rules! raw_values {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // test
-raw_values!(test01;
+test_raw_values!(test01;
   params |> vec!["ID", "16", "scaffold", "1", "60", "100M", "", "", "100", "GATTACA", ""];
   expect |> RawValues{
     read_id: ReadControl{

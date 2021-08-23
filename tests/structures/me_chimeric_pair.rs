@@ -18,7 +18,7 @@ use crate::load_me_anchor;
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // get
-macro_rules! get_chr_anchor {
+macro_rules! test_get_chr_anchor {
   ( $function: ident;
     $sequence: expr, $expect: expr
   ) => {
@@ -39,10 +39,10 @@ macro_rules! get_chr_anchor {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // test
-get_chr_anchor!(get01; "AAAAAAA".to_string(), "AAAAAAA".to_string());
-get_chr_anchor!(get02; "MACTHAA".to_string(), "MACTHAA".to_string());
-get_chr_anchor!(get03; "CAAGAAC".to_string(), "CAAGAAC".to_string());
-get_chr_anchor!(get04; "GATTACA".to_string(), "GATTACA".to_string());
+test_get_chr_anchor!(get01; "AAAAAAA".to_string(), "AAAAAAA".to_string());
+test_get_chr_anchor!(get02; "MACTHAA".to_string(), "MACTHAA".to_string());
+test_get_chr_anchor!(get03; "CAAGAAC".to_string(), "CAAGAAC".to_string());
+test_get_chr_anchor!(get04; "GATTACA".to_string(), "GATTACA".to_string());
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 

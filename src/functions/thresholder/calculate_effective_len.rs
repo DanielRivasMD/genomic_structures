@@ -14,9 +14,9 @@ use super::calculate_effective_len;
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // private function
-macro_rules! calculate_effective_len {
+macro_rules! test_calculate_effective_len {
   ( $function: ident;
-    $glen: expr, $expected: expr
+    $glen: expr, $expect: expr
   ) => {
     #[test]
     fn $function() {
@@ -26,9 +26,9 @@ macro_rules! calculate_effective_len {
         BIN_OVERLAP as f64,
       );
       assert_eq!(
-        effective_length, $expected,
+        effective_length, $expect,
         "\n\nScaffold length: {:?}.\nEffective scaffold length: {:?}.\nExpected: {:?}.\n\n",
-        $glen, effective_length, $expected,
+        $glen, effective_length, $expect,
       );
     }
   };
@@ -37,7 +37,7 @@ macro_rules! calculate_effective_len {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // test
-calculate_effective_len!(test01; 2000., 4000.);
-calculate_effective_len!(test02; 3243556456., 6487112912.);
+test_calculate_effective_len!(test01; 2000., 4000.);
+test_calculate_effective_len!(test02; 3243556456., 6487112912.);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
