@@ -5,11 +5,18 @@ use crate::BinPosition;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-#[derive(new)]
+#[derive(new, Default)]
 pub struct StrandDirection {
+  #[new(default)]
   pub fs5: BinPosition,
+
+  #[new(default)]
   pub fs3: BinPosition,
+
+  #[new(default)]
   pub rs5: BinPosition,
+
+  #[new(default)]
   pub rs3: BinPosition,
 }
 
