@@ -60,6 +60,7 @@ pub use crate::structures::{
 
 // structs
 pub use crate::structures::{
+  bin_position::BinPosition,
   break_point::BreakPoint,
   chr_anchor::ChrAnchor,
   cigar::CIGAR,

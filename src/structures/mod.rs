@@ -2,6 +2,7 @@
 
 // modules
 pub mod anchor_enum;
+pub mod bin_position;
 pub mod break_point;
 pub mod chr_anchor;
 pub mod chr_anchor_enum;
