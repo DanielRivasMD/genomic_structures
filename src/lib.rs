@@ -79,7 +79,10 @@ pub use crate::structures::{
 };
 
 // traits
-pub use crate::structures::me_anchor::TagME;
+pub use crate::structures::{
+  activate::ActivateExt,
+  me_anchor::TagME,
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
