@@ -16,6 +16,7 @@ pub mod me_library;
 pub mod orientation_enum;
 pub mod raw_values;
 pub mod read_control;
+pub mod strand_direction;
 pub mod sv_chimeric_pair;
 pub mod sv_chimeric_read;
 pub mod sv_type;

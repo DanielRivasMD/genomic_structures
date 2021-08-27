@@ -72,6 +72,7 @@ pub use crate::structures::{
   orientation_enum::OrientationPair,
   raw_values::RawValues,
   read_control::ReadControl,
+  strand_direction::StrandDirection,
   sv_chimeric_pair::SVChimericPair,
   sv_chimeric_read::SVChimericRead,
   sv_type::SVType,
