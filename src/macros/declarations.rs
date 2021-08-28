@@ -59,18 +59,6 @@ macro_rules! load {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-/// Evaluate mapping quality (MAPQ).
-#[macro_export]
-macro_rules! mapq {
-  // mapq
-  ( $record: expr, $read_no: tt ) => {
-    $record.$read_no.chr_read.is_empty() ||
-      $record.$read_no.chr_read[0].mapq < MAPQ
-  };
-}
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-
 /// Count reads that align at a certain bin along chromosome.
 #[macro_export]
 macro_rules! chr_count {
