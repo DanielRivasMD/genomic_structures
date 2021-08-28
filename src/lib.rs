@@ -30,7 +30,6 @@ mod functions;
 
 // functions
 pub use crate::functions::{
-  counter::strand_count,
   flag_interpretor::interpret,
   identificator::identify,
   position_binner::bin,
