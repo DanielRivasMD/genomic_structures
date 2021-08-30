@@ -4,15 +4,14 @@
 #[macro_export]
 macro_rules! load {
   // mobile element on hashmap
-  ( mobile element |> $record: expr; $values: expr; $read_me: tt ) => {
+  ( mobile element |> $record: expr; $values: expr; $read_no: tt ) => {
     // record data on primary alignment
     if $values.flag <= 255 {
-      $record.$read_me.sequence = $values.sequence.clone();
-      $record.$read_me.quality = $values.quality;
+      $record.$read_no.sequence = $values.sequence.clone();
     }
 
     // record mobile element data
-    $record.$read_me.me_read.push(MEAnchor::load(
+    $record.$read_no.me_read.push(MEAnchor::load(
       $values.cigar.clone(),
       $values.flag,
       $values.scaffold.clone(),
@@ -23,19 +22,24 @@ macro_rules! load {
 
     // calculate break point
     $record
-      .$read_me
+      .$read_no
       .me_read
       .iter_mut()
       .last()
       .unwrap()
-      .calculate_break_point(&$record.$read_me.sequence.clone());
+      .calculate_break_point(&$record.$read_no.sequence.clone());
   };
 
   // chromosomal loci
   ( chromosomal |> $record: expr; $values: expr; $read_no: tt ) => {
+    // check whether read id & sequence coincide
     if $record.$read_no.sequence == $values.sequence ||
       $record.$read_no.reverse_sequence() == $values.sequence
     {
+      // assign chromosomal anchor mapping quality
+      $record.$read_no.quality = $values.quality;
+
+      // load chromosomal anchor
       $record.$read_no.chr_read.push(ChrAnchor::load(
         $values.cigar.clone(),
         $values.scaffold.clone(),
