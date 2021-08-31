@@ -5,7 +5,7 @@ use crate::BinPosition;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-#[derive(new, Default)]
+#[derive(Debug, new, Default, PartialEq)]
 pub struct StrandDirection {
   #[new(default)]
   pub fs5: BinPosition,
