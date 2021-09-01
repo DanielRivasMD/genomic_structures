@@ -6,9 +6,12 @@ use std::collections::HashMap;
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 #[derive(Debug, new, Default, PartialEq)]
-pub struct BinPosition(
-  #[new(default)] pub i32,
-  #[new(default)] pub HashMap<i32, Vec<String>>,
-);
+pub struct BinPosition {
+  #[new(default)]
+  pub count: i32,
+
+  #[new(default)]
+  pub position: HashMap<i32, Vec<String>>,
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
