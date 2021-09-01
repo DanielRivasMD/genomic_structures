@@ -16,7 +16,7 @@ macro_rules! test_table {
     fn $function() {
       let mut bined_hm = std::collections::HashMap::new();
       for ix in 0..$keys.len() {
-        bined_hm.insert($keys[ix].clone(), $values[ix].clone());
+        bined_hm.insert($keys[ix], $values[ix].clone());
       }
       let table = table(&bined_hm, $psize);
 
@@ -36,12 +36,12 @@ test_table!(test01;
   params |> 5;
   values |>
     k >>> [
-      "100".to_string(),
-      "200".to_string(),
-      "300".to_string(),
-      "400".to_string(),
-      "500".to_string(),
-      "600".to_string(),
+      100,
+      200,
+      300,
+      400,
+      500,
+      600,
     ];
     v >>> [
       vec!["100.1".to_string(), "100.2".to_string(), ],

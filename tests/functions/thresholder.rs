@@ -46,7 +46,7 @@ macro_rules! test_threshold {
 test_threshold!(test01;
   params |> 6., 1000., 0.001;
   values |>
-    k >>> vec![ "100".to_string(), "200".to_string(), "300".to_string(), "400".to_string(), "500".to_string(), "600".to_string(), ];
+    k >>> vec![ 100, 200, 300, 400, 500, 600, ];
     v >>> [
       vec!["100.1".to_string(), "100.2".to_string(), ],
       vec!["200.1".to_string(), "200.2".to_string(), "200.3".to_string(), ],

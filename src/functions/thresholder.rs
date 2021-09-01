@@ -33,14 +33,7 @@ use libc::{
 ///
 /// ```
 /// use genomic_structures::threshold;
-/// let ks = vec![
-///   "100".to_string(),
-///   "200".to_string(),
-///   "300".to_string(),
-///   "400".to_string(),
-///   "500".to_string(),
-///   "600".to_string(),
-/// ];
+/// let ks = vec![100, 200, 300, 400, 500, 600];
 /// let vs = vec![
 ///   vec!["100.1".to_string(), "100.2".to_string()],
 ///   vec![
@@ -70,17 +63,24 @@ pub fn threshold(
   bined_hm: &HashMap<i32, Vec<String>>,
   psize: usize,
 ) -> usize {
+  // calculate effective scaffold / chromosome length with default values
   let eff_genome_length = calculate_effective_len!(chromosome_size);
+  // calculat lambda with default values
   let lambda = calculate_lambda!(pop_reads, eff_genome_length);
+  // construct Poisson distribution (inverse)
   let p_values = r_ppoisson(lambda, psize);
 
+  // calculate peak probabilities
   let mut peak_prob = vec![0.; psize];
   for (ix, p_val) in p_values.iter().enumerate() {
     peak_prob[ix] = p_val * chromosome_size;
   }
 
+  // contruct table of reads
   let bin_tb = table(bined_hm, psize);
+  // construct cummulative sum of table
   let cum_bin_tb = cumsum(bin_tb);
+  // calculate false discovery values
   let mut false_disc_values = vec![0.; psize];
   for ix in 0..psize {
     if cum_bin_tb[ix] == 0. {
@@ -90,6 +90,7 @@ pub fn threshold(
     }
   }
 
+  // find threshold at false discovery tolerance
   let mut threshold = 0;
   for (ix, fd_val) in false_disc_values.iter().enumerate() {
     if *fd_val < false_discovery_tolerance {
