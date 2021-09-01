@@ -67,7 +67,7 @@ pub fn threshold(
   pop_reads: f64,
   chromosome_size: f64,
   false_discovery_tolerance: f64,
-  read_hm: &HashMap<String, Vec<String>>,
+  bined_hm: &HashMap<i32, Vec<String>>,
   psize: usize,
 ) -> usize {
   let eff_genome_length = calculate_effective_len!(chromosome_size);
@@ -79,7 +79,7 @@ pub fn threshold(
     peak_prob[ix] = p_val * chromosome_size;
   }
 
-  let bin_tb = table(read_hm, psize);
+  let bin_tb = table(bined_hm, psize);
   let cum_bin_tb = cumsum(bin_tb);
   let mut false_disc_values = vec![0.; psize];
   for ix in 0..psize {
@@ -148,7 +148,7 @@ fn r_ppoisson(
 
 // table convertor
 fn table(
-  bined_hm: &HashMap<String, Vec<String>>,
+  bined_hm: &HashMap<i32, Vec<String>>,
   psize: usize,
 ) -> Vec<f64> {
   let mut out_vec = vec![0.; psize];
