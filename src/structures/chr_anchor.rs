@@ -1,5 +1,10 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
+// standard libraries
+use std::fmt;
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
 // crate utilities
 use crate::{
   functions::{
@@ -215,6 +220,22 @@ impl Anchor for ChrAnchor {
 impl SAMFlag for ChrAnchor {
   fn get_flag(&self) -> i32 {
     self.flag
+  }
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// display trait implementation
+impl fmt::Display for ChrAnchor {
+  fn fmt(
+    &self,
+    f: &mut fmt::Formatter,
+  ) -> fmt::Result {
+    writeln!(
+      f,
+      "{}\t{}\t{}\t{}\t",
+      self.chr, self.position, self.cigar, self.tlen
+    )
   }
 }
 
