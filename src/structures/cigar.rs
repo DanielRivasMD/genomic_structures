@@ -3,6 +3,7 @@
 // standard libraries
 use anyhow::Context;
 use anyhow::Result as anyResult;
+use std::fmt;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -236,6 +237,22 @@ impl CIGAR {
     let leftmost = self.calculate_left_boundry(position);
     // accomodate 1-based coordinate system
     leftmost + (self.left_clip + self.total_alignment() + self.rigth_clip) - 1
+  }
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// display trait implementation
+impl fmt::Display for CIGAR {
+  fn fmt(
+    &self,
+    f: &mut fmt::Formatter,
+  ) -> fmt::Result {
+    writeln!(
+      f,
+      "{}\t{}\t{}\t",
+      self.signature, self.left_boundry, self.right_boundry
+    )
   }
 }
 
