@@ -1,5 +1,10 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
+// standard libraries
+use std::fmt;
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
 /// Determine breaking point.
 #[derive(Debug, new, Default, PartialEq)]
 pub struct BreakPoint {
@@ -87,6 +92,18 @@ impl BreakPoint {
         [(sequence.len() as f64 - offset - cleave) as usize..]
         .to_string();
     }
+  }
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// display trait implementation
+impl fmt::Display for BreakPoint {
+  fn fmt(
+    &self,
+    f: &mut fmt::Formatter,
+  ) -> fmt::Result {
+    writeln!(f, "{}\t{}", self.sequence, self.coordinate)
   }
 }
 
