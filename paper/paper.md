@@ -1,0 +1,72 @@
+title: 'genomic_structures: A Rust library to manipulate genomic features'
+tags:
+
+- Rust
+- genomics
+- library
+  authors:
+- name: Salvador Daniel Rivas-Carrillo ^[first author, corresponding, author]
+  orcid: 0000-0002-0143-2687
+  affiliation: 1
+- name: Manfred G. Grabherr ^
+  orcid: 0000-0001-8792-6508
+  affiliation: 1
+  affiliations:
+- name: Deparment of Medical Biochemistry and Microbiology, Uppsala University
+  index: 1
+  date: 23 September 2021
+  bibliography: paper.bib
+
+---
+
+# Summary
+
+# Statement of need
+
+We live in an age of change. In the filed of biology, almost a decade after the completion of the human genome, another leap took place with the emergence of massive parallel sequencing. This technological advancement shifted our perception of genetic information by increasing the rate of data collection while lowering the cost. The outcome has implicated numerous centers around the globe sequencing and sharing data.
+
+On the other hand, in the field of computer science, computers have almost reach the plateu in terms of ... and have shifted toward parallel and concurrent programming. Modern programming languages have been built by design to accomodate such needs. With this in mind, we developed `genomic_structures`, a Rust library to read, reprsent and manipulate genomic structures from next-generation sequencing data.
+
+# Funcionality
+
+`genomic_structures` offers, a set of `structs` and `functions` to represent common objects on computational biology, such as:
+
+`structs`:
+
+- CIGAR from sequence alginment
+- SAM flag representation
+- read pairs, either regular or chimeric, i.e., aligned to two different references
+- read anchoring when aligned to different references
+- break point estimation considereing flags, alignement orientation, CIGAR interpretation
+- structural variants: inversion, duplication, deletion, translocation
+- mobile element annotations, for instance endogenous retroviruses
+
+`functions`:
+
+- interpretation of binary SAM flag for read features and orientation in relation to reference
+- read from raw SAM file
+- calculate read position and orientation
+- preload fasta references
+- window sliding and binning
+- identification of structural variants based on lenght, position and orientation
+- identification of mobile element based on position, orientation, inherented features and annoations
+- threshold for candidate calling based on boolean threshold or Poisson distributed
+
+`macros`:
+
+- to facilitate loading read information into structures
+- to wrap functions with default parameters
+
+`genomic_structures` offers state-of-the-art error handling, extensive unit testing as well as easy-to-access documentation. Moreover, `genomic_structures` uses concurrent file reading and can accomodate parallel calculations when handling scaffolds or chromosomes.
+
+# Software Repository
+
+The software is available as source code from https://github.com/DanielRivasMD/genomic_structures/ under the General Public License GLP-3.0.
+
+# Acknowledgements
+
+<!-- TODO: acknowledge not author contributors -->
+
+# References
+
+<!-- TODO: add references -->
