@@ -47,6 +47,7 @@ pub struct MEChimericRead {
 
 // load & update
 impl MEChimericRead {
+  ///
   pub fn load(me_anchor: MEAnchor) -> Self {
     let mut me_chimeric_read = Self::new();
     me_chimeric_read.me_read.push(me_anchor);
@@ -121,7 +122,7 @@ impl Sequence for MEChimericRead {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-// manual display trait implementation
+// display trait implementation
 impl fmt::Display for MEChimericRead {
   fn fmt(
     &self,
@@ -129,8 +130,8 @@ impl fmt::Display for MEChimericRead {
   ) -> fmt::Result {
     writeln!(
       f,
-      "Chromosome: {}, Position: {}",
-      self.chr_read[0].chr, self.chr_read[0].position,
+      "{}\t{}\t{}\t{}\t",
+      self.chr_read[0], self.me_read[0], self.quality, self.sequence,
     )
   }
 }

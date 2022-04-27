@@ -328,6 +328,7 @@ impl TagME for MEAnchor {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // tag
+// TODO: relocate tag trait
 /// Tag mobile element.
 pub trait TagME {
   ///
@@ -433,5 +434,24 @@ impl fmt::Display for MEAnchor {
     )
   }
 }
+
+// Sequence identifier.
+// Retrotransposon start coordinate within sequence.
+// Retrotransposon end coordinate within sequence.
+// Left LTR start coordinate.
+// Left LTR end coordinate.
+// Right LTR start coordinate.
+// Right LTR end coordinate.
+// % Identity between left and right LTRs (0-100).
+// Left Target Site Duplication start coordinate.
+// Left Target Site Duplication end coordinate.
+// Right Target Site Duplication start coordinate.
+// Right Target Site Duplication end coordinate.
+// Polypurine Tract start coordinate.
+// Polupurine Tract end coordinate.
+// Strand on chromosome (+ or -).
+// Percentage of purines in Polypurine Tract (0-100).
+// TG motif start coordinate.
+// CA motif end coordinate.
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
