@@ -23,6 +23,7 @@ use crate::{
 
 // TODO: raw parser straigth from record line
 // TODO: think about a way to use raw values only with reference to strings
+// TODO: write an error catcher with better messages for parsing
 // values ordered as SAM format
 /// Structural representation of SAM file records.
 #[derive(Debug, new, Default, PartialEq)]
