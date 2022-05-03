@@ -34,7 +34,6 @@ pub use crate::functions::{
   identificator::identify,
   position_binner::bin,
   sequences::reverse_sequence,
-  thresholder::threshold,
 };
 
 // traits
