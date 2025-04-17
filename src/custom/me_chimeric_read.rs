@@ -7,8 +7,8 @@ use std::fmt;
 
 // crate utilities
 use crate::{
-  functions::sequences::Sequence,
-  structures::{
+  function::sequences::Sequence,
+  custom::{
     chr_anchor::ChrAnchor,
     me_anchor::MEAnchor,
     orientation_enum::{

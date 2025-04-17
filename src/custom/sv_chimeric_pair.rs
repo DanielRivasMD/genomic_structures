@@ -2,8 +2,8 @@
 
 // crate utilities
 use crate::{
-  functions::identificator::identify,
-  structures::{
+  function::identificator::identify,
+  custom::{
     sv_chimeric_read::SVChimericRead,
     sv_type::SVType,
   },

@@ -7,8 +7,8 @@ use std::fmt;
 
 // crate utilities
 use crate::{
-  functions::flag_interpretor::SAMFlag,
-  structures::{
+  function::flag_interpretor::SAMFlag,
+  custom::{
     break_point::BreakPoint,
     cigar::CIGAR,
     orientation_enum::OrientationEnum,

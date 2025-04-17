@@ -7,7 +7,7 @@ use std::fmt;
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // crate utilities
-use crate::structures::{
+use crate::custom::{
   chr_anchor_enum::ChrAnchorEnum,
   me_anchor::MEAnchor,
   me_chimeric_read::MEChimericRead,

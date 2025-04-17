@@ -7,11 +7,11 @@ use std::fmt;
 
 // crate utilities
 use crate::{
-  functions::{
+  function::{
     flag_interpretor::SAMFlag,
     position_binner::Anchor,
   },
-  structures::{
+  custom::{
     anchor_enum::AnchorEnum,
     cigar::CIGAR,
   },

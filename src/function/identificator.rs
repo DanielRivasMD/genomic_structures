@@ -3,8 +3,8 @@
 // crate utilities
 use crate::TRANSLOCATION_DISTANCE;
 use crate::{
-  functions::flag_interpretor::interpret,
-  structures::{
+  function::flag_interpretor::interpret,
+  custom::{
     sv_chimeric_pair::SVChimericPair,
     sv_type::SVType,
   },

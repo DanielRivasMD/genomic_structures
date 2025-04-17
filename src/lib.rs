@@ -25,11 +25,11 @@ pub use crate::error::common_error::CommonError;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-// functions
-mod functions;
+// function
+mod function;
 
-// functions
-pub use crate::functions::{
+// function
+pub use crate::function::{
   flag_interpretor::interpret,
   identificator::identify,
   position_binner::bin,
@@ -37,7 +37,7 @@ pub use crate::functions::{
 };
 
 // traits
-pub use crate::functions::{
+pub use crate::function::{
   flag_interpretor::SAMFlag,
   position_binner::Anchor,
   sequences::Sequence,
@@ -45,11 +45,11 @@ pub use crate::functions::{
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-// structs
-mod structures;
+// custom
+mod custom;
 
 // enums
-pub use crate::structures::{
+pub use crate::custom::{
   anchor_enum::AnchorEnum,
   chr_anchor_enum::ChrAnchorEnum,
   extra_values_enum::ExtraValuesEnum,
@@ -57,7 +57,7 @@ pub use crate::structures::{
 };
 
 // structs
-pub use crate::structures::{
+pub use crate::custom::{
   bin_position::BinPosition,
   break_point::BreakPoint,
   chr_anchor::ChrAnchor,
@@ -77,7 +77,7 @@ pub use crate::structures::{
 };
 
 // traits
-pub use crate::structures::{
+pub use crate::custom::{
   activate::ActivateExt,
   me_anchor::TagME,
 };
